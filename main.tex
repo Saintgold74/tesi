@@ -1,0 +1,129 @@
+% !TEX program = xelatex % Questa riga è importante per VS Code/LaTeX Workshop
+
+
+\documentclass[12pt, a4paper]{book} % 12pt per la dimensione del testo, a4paper per il formato carta
+
+% --- PACCHETTI FONDAMENTALI ---
+\usepackage[utf8]{inputenc} % Già implicito con XeLaTeX/LuaLaTeX ma buona pratica
+\usepackage{microtype} % Migliora l'estetica del testo
+\usepackage{csquotes} % Per le citazioni
+\usepackage{graphicx} % Per includere immagini (es. .pdf, .png, .jpg)
+\usepackage{amsmath, amssymb, amsfonts} % Pacchetti AMS per simboli matematici avanzati
+\usepackage{booktabs} % Per tabelle di qualità professionale
+\usepackage{hyperref} % Per creare collegamenti cliccabili nel PDF
+\usepackage[nameinlink, capitalize]{cleveref} % Per riferimenti incrociati intelligenti (es. "Figura 1.1")
+
+% --- IMPOSTAZIONI TIPOGRAFICHE (REGOLE UNIVERSITARIE) ---
+
+% 1. Font: Arial
+% Richiede XeLaTeX o LuaLaTeX per funzionare correttamente
+\usepackage{fontspec}
+\setmainfont{Arial} % Carattere principale
+\setsansfont{Arial} % Carattere sans-serif (spesso usato per titoli, ma qui è Arial)
+%\setmonofont{Consolas} % Un font monospace per il codice (opzionale)
+
+% 2. Margini: Superiore/Inferiore 3.5cm, Destro 3cm, Sinistro 4.5cm
+\usepackage[
+    top=3.5cm,
+    bottom=3.5cm,
+    left=4.5cm,
+    right=3cm,
+    % showframe % Decommenta per visualizzare i margini durante la fase di debug
+]{geometry}
+
+% 3. Interlinea: 1.5 righe
+\usepackage{setspace}
+\onehalfspacing
+
+% 4. Rientro prima riga: 1.25 cm
+% \setlength{\parindent}{1.25cm} % Decommenta se vuoi un rientro esplicito. LaTeX ha un rientro di default.
+% \usepackage{indentfirst} % Assicura che il primo paragrafo dopo un titolo abbia un rientro.
+
+% 5. Titoli dei paragrafi: 11, grassetto
+% Le classi standard gestiscono le dimensioni dei titoli. Potrebbe non essere esattamente 11pt,
+% ma molto vicino. Per un controllo preciso servirebbe una riconfigurazione più complessa.
+
+% --- IMPOSTAZIONI NOTE A PIE' PAGINA (REGOLE UNIVERSITARIE) ---
+
+% Note a piè di pagina: numerate progressivamente all'inizio di ogni capitolo.
+% Per questo serve il pacchetto chngcntr, e la classe document 'book' o 'report'.
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter} % La numerazione riparte per ogni nuovo \chapter.
+% Se usi \section come unità più alta (documentclass{article}), usa:
+% \counterwithout{footnote}{section}
+
+% Carattere note: Arial, dimensione 10, stile normale, rientro 0.6cm, interlinea singola
+% Questo è più complesso da impostare in modo robusto. Ecco un tentativo:
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@footnotetext}{\normalfont}{\normalfont\fontsize{10}{12}\selectfont}{}{} % Dimensione 10, interlinea 12pt (singola)
+% Per il rientro di 0.6cm, si può modificare \footnotesep o usare footmisc
+\usepackage[hang, flushmargin]{footmisc} % Per controllare rientro note, default è 0.6cm per hang
+\makeatother
+
+% --- GESTIONE BIBLIOGRAFIA ---
+% Usiamo biblatex con biber per maggiore flessibilità e compatibilità con i font di sistema
+\usepackage[
+    backend=biber,
+    style=verbose-ibid, % Stile per citazioni complete in nota e "ibid"
+    citestyle=numeric, % o authoryear, come preferisci per le citazioni nel testo
+    sorting=nyt, % Ordina per nome, anno, titolo (come richiesto per la bibliografia finale)
+    url=false, doi=false, eprint=false % Disabilita URL, DOI, ePrint se non richiesto
+]{biblatex}
+\addbibresource{bibliografia/riferimenti.bib} % Assicurati che il percorso sia corretto
+
+% --- INIZIO DEL DOCUMENTO ---
+\begin{document}
+
+% Frontespizio (da adattare al tuo caso)
+\begin{titlepage}
+    \centering
+    \vspace*{\fill}
+    {\Huge\bfseries Titolo della Tesi di Laurea\par}
+    \vspace{1cm}
+    {\Large Nome Cognome Candidato\par}
+    \vspace{0.5cm}
+    {\large Matricola: XXXXXX\par}
+    \vspace{1cm}
+    {\Large Relatore: Prof. Nome Cognome Relatore\par}
+    \vspace{0.5cm}
+    {\large Correlatore: Dott. Nome Cognome Correlatore (se presente)\par}
+    \vfill
+    {\Large Dipartimento di Informatica\par}
+    {\large Università degli Studi di [Nome Università]\par}
+    {\large Anno Accademico 20XX/20YY\par}
+    \vspace*{\fill}
+\end{titlepage}
+
+% Prefazione (se presente)
+\chapter*{Prefazione} % Il * nasconde il numero del capitolo nell'indice e nel testo
+\addcontentsline{toc}{chapter}{Prefazione} % Aggiunge la prefazione all'indice
+\textit{
+    Qui va il testo della prefazione, che deve essere in corsivo come da regole.
+    Ad esempio, potresti ringraziare il relatore, la tua famiglia, e descrivere brevemente il motivo della tua scelta dell'argomento.
+}
+
+% Indice generale
+\tableofcontents
+
+\newpage % Per iniziare il primo capitolo su una nuova pagina
+
+% Includi i tuoi capitoli qui.
+% Assicurati che i file dei capitoli si trovino nella cartella 'sezioni/'.
+% Puoi commentare o decommentare i capitoli mentre li scrivi.
+
+%\input{sezioni/introduzione.tex}
+%\input{sezioni/capitolo1.tex} % Es. Revisione della letteratura
+%\input{sezioni/capitolo2.tex} % Es. Metodologia
+%\input{sezioni/capitolo3.tex} % Es. Risultati e Discussione
+%\input{sezioni/conclusioni.tex} % Conclusioni
+
+% Appendici (se presenti)
+%\appendix
+%\input{appendici/appendiceA.tex}
+%\input{appendici/appendiceB.tex}
+
+% Bibliografia finale
+\printbibliography[heading=bibintoc, title={Bibliografia}] % Aggiunge la bibliografia all'indice generale
+
+\end{document}
