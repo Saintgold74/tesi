@@ -1,129 +1,276 @@
-% !TEX program = xelatex % Questa riga è importante per VS Code/LaTeX Workshop
+% !TEX program = xelatex
+\documentclass[12pt,a4paper,oneside]{book}
 
-
-\documentclass[12pt, a4paper]{book} % 12pt per la dimensione del testo, a4paper per il formato carta
-
-% --- PACCHETTI FONDAMENTALI ---
-\usepackage[utf8]{inputenc} % Già implicito con XeLaTeX/LuaLaTeX ma buona pratica
-\usepackage{microtype} % Migliora l'estetica del testo
-\usepackage{csquotes} % Per le citazioni
-\usepackage{graphicx} % Per includere immagini (es. .pdf, .png, .jpg)
-\usepackage{amsmath, amssymb, amsfonts} % Pacchetti AMS per simboli matematici avanzati
-\usepackage{booktabs} % Per tabelle di qualità professionale
-\usepackage{hyperref} % Per creare collegamenti cliccabili nel PDF
-\usepackage[nameinlink, capitalize]{cleveref} % Per riferimenti incrociati intelligenti (es. "Figura 1.1")
-
-% --- IMPOSTAZIONI TIPOGRAFICHE (REGOLE UNIVERSITARIE) ---
-
-% 1. Font: Arial
-% Richiede XeLaTeX o LuaLaTeX per funzionare correttamente
+% ==========================================
+% PACCHETTI ESSENZIALI PER XeLaTeX
+% ==========================================
 \usepackage{fontspec}
-\setmainfont{Arial} % Carattere principale
-\setsansfont{Arial} % Carattere sans-serif (spesso usato per titoli, ma qui è Arial)
-%\setmonofont{Consolas} % Un font monospace per il codice (opzionale)
+\usepackage[italian]{babel}
 
-% 2. Margini: Superiore/Inferiore 3.5cm, Destro 3cm, Sinistro 4.5cm
+% Font Arial nativo dal sistema (REGOLA UNIVERSITÀ)
+\setmainfont{Arial}[
+    Ligatures=TeX,
+    Numbers=Lining,
+    BoldFont=Arial Bold,
+    ItalicFont=Arial Italic,
+    BoldItalicFont=Arial Bold Italic,
+]
+
+% MARGINI ESATTI SECONDO REGOLAMENTO UNIVERSITÀ
 \usepackage[
-    top=3.5cm,
-    bottom=3.5cm,
-    left=4.5cm,
-    right=3cm,
-    % showframe % Decommenta per visualizzare i margini durante la fase di debug
+    top=3.5cm,        % Superiore: 3,5 cm
+    bottom=3.5cm,     % Inferiore: 3,5 cm  
+    left=4.5cm,       % Sinistro: 4,5 cm
+    right=3cm         % Destro: 3 cm
 ]{geometry}
 
-% 3. Interlinea: 1.5 righe
+% INTERLINEA 1,5 RIGHE (REGOLA UNIVERSITÀ)
 \usepackage{setspace}
 \onehalfspacing
 
-% 4. Rientro prima riga: 1.25 cm
-% \setlength{\parindent}{1.25cm} % Decommenta se vuoi un rientro esplicito. LaTeX ha un rientro di default.
-% \usepackage{indentfirst} % Assicura che il primo paragrafo dopo un titolo abbia un rientro.
+% GESTIONE PARAGRAFI - RIENTRO PRIMA RIGA 1,25 CM
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
 
-% 5. Titoli dei paragrafi: 11, grassetto
-% Le classi standard gestiscono le dimensioni dei titoli. Potrebbe non essere esattamente 11pt,
-% ma molto vicino. Per un controllo preciso servirebbe una riconfigurazione più complessa.
-
-% --- IMPOSTAZIONI NOTE A PIE' PAGINA (REGOLE UNIVERSITARIE) ---
-
-% Note a piè di pagina: numerate progressivamente all'inizio di ogni capitolo.
-% Per questo serve il pacchetto chngcntr, e la classe document 'book' o 'report'.
+% NOTE A PIÈ PAGINA - NUMERATE PER CAPITOLO (REGOLA UNIVERSITÀ)
+\usepackage{footmisc}
 \usepackage{chngcntr}
-\counterwithout{footnote}{chapter} % La numerazione riparte per ogni nuovo \chapter.
-% Se usi \section come unità più alta (documentclass{article}), usa:
-% \counterwithout{footnote}{section}
+\counterwithout{footnote}{chapter}
+\counterwithin{footnote}{chapter}
 
-% Carattere note: Arial, dimensione 10, stile normale, rientro 0.6cm, interlinea singola
-% Questo è più complesso da impostare in modo robusto. Ecco un tentativo:
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd{\@footnotetext}{\normalfont}{\normalfont\fontsize{10}{12}\selectfont}{}{} % Dimensione 10, interlinea 12pt (singola)
-% Per il rientro di 0.6cm, si può modificare \footnotesep o usare footmisc
-\usepackage[hang, flushmargin]{footmisc} % Per controllare rientro note, default è 0.6cm per hang
-\makeatother
+% PERSONALIZZAZIONE FORMATO NOTE (PARENTESI TONDE)
+\renewcommand{\thefootnote}{(\arabic{footnote})}
 
-% --- GESTIONE BIBLIOGRAFIA ---
-% Usiamo biblatex con biber per maggiore flessibilità e compatibilità con i font di sistema
+% FORMATO NOTE: Arial 10pt, rientro 0,6cm, interlinea singola
+\renewcommand{\footnotesize}{\fontsize{10pt}{10pt}\selectfont}
+\renewcommand{\footnoterule}{\kern-3pt\hrule width 0.4\columnwidth \kern 2.6pt}
+
+% Configurazione layout note
+\setlength{\footnotemargin}{0.6cm}
+\setlength{\footnotesep}{0pt}
+
+% GESTIONE INDICE - TITOLI A SINISTRA, NUMERI A DESTRA
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsecfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsubsecfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+
+% TITOLI: 11PT GRASSETTO (REGOLA UNIVERSITÀ)
+\usepackage{titlesec}
+
+% Capitoli: 11pt grassetto
+\titleformat{\chapter}[display]
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\chaptertitlename\ \thechapter}
+    {10pt}
+    {}
+
+% Sezioni: 11pt grassetto  
+\titleformat{\section}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesection}
+    {1em}
+    {}
+
+% Sottosezioni: 11pt grassetto
+\titleformat{\subsection}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesubsection}
+    {1em}
+    {}
+
+% Sotto-sottosezioni: 11pt grassetto
+\titleformat{\subsubsection}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesubsubsection}
+    {1em}
+    {}
+
+% HYPERLINKS (devono essere dopo altri pacchetti)
 \usepackage[
-    backend=biber,
-    style=verbose-ibid, % Stile per citazioni complete in nota e "ibid"
-    citestyle=numeric, % o authoryear, come preferisci per le citazioni nel testo
-    sorting=nyt, % Ordina per nome, anno, titolo (come richiesto per la bibliografia finale)
-    url=false, doi=false, eprint=false % Disabilita URL, DOI, ePrint se non richiesto
-]{biblatex}
-\addbibresource{bibliografia/riferimenti.bib} % Assicurati che il percorso sia corretto
+    colorlinks=false,
+    pdfborder={0 0 0},
+]{hyperref}
 
-% --- INIZIO DEL DOCUMENTO ---
-\begin{document}
+% ==========================================
+% COMANDI PERSONALIZZATI PER CITAZIONI
+% ==========================================
 
-% Frontespizio (da adattare al tuo caso)
-\begin{titlepage}
-    \centering
-    \vspace*{\fill}
-    {\Huge\bfseries Titolo della Tesi di Laurea\par}
-    \vspace{1cm}
-    {\Large Nome Cognome Candidato\par}
-    \vspace{0.5cm}
-    {\large Matricola: XXXXXX\par}
-    \vspace{1cm}
-    {\Large Relatore: Prof. Nome Cognome Relatore\par}
-    \vspace{0.5cm}
-    {\large Correlatore: Dott. Nome Cognome Correlatore (se presente)\par}
-    \vfill
-    {\Large Dipartimento di Informatica\par}
-    {\large Università degli Studi di [Nome Università]\par}
-    {\large Anno Accademico 20XX/20YY\par}
-    \vspace*{\fill}
-\end{titlepage}
+% Comando per autori in maiuscoletto (REGOLA UNIVERSITÀ)
+\newcommand{\autore}[1]{\textsc{#1}}
 
-% Prefazione (se presente)
-\chapter*{Prefazione} % Il * nasconde il numero del capitolo nell'indice e nel testo
-\addcontentsline{toc}{chapter}{Prefazione} % Aggiunge la prefazione all'indice
-\textit{
-    Qui va il testo della prefazione, che deve essere in corsivo come da regole.
-    Ad esempio, potresti ringraziare il relatore, la tua famiglia, e descrivere brevemente il motivo della tua scelta dell'argomento.
+% Comando per citazione libro secondo formato università
+% Uso: \citlibro{F. FORTUNA}{Corporate Governance}{Milano}{F.Angeli}{2001}{16-20}
+\newcommand{\citlibro}[6]{%
+    \autore{#1}, \textit{#2}, #3, #4, #5, pagg. #6%
 }
 
-% Indice generale
+% Comando per citazione articolo secondo formato università  
+% Uso: \citarticolo{G. ZURZOLO}{Collegio sindacale e internal auditors}{Quaderni di finanza}{14}{Consob}{1996}{46}
+\newcommand{\citarticolo}[7]{%
+    \autore{#1}, #2, in «#3», n. #4, #5, #6, pag. #7%
+}
+
+% Ambiente per prefazione in corsivo (REGOLA UNIVERSITÀ)
+\newenvironment{prefazione}
+    {\chapter*{Prefazione}
+     \addcontentsline{toc}{chapter}{Prefazione}
+     \itshape}  % Tutto il testo in corsivo
+    {\normalfont\clearpage}
+
+% Ambiente per bibliografia manuale secondo regole università
+\newenvironment{bibliografiauniv}
+    {\chapter*{Bibliografia}
+     \addcontentsline{toc}{chapter}{Bibliografia}
+     \begin{list}{}{\setlength{\leftmargin}{0pt}\setlength{\itemindent}{-\leftmargin}}
+     \raggedright}
+    {\end{list}}
+
+% ==========================================
+% METADATI DOCUMENTO
+% ==========================================
+\hypersetup{
+    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
+    pdfauthor={Marco Santoro},
+    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
+    pdfkeywords={ingegneria informatica, tesi, università},
+}
+
+% ==========================================
+% INIZIO DOCUMENTO
+% ==========================================
+\begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \begin{center}
+        \vspace*{2cm}
+        
+        {\Large \textbf{UNIVERSITÀ DEGLI STUDI "NICCOLO' CUSANO"]}}\\
+        \vspace{0.5cm}
+        {\large DIPARTIMENTO DI INGEGNERIA}\\
+        \vspace{0.5cm}
+        {\large CORSO DI LAUREA IN INGEGNERIA INFORMATICA}\\
+        
+        \vspace{3cm}
+        
+        {\Huge \textbf{TITOLO DELLA TESI}}\\
+        
+        \vspace{3cm}
+        
+        \begin{flushleft}
+            \begin{tabular}{ll}
+                \textbf{Relatore:} & Prof. [Giovanni Farina] \\
+                & \\
+                \textbf{Correlatore:} & Dott. [Nome Cognome] \\
+                & \\
+                \textbf{Candidato:} & [Marco Santoro] \\
+                \textbf{Matricola:} & [IN08000291] \\
+            \end{tabular}
+        \end{flushleft}
+        
+        \vfill
+        
+        {\large ANNO ACCADEMICO 2024/2025}
+        
+    \end{center}
+\end{titlepage}
+
+% ==========================================
+% INDICE GENERALE (titoli a sinistra, numeri a destra)
+% ==========================================
 \tableofcontents
+\newpage
 
-\newpage % Per iniziare il primo capitolo su una nuova pagina
+% ==========================================
+% PREFAZIONE (tutto in corsivo come da regole)
+% ==========================================
+\begin{prefazione}
+Questa è una prefazione di esempio scritta completamente in corsivo, come richiesto dalle regole dell'università.
 
-% Includi i tuoi capitoli qui.
-% Assicurati che i file dei capitoli si trovino nella cartella 'sezioni/'.
-% Puoi commentare o decommentare i capitoli mentre li scrivi.
+Il template XeLaTeX è stato completamente adattato per rispettare tutte le specifiche del regolamento universitario: font Arial nativo, margini esatti, interlinea 1,5, note numerate per capitolo con parentesi tonde, e formato citazioni conforme.
 
-%\input{sezioni/introduzione.tex}
-%\input{sezioni/capitolo1.tex} % Es. Revisione della letteratura
-%\input{sezioni/capitolo2.tex} % Es. Metodologia
-%\input{sezioni/capitolo3.tex} % Es. Risultati e Discussione
-%\input{sezioni/conclusioni.tex} % Conclusioni
+Qui vanno inseriti i ringraziamenti alle persone che hanno contribuito al lavoro di tesi e una breve introduzione personale al contenuto della ricerca.
+\end{prefazione}
 
-% Appendici (se presenti)
-%\appendix
-%\input{appendici/appendiceA.tex}
-%\input{appendici/appendiceB.tex}
+% ==========================================
+% CAPITOLI
+% ==========================================
 
-% Bibliografia finale
-\printbibliography[heading=bibintoc, title={Bibliografia}] % Aggiunge la bibliografia all'indice generale
+\chapter{Introduzione}
+
+Questo è un esempio di testo formattato secondo le regole esatte della tua università. Il carattere Arial è caricato nativamente dal sistema operativo, dimensione 12pt normale per il testo.
+
+I paragrafi sono giustificati con rientro della prima riga di 1,25 cm e interlinea 1,5 righe, esattamente come specificato nel regolamento.
+
+Esempio di citazione di libro secondo le regole universitarie: secondo \citlibro{F. Fortuna}{Corporate Governance}{Milano}{F.Angeli}{2001}{16-20}(1), la governance aziendale rappresenta un elemento fondamentale.
+
+Esempio di citazione di articolo: come evidenziato da \citarticolo{G. Zurzolo}{Collegio sindacale e internal auditors}{Quaderni di finanza}{14}{Consob}{1996}{46}(2), il controllo interno è cruciale.
+
+\section{Obiettivi della Ricerca}
+
+I titoli delle sezioni utilizzano Arial 11pt grassetto, come specificato nelle regole. Le note sono numerate progressivamente dall'inizio del capitolo e utilizzano parentesi tonde.
+
+\subsection{Obiettivi Specifici}
+
+Anche i sotto-paragrafi seguono il formato 11pt grassetto.
+
+\section{Struttura della Tesi}
+
+La tesi è organizzata nei seguenti capitoli principali...
+
+\chapter{Stato dell'Arte}
+
+Secondo capitolo di esempio che dimostra la corretta numerazione delle note che ricomincia da (1) per ogni nuovo capitolo.
+
+Esempio di altra citazione: \citlibro{D. E. Knuth}{The Art of Computer Programming}{Boston}{Addison-Wesley}{1997}{1-50}(1).
+
+\section{Tecnologie Esistenti}
+
+Analisi delle tecnologie attualmente disponibili...
+
+\subsection{Confronto Metodologie}
+
+Dettaglio del confronto tra le diverse metodologie...
+
+\chapter{Metodologia Proposta}
+
+Descrizione dettagliata della metodologia sviluppata in questa tesi.
+
+\chapter{Implementazione}
+
+Dettagli tecnici dell'implementazione del sistema proposto.
+
+\chapter{Risultati Sperimentali}
+
+Presentazione e discussione dei risultati ottenuti attraverso la sperimentazione.
+
+\chapter{Conclusioni}
+
+Riepilogo dei contributi della tesi e indicazioni per sviluppi futuri.
+
+% ==========================================
+% BIBLIOGRAFIA SECONDO REGOLE UNIVERSITÀ
+% ==========================================
+\begin{bibliografiauniv}
+
+% Ordinata alfabeticamente per cognome autore
+% Formato: COGNOME NOME, Titolo, luogo, editore, anno
+
+\item \autore{Airoldi G.}, Gli assetti istituzionali d'impresa: inerzia, funzioni e leve, in \autore{Airoldi G.-Forestieri G.} (a cura di), Corporate governance. Analisi e prospettive nel caso italiano, Milano, Etas Libri, 1998.
+
+\item \autore{Fortuna F.}, Corporate Governance, Milano, F.Angeli, 2001.
+
+\item \autore{Knuth Donald E.}, The Art of Computer Programming, volume 1, Boston, Addison-Wesley, 1997.
+
+\item \autore{Zurzolo G.}, Collegio sindacale e internal auditors, in «Quaderni di finanza», n. 14, Consob, 1996.
+
+% Esempio di più opere dello stesso autore (ordine cronologico)
+% \item \autore{Rossi M.}, Prima opera, Milano, Editore, 1995.
+% \item \autore{Rossi M.}, Seconda opera, Roma, Altro Editore, 2000.
+
+\end{bibliografiauniv}
 
 \end{document}
