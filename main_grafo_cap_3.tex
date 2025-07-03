@@ -1,0 +1,773 @@
+% =====================================
+% GRAFICI E DIAGRAMMI - CAPITOLO 3 EVOLUZIONE INFRASTRUTTURALE
+% "Da Data Center a Cloud-First"
+% Compatibile con XeLaTeX
+% =====================================
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+% Configurazioni PGFPlots
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,shapes,arrows,calc,patterns,decorations.pathreplacing,fit,backgrounds,matrix}
+
+% Definizione colori tema
+\definecolor{gdoblu}{RGB}{25,118,188}
+\definecolor{gdorosso}{RGB}{220,38,58}
+\definecolor{gdoverde}{RGB}{0,150,108}
+\definecolor{gdoarancio}{RGB}{255,165,0}
+\definecolor{gdogrigio}{RGB}{128,128,128}
+\definecolor{gdovioletto}{RGB}{128,0,128}
+
+\geometry{margin=2cm}
+
+\begin{document}
+
+% =====================================
+% FIGURA 3.1: ARCHITETTURA SD-WAN GDO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, scale=0.85, transform shape]
+% Definizione stili
+\tikzset{
+    controller/.style={rectangle, rounded corners, minimum width=3cm, minimum height=2cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    store/.style={rectangle, rounded corners, minimum width=2cm, minimum height=1.5cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    connection/.style={->, thick, gdogrigio},
+    control/.style={->, thick, gdorosso, dashed},
+    data/.style={-, thick, gdoblu},
+    internet/.style={ellipse, minimum width=2.5cm, minimum height=1.5cm, text centered, draw=gdoarancio, fill=gdoarancio!20}
+}
+
+% Orchestratore Centrale
+\node[controller] (orchestrator) at (0,6) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{SD-WAN Orchestrator}
+
+• Policy Management
+• Path Optimization
+• Centralized Control
+\end{minipage}
+};
+
+% Controller Regionali
+\node[controller, minimum width=2.5cm] (controller1) at (-4,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Regional Controller A}
+
+• Local Policy
+• Backup Control
+\end{minipage}
+};
+
+\node[controller, minimum width=2.5cm] (controller2) at (4,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Regional Controller B}
+
+• Local Policy  
+• Backup Control
+\end{minipage}
+};
+
+% Store Network
+\node[store] (store1) at (-6,0) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{Store 1}
+
+SD-WAN Edge
+\end{minipage}
+};
+
+\node[store] (store2) at (-3,0) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{Store 2}
+
+SD-WAN Edge
+\end{minipage}
+};
+
+\node[store] (store3) at (3,0) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{Store N}
+
+SD-WAN Edge
+\end{minipage}
+};
+
+\node[store] (store4) at (6,0) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{Store N+1}
+
+SD-WAN Edge
+\end{minipage}
+};
+
+% Internet/Cloud
+\node[internet] (internet) at (0,0) {\textbf{Internet/MPLS}};
+
+% Data Center
+\node[controller, fill=gdovioletto!20, draw=gdovioletto] (datacenter) at (0,-3) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Data Center HQ}
+
+• Core Applications
+• Analytics Platform
+• Security Services
+\end{minipage}
+};
+
+% Connessioni di controllo
+\draw[control] (orchestrator) -- (controller1) node[midway, above left] {\footnotesize Control Plane};
+\draw[control] (orchestrator) -- (controller2) node[midway, above right] {\footnotesize Control Plane};
+\draw[control] (controller1) -- (store1);
+\draw[control] (controller1) -- (store2);
+\draw[control] (controller2) -- (store3);
+\draw[control] (controller2) -- (store4);
+
+% Connessioni dati
+\draw[data] (store1) -- (internet);
+\draw[data] (store2) -- (internet);
+\draw[data] (store3) -- (internet);
+\draw[data] (store4) -- (internet);
+\draw[data] (internet) -- (datacenter);
+
+% Path alternativi (backup)
+\draw[data, dashed] (store1) -- (store2) node[midway, above] {\footnotesize Backup Path};
+\draw[data, dashed] (store3) -- (store4) node[midway, above] {\footnotesize Backup Path};
+
+% QoS Indicators
+\node at (-8,1.5) {
+\begin{minipage}{2cm}
+\footnotesize
+\textbf{QoS Classes:}
+• Real-time (EF)
+• Business (AF31)
+• Best Effort (BE)
+\end{minipage}
+};
+
+% Performance Metrics
+\node at (8,1.5) {
+\begin{minipage}{2cm}
+\footnotesize
+\textbf{Metrics:}
+• Latenza < 100ms
+• Jitter < 10ms
+• Loss < 0.1\%
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Architettura SD-WAN per la GDO: controllo centralizzato con resilienza distribuita}
+\label{fig:sdwan_architecture}
+\end{figure}
+
+% =====================================
+% FIGURA 3.2: MATRICE DECISIONALE MIGRAZIONE CLOUD
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+% Assi della matrice
+\draw[->] (0,0) -- (8,0) node[right] {\textbf{Complessità Applicativa}};
+\draw[->] (0,0) -- (0,8) node[above] {\textbf{Benefici Cloud Attesi}};
+
+% Griglia di sfondo
+\foreach \x in {1,2,3,4,5,6,7} {
+  \draw[gray!30] (\x,0) -- (\x,8);
+}
+\foreach \y in {1,2,3,4,5,6,7} {
+  \draw[gray!30] (0,\y) -- (8,\y);
+}
+
+% Zone strategiche
+\fill[gdoverde!20] (0,0) rectangle (3,4);
+\fill[gdoarancio!20] (3,0) rectangle (6,4);
+\fill[gdoarancio!20] (0,4) rectangle (3,8);
+\fill[gdorosso!20] (3,4) rectangle (8,8);
+\fill[gdovioletto!20] (6,0) rectangle (8,4);
+
+% Etichette zone
+\node at (1.5,2) {\begin{minipage}{2.5cm}\centering\textbf{Lift-and-Shift}\footnotesize Migrazione rapida\end{minipage}};
+\node at (4.5,2) {\begin{minipage}{2.5cm}\centering\textbf{Replatforming}\footnotesize Ottimizzazioni minime\end{minipage}};
+\node at (1.5,6) {\begin{minipage}{2.5cm}\centering\textbf{Refactoring}\footnotesize Ristrutturazione\end{minipage}};
+\node at (5.5,6) {\begin{minipage}{2.5cm}\centering\textbf{Rebuild}\footnotesize Ricostruzione completa\end{minipage}};
+\node at (7,2) {\begin{minipage}{1.5cm}\centering\textbf{Retire}\footnotesize Legacy\end{minipage}};
+
+% Esempi applicazioni
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (1,1.5) {\footnotesize POS};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (2.5,1) {\footnotesize Web};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (4,2.5) {\footnotesize ERP};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (5.5,3) {\footnotesize CRM};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (2,5.5) {\footnotesize Analytics};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (4.5,6.5) {\footnotesize AI/ML};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (7,1.5) {\footnotesize Legacy};
+
+% Scale
+\foreach \x in {0,2,4,6,8} {
+  \node[below] at (\x,-0.3) {\x};
+}
+\foreach \y in {0,2,4,6,8} {
+  \node[left] at (-0.3,\y) {\y};
+}
+
+% Legenda
+\node at (10,6) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Legenda Strategie:}
+
+\tikz \fill[gdoverde!20] (0,0) rectangle (0.3,0.2); Lift-and-Shift
+
+\tikz \fill[gdoarancio!20] (0,0) rectangle (0.3,0.2); Replatforming
+
+\tikz \fill[gdorosso!20] (0,0) rectangle (0.3,0.2); Refactoring
+
+\tikz \fill[gdovioletto!20] (0,0) rectangle (0.3,0.2); Retire/Replace
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Matrice decisionale per la selezione della strategia di migrazione cloud}
+\label{fig:migration_decision_matrix}
+\end{figure}
+
+% =====================================
+% TABELLA 3.1: CONFRONTO STRATEGIE MIGRAZIONE
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Confronto Strategie di Migrazione Cloud: Tempi, Costi e Benefici}
+\label{tab:migration_strategies_comparison}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Strategia} & \textbf{Timeline} & \textbf{Costo Iniziale} & \textbf{Benefici Cloud} & \textbf{ROI 3 anni} & \textbf{Rischio} \\
+\midrule
+Lift-and-Shift & 3-6 mesi & Basso & 20-30\% & 150-200\% & Basso \\
+\addlinespace
+Replatforming & 6-12 mesi & Medio & 30-40\% & 200-300\% & Medio \\
+\addlinespace
+Refactoring & 12-24 mesi & Alto & 50-70\% & 300-500\% & Alto \\
+\addlinespace
+Rebuild & 24-48 mesi & Molto Alto & 70-90\% & 400-800\% & Molto Alto \\
+\addlinespace
+Retire/Replace & 6-18 mesi & Variabile & 60-80\% & 250-400\% & Medio \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 3.3: ROADMAP STRATEGICA TRANSIZIONE
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=1.5cm, scale=0.9, transform shape]
+% Definizione stili
+\tikzset{
+    phase/.style={rectangle, rounded corners, minimum width=3cm, minimum height=2.5cm, text centered, draw=black, thick},
+    milestone/.style={diamond, minimum width=1.5cm, minimum height=1cm, text centered, draw=gdorosso, fill=gdorosso!20, thick},
+    dependency/.style={->, thick, gdogrigio, dashed}
+}
+
+% Timeline principale
+\draw[->] (0,0) -- (15,0) node[right] {\textbf{Timeline (mesi)}};
+
+% Fasi della roadmap
+\node[phase, fill=gdorosso!20] (fase1) at (2.5,3) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Fase 1: Foundation}
+\footnotesize (0-12 mesi)
+
+• Virtualizzazione
+• SD-WAN deployment
+• Infrastructure upgrade
+• Team training
+\end{minipage}
+};
+
+\node[phase, fill=gdoarancio!20] (fase2) at (5.5,3) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Fase 2: Hybrid}
+\footnotesize (12-24 mesi)
+
+• Cloud migration pilot
+• Edge computing
+• Automation tools
+• Multi-cloud setup
+\end{minipage}
+};
+
+\node[phase, fill=gdoverde!20] (fase3) at (8.5,3) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Fase 3: Cloud-First}
+\footnotesize (24-36 mesi)
+
+• Core apps migration
+• Container orchestration
+• AI/ML integration
+• Zero Trust security
+\end{minipage}
+};
+
+\node[phase, fill=gdoblu!20] (fase4) at (11.5,3) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Fase 4: Autonomous}
+\footnotesize (36+ mesi)
+
+• Self-healing infra
+• Predictive scaling
+• AI-driven optimization
+• Sustainable IT
+\end{minipage}
+};
+
+% Milestone
+\node[milestone] (m1) at (2.5,1) {\footnotesize M1};
+\node[milestone] (m2) at (5.5,1) {\footnotesize M2};
+\node[milestone] (m3) at (8.5,1) {\footnotesize M3};
+\node[milestone] (m4) at (11.5,1) {\footnotesize M4};
+
+% Connessioni milestone-fasi
+\draw[->] (m1) -- (fase1);
+\draw[->] (m2) -- (fase2);
+\draw[->] (m3) -- (fase3);
+\draw[->] (m4) -- (fase4);
+
+% Dipendenze tra fasi
+\draw[dependency] (fase1.east) -- (fase2.west);
+\draw[dependency] (fase2.east) -- (fase3.west);
+\draw[dependency] (fase3.east) -- (fase4.west);
+
+% Metriche di successo
+\node at (2.5,6) {
+\begin{minipage}{2.8cm}
+\centering
+\footnotesize
+\textbf{Target M1:}
+• 90\% virtualizzazione
+• 99.9\% uptime
+• 25\% cost reduction
+\end{minipage}
+};
+
+\node at (5.5,6) {
+\begin{minipage}{2.8cm}
+\centering
+\footnotesize
+\textbf{Target M2:}
+• 30\% cloud workload
+• 60\% deployment speed
+• 1h DR RTO
+\end{minipage}
+};
+
+\node at (8.5,6) {
+\begin{minipage}{2.8cm}
+\centering
+\footnotesize
+\textbf{Target M3:}
+• 70\% cloud adoption
+• 40\% OPEX reduction
+• 30\% CX improvement
+\end{minipage}
+};
+
+\node at (11.5,6) {
+\begin{minipage}{2.8cm}
+\centering
+\footnotesize
+\textbf{Target M4:}
+• 90\% automation
+• 75\% MTTR reduction
+• Carbon neutral IT
+\end{minipage}
+};
+
+% Timeline markers
+\foreach \x in {1,2,...,12} {
+  \draw (\x,-0.1) -- (\x,0.1);
+  \node[below] at (\x,-0.3) {\footnotesize \x};
+}
+
+% Investment curve
+\begin{scope}[yshift=-3cm]
+\begin{axis}[
+    width=12cm,
+    height=4cm,
+    xlabel={\footnotesize Mesi},
+    ylabel={\footnotesize Investimento Cumulativo (M€)},
+    xmin=0, xmax=48,
+    ymin=0, ymax=8,
+    grid=major,
+    no marks
+]
+\addplot[gdoblu, thick] coordinates {
+    (0,0) (6,1.5) (12,3) (18,4) (24,5.5) (30,6.5) (36,7) (42,7.5) (48,8)
+};
+\addplot[gdoverde, thick] coordinates {
+    (0,0) (12,0) (18,0.5) (24,1.5) (30,3) (36,5) (42,7) (48,9)
+};
+\legend{\footnotesize Investimenti, \footnotesize Savings Cumulativi}
+\end{axis}
+\end{scope}
+
+\end{tikzpicture}
+\caption{Roadmap strategica per la transizione cloud-first: timeline, dipendenze e target}
+\label{fig:strategic_roadmap}
+\end{figure}
+
+% =====================================
+% FIGURA 3.4: EDGE COMPUTING ARCHITECTURE
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+% Definizione stili
+\tikzset{
+    device/.style={rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm, text centered, draw=gdoarancio, fill=gdoarancio!20, thick},
+    edge/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1.8cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    regional/.style={rectangle, rounded corners, minimum width=3cm, minimum height=2.5cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    cloud/.style={ellipse, minimum width=3cm, minimum height=2cm, text centered, draw=gdovioletto, fill=gdovioletto!20, thick},
+    dataflow/.style={<->, thick, gdogrigio}
+}
+
+% Device Edge Layer
+\node[device] (sensor1) at (0,0) {\footnotesize IoT Sensor};
+\node[device] (camera1) at (2,0) {\footnotesize Smart Camera};
+\node[device] (pos1) at (4,0) {\footnotesize POS System};
+\node[device] (sensor2) at (6,0) {\footnotesize RFID Reader};
+
+% Infrastructure Edge Layer
+\node[edge] (edge1) at (1,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Store Edge Server}
+
+• Local processing
+• Caching layer
+• Real-time analytics
+\end{minipage}
+};
+
+\node[edge] (edge2) at (5,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Store Edge Server}
+
+• Local processing
+• Caching layer  
+• Real-time analytics
+\end{minipage}
+};
+
+% Regional Edge Layer
+\node[regional] (regional) at (3,6.5) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Regional Data Center}
+
+• Aggregated analytics
+• ML model training
+• Regional services
+• Backup \& DR
+\end{minipage}
+};
+
+% Cloud Layer
+\node[cloud] (cloud) at (3,10) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Public Cloud}
+
+• Global analytics
+• AI/ML platforms
+• Enterprise services
+• Long-term storage
+\end{minipage}
+};
+
+% Connessioni
+\draw[dataflow] (sensor1) -- (edge1);
+\draw[dataflow] (camera1) -- (edge1);
+\draw[dataflow] (pos1) -- (edge2);
+\draw[dataflow] (sensor2) -- (edge2);
+
+\draw[dataflow] (edge1) -- (regional);
+\draw[dataflow] (edge2) -- (regional);
+
+\draw[dataflow] (regional) -- (cloud);
+
+% Latency indicators
+\node at (-2,1.5) {
+\begin{minipage}{2cm}
+\footnotesize
+\textbf{Device→Edge:}
+< 5ms
+\end{minipage}
+};
+
+\node at (-2,4.5) {
+\begin{minipage}{2cm}
+\footnotesize
+\textbf{Edge→Regional:}
+< 50ms
+\end{minipage}
+};
+
+\node at (-2,8) {
+\begin{minipage}{2cm}
+\footnotesize
+\textbf{Regional→Cloud:}
+< 200ms
+\end{minipage}
+};
+
+% Processing capabilities
+\node at (8,1.5) {
+\begin{minipage}{2.5cm}
+\footnotesize
+\textbf{Device Edge:}
+• Simple filtering
+• Basic aggregation
+• Local decisions
+\end{minipage}
+};
+
+\node at (8,4.5) {
+\begin{minipage}{2.5cm}
+\footnotesize
+\textbf{Infrastructure Edge:}
+• Complex analytics
+• ML inference
+• Local storage
+\end{minipage}
+};
+
+\node at (8,8) {
+\begin{minipage}{2.5cm}
+\footnotesize
+\textbf{Regional/Cloud:}
+• ML training
+• Big data analytics
+• Global coordination
+\end{minipage}
+};
+
+% Data flow volumes
+\draw[<-, thick, gdorosso] (0.5,11) -- (0.5,9.5) node[left, midway] {\footnotesize 1GB/day};
+\draw[<-, thick, gdorosso] (0.5,7.5) -- (0.5,6) node[left, midway] {\footnotesize 100GB/day};
+\draw[<-, thick, gdorosso] (0.5,4.5) -- (0.5,3) node[left, midway] {\footnotesize 1TB/day};
+
+\end{tikzpicture}
+\caption{Architettura edge computing per la GDO: elaborazione distribuita multi-tier}
+\label{fig:edge_computing_architecture}
+\end{figure}
+
+% =====================================
+% TABELLA 3.2: ANALISI ROI TRANSIZIONE CLOUD
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Analisi ROI della Transizione Cloud: Proiezione Quinquennale}
+\label{tab:roi_analysis_cloud_transition}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Anno} & \textbf{Investimenti (M€)} & \textbf{Savings OPEX (M€)} & \textbf{Benefici Strategici (M€)} & \textbf{Cash Flow (M€)} & \textbf{NPV Cumulativo (M€)} \\
+\midrule
+0 & -4.0 & 0.0 & 0.0 & -4.0 & -4.0 \\
+1 & -1.5 & 0.8 & 0.2 & -0.5 & -4.5 \\
+2 & -0.5 & 1.5 & 0.5 & 1.5 & -3.1 \\
+3 & -0.3 & 2.2 & 1.1 & 3.0 & -0.6 \\
+4 & -0.2 & 2.8 & 1.8 & 4.4 & 3.2 \\
+5 & -0.1 & 3.2 & 2.5 & 5.6 & 8.1 \\
+\midrule
+\multicolumn{4}{l}{\textbf{NPV Totale (8\% discount rate):}} & \textbf{€2.1M} \\
+\multicolumn{4}{l}{\textbf{IRR:}} & \textbf{24\%} \\
+\multicolumn{4}{l}{\textbf{Payback Period:}} & \textbf{2.8 anni} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 3.5: POWER EFFICIENCY ANALYSIS
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Analisi Efficienza Energetica: UPS vs Load Factor},
+    xlabel={Load Factor (\%)},
+    ylabel={Efficienza (\%)},
+    width=12cm,
+    height=8cm,
+    xmin=10,
+    xmax=100,
+    ymin=85,
+    ymax=98,
+    grid=major,
+    legend style={at={(0.02,0.98)}, anchor=north west},
+]
+
+% Curve di efficienza per diverse configurazioni UPS
+\addplot[color=gdoblu, mark=*, line width=2pt] coordinates {
+    (10, 87) (20, 91) (30, 93) (40, 95) (50, 96.5) (60, 97) (70, 97.2) (80, 97) (90, 96.5) (100, 95.8)
+};
+
+\addplot[color=gdoverde, mark=square*, line width=2pt] coordinates {
+    (10, 89) (20, 93) (30, 95) (40, 96.5) (50, 97.5) (60, 98) (70, 98.2) (80, 98.1) (90, 97.8) (100, 97.2)
+};
+
+\addplot[color=gdorosso, mark=triangle*, line width=2pt] coordinates {
+    (10, 85) (20, 88) (30, 90) (40, 92) (50, 94) (60, 95) (70, 95.5) (80, 95.2) (90, 94.8) (100, 94)
+};
+
+% Zona operativa ottimale
+\fill[gdoverde!20, opacity=0.3] (axis cs:40,85) rectangle (axis cs:80,98);
+\node at (axis cs:60,87) {\footnotesize Zona Operativa Ottimale};
+
+% Linea target efficiency
+\draw[dashed, gdoarancio, line width=2pt] (axis cs:10,95) -- (axis cs:100,95) node[right] {\footnotesize Target 95\%};
+
+\legend{UPS Online Standard, UPS Eco-Mode, UPS Legacy}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Curve di efficienza energetica per diverse configurazioni UPS in funzione del load factor}
+\label{fig:ups_efficiency_analysis}
+\end{figure}
+
+% =====================================
+% TABELLA 3.3: COMPARISON COOLING STRATEGIES
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Confronto Strategie di Cooling per Ambienti IT Retail}
+\label{tab:cooling_strategies_comparison}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Strategia} & \textbf{PUE Tipico} & \textbf{CAPEX Relativo} & \textbf{OPEX Annuo} & \textbf{Efficienza Energetica} \\
+\midrule
+Traditional CRAC & 2.2-2.5 & 100\% & 100\% & Baseline \\
+\addlinespace
+Hot/Cold Aisle & 1.8-2.2 & 120\% & 85\% & +15\% \\
+\addlinespace
+Containment & 1.6-1.9 & 140\% & 70\% & +30\% \\
+\addlinespace
+Free Cooling & 1.4-1.7 & 160\% & 60\% & +40\% \\
+\addlinespace
+Liquid Cooling & 1.2-1.4 & 200\% & 50\% & +50\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 3.6: RISK ASSESSMENT MATRIX
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+% Matrice di rischio
+\draw[->] (0,0) -- (6,0) node[right] {\textbf{Probabilità}};
+\draw[->] (0,0) -- (0,6) node[above] {\textbf{Impatto}};
+
+% Griglia
+\foreach \x in {1,2,3,4,5} {
+  \draw[gray!30] (\x,0) -- (\x,6);
+}
+\foreach \y in {1,2,3,4,5} {
+  \draw[gray!30] (0,\y) -- (6,\y);
+}
+
+% Zone di rischio
+\fill[gdoverde!30] (0,0) rectangle (2,2);
+\fill[gdoarancio!30] (2,0) rectangle (4,2);
+\fill[gdoarancio!30] (0,2) rectangle (2,4);
+\fill[gdorosso!30] (2,2) rectangle (6,6);
+\fill[gdoverde!30] (4,0) rectangle (6,2);
+\fill[gdoarancio!30] (0,4) rectangle (2,6);
+
+% Labels zone
+\node at (1,1) {\footnotesize Basso};
+\node at (3,1) {\footnotesize Medio};
+\node at (1,3) {\footnotesize Medio};
+\node at (4,4) {\footnotesize Alto};
+\node at (5,1) {\footnotesize Basso};
+\node at (1,5) {\footnotesize Medio};
+
+% Posizionamento rischi specifici
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (1.5,1.5) {\footnotesize 1};
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (2.5,3) {\footnotesize 2};
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (3.5,2.5) {\footnotesize 3};
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (1.5,4.5) {\footnotesize 4};
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (4.5,3.5) {\footnotesize 5};
+\node[circle, fill=gdoblu, text=white, inner sep=1pt] at (3,4.5) {\footnotesize 6};
+
+% Scale
+\foreach \x in {0,1,2,3,4,5} {
+  \node[below] at (\x,-0.2) {\footnotesize \x};
+}
+\foreach \y in {0,1,2,3,4,5} {
+  \node[left] at (-0.2,\y) {\footnotesize \y};
+}
+
+% Legenda rischi
+\node at (8,4) {
+\begin{minipage}{4cm}
+\footnotesize
+\textbf{Rischi Identificati:}
+
+1. Performance degradation
+2. Skills gap organizzativo  
+3. Vendor lock-in
+4. Security vulnerabilities
+5. Integration complexity
+6. Regulatory changes
+
+\textbf{Livelli di Rischio:}
+\tikz \fill[gdoverde!30] (0,0) rectangle (0.3,0.15); Accettabile
+\tikz \fill[gdoarancio!30] (0,0) rectangle (0.3,0.15); Monitoraggio
+\tikz \fill[gdorosso!30] (0,0) rectangle (0.3,0.15); Mitigazione
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Matrice di valutazione rischi per la transizione cloud: probabilità vs impatto}
+\label{fig:risk_assessment_matrix}
+\end{figure}
+
+\end{document}

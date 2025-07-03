@@ -20,6 +20,7 @@
 \usepackage{longtable}
 \usepackage{xcolor}
 \usepackage{geometry}
+\usepackage{textcomp}
 
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.18}
@@ -54,7 +55,7 @@
     bar width=0.6cm,
     width=14cm,
     height=8cm,
-    symbolic x coords={Ransomware, Supply Chain, Data Breach, Phishing, Malware POS},
+    symbolic x coords={Ransomware, {Supply Chain}, {Data Breach}, Phishing, {Malware POS}},
     xtick=data,
     x tick label style={rotate=45, anchor=east},
     ymin=0,
@@ -66,10 +67,10 @@
 ]
 \addplot[fill=gdorosso!80, draw=gdorosso] coordinates {
     (Ransomware, 149)
-    (Supply Chain, 126)
-    (Data Breach, 89)
+    ({Supply Chain}, 126)
+    ({Data Breach}, 89)
     (Phishing, 73)
-    (Malware POS, 45)
+    ({Malware POS}, 45)
 };
 \legend{Incremento Q1 2025 vs Q1 2024}
 \end{axis}
@@ -218,11 +219,15 @@ Terza & 2024-2025 & 62\% & Adattamento dinamico, manipolazione protocolli & Arch
 \centering
 \textbf{Asset Critici}
 
-• Sistemi POS
-• Database Clienti  
-• Dati Pagamento
-• Sistemi ERP
-• Infrastruttura IT
+\textbullet{} Sistemi POS
+
+\textbullet{} Database Clienti  
+
+\textbullet{} Dati Pagamento
+
+\textbullet{} Sistemi ERP
+
+\textbullet{} Infrastruttura IT
 \end{minipage}
 };
 
@@ -462,9 +467,11 @@ Standard & Bassa & < 1 ora & < 4 ore & < 24 ore & 7 giorni \\
 \centering
 \textbf{Mappatura Cross-Standard}
 
-• Identificazione Overlap
-• Risoluzione Conflitti  
-• Ottimizzazione Controlli
+\textbullet{} Identificazione Overlap
+
+\textbullet{} Risoluzione Conflitti  
+
+\textbullet{} Ottimizzazione Controlli
 \end{minipage}
 };
 
@@ -473,9 +480,11 @@ Standard & Bassa & < 1 ora & < 4 ore & < 24 ore & 7 giorni \\
 \centering
 \textbf{Ottimizzatore}
 
-• Set Cover Algorithm
-• Minimizzazione Costi
-• Validazione Coverage
+\textbullet{} Set Cover Algorithm
+
+\textbullet{} Minimizzazione Costi
+
+\textbullet{} Validazione Coverage
 \end{minipage}
 };
 
