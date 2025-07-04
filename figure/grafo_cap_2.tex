@@ -1,0 +1,504 @@
+% =====================================
+% GRAFICI E TABELLE PER TESI GDO
+% Sezioni 2.1, 2.2, 2.3
+% Compatibile con XeLaTeX
+% =====================================
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+% Configurazioni PGFPlots
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,shapes,arrows,calc,patterns,decorations.pathreplacing}
+
+% Definizione colori tema
+\definecolor{gdoblu}{RGB}{25,118,188}
+\definecolor{gdorosso}{RGB}{220,38,58}
+\definecolor{gdoverde}{RGB}{0,150,108}
+\definecolor{gdoarancio}{RGB}{255,165,0}
+\definecolor{gdogrigio}{RGB}{128,128,128}
+
+\geometry{margin=2cm}
+
+\begin{document}
+
+% =====================================
+% SEZIONE 2.1 - MINACCE E RISCHI
+% =====================================
+
+\section*{Sezione 2.1 - Minacce e Rischi Principali}
+
+% Figura 2.1: Evoluzione del Threat Landscape GDO
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Evoluzione del Threat Landscape GDO - Q1 2024 vs Q1 2025},
+    xlabel={Tipologia di Attacco},
+    ylabel={Incremento Percentuale (\%)},
+    ybar,
+    bar width=0.6cm,
+    width=14cm,
+    height=8cm,
+    symbolic x coords={Ransomware, Supply Chain, Data Breach, Phishing, Malware POS},
+    xtick=data,
+    x tick label style={rotate=45, anchor=east},
+    ymin=0,
+    ymax=160,
+    legend style={at={(0.5,-0.15)}, anchor=north, legend columns=1},
+    grid=major,
+    nodes near coords,
+    nodes near coords align={vertical},
+]
+\addplot[fill=gdorosso!80, draw=gdorosso] coordinates {
+    (Ransomware, 149)
+    (Supply Chain, 126)
+    (Data Breach, 89)
+    (Phishing, 73)
+    (Malware POS, 45)
+};
+\legend{Incremento Q1 2025 vs Q1 2024}
+\end{axis}
+\end{tikzpicture}
+\caption{La figura mostra l'incremento percentuale delle diverse tipologie di attacchi nel settore retail, evidenziando la crescita del 149\% per ransomware e del 126\% per attacchi supply chain}
+\label{fig:threat_landscape_evolution}
+\end{figure}
+
+% Tabella 2.1: Evoluzione Tecniche Attacco POS
+\begin{table}[htbp]
+\centering
+\caption{Evoluzione Tecniche Attacco POS}
+\label{tab:pos_attack_evolution}
+\begin{tabular}{@{}lcccp{4cm}c@{}}
+\toprule
+\textbf{Generazione} & \textbf{Periodo} & \textbf{Tasso Successo} & \textbf{Caratteristiche Principali} & \textbf{Contromisure Efficaci} \\
+\midrule
+Prima & 2019-2021 & 73\% & Malware semplice, vulnerabilità note & Antivirus aggiornati \\
+\addlinespace
+Seconda & 2022-2023 & 45\% & Offuscamento, comunicazioni cifrate & Analisi comportamentale \\
+\addlinespace
+Terza & 2024-2025 & 62\% & Adattamento dinamico, manipolazione protocolli & Architetture Zero Trust \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Grafico 2.2: Timeline Incidente Applebee's
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Timeline Incidente Applebee's - Correlazione Tempo vs Impatto},
+    xlabel={Giorni dall'Inizio Attacco},
+    ylabel={Sistemi Compromessi (\%)},
+    width=14cm,
+    height=8cm,
+    xmin=0,
+    xmax=15,
+    ymin=0,
+    ymax=100,
+    grid=major,
+    legend style={at={(0.02,0.98)}, anchor=north west},
+]
+\addplot[color=gdorosso, mark=*, line width=2pt] coordinates {
+    (0, 1)
+    (2, 1)
+    (5, 5)
+    (7, 15)
+    (9, 45)
+    (12, 85)
+    (14, 95)
+};
+
+% Annotazioni eventi chiave
+\draw[<-, thick] (axis cs:2,1) -- (axis cs:3,10) node[above] {\footnotesize Ricognizione};
+\draw[<-, thick] (axis cs:5,5) -- (axis cs:6,15) node[above] {\footnotesize Escalation};
+\draw[<-, thick] (axis cs:7,15) -- (axis cs:8,25) node[above] {\footnotesize Propagazione};
+\draw[<-, thick] (axis cs:14,95) -- (axis cs:13,85) node[left] {\footnotesize Rilevamento};
+
+\legend{Percentuale Sistemi Compromessi}
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico mostra come l'impatto dell'incidente sia cresciuto esponenzialmente con il tempo, evidenziando l'importanza del rilevamento precoce}
+\label{fig:applebees_timeline}
+\end{figure}
+
+% Grafico 2.3: Crescita Attacchi Supply Chain
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Crescita Attacchi Supply Chain 2019-2025},
+    xlabel={Anno},
+    ylabel={Numero di Attacchi},
+    width=14cm,
+    height=8cm,
+    xmin=2018.5,
+    xmax=2025.5,
+    ymin=0,
+    ymax=800,
+    grid=major,
+    legend style={at={(0.02,0.98)}, anchor=north west},
+    xtick={2019,2020,2021,2022,2023,2024,2025},
+]
+\addplot[color=gdoblu, mark=square*, line width=2pt] coordinates {
+    (2019, 78)
+    (2020, 145)
+    (2021, 234)
+    (2022, 356)
+    (2023, 478)
+    (2024, 612)
+    (2025, 745)
+};
+
+% Freccia accelerazione
+\draw[<->, thick, gdorosso] (axis cs:2024,612) -- (axis cs:2025,745) node[midway, right] {\footnotesize +21.7\%};
+
+\legend{Attacchi Supply Chain Documentati}
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico mostra la crescita esponenziale degli attacchi supply chain, con particolare accelerazione nel 2024-2025}
+\label{fig:supply_chain_growth}
+\end{figure}
+
+% =====================================
+% SEZIONE 2.2 - TECNOLOGIE DI DIFESA
+% =====================================
+
+\newpage
+\section*{Sezione 2.2 - Tecnologie di Difesa Essenziali}
+
+% Figura 2.4: Architettura Difesa Stratificata GDO
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=1.5cm]
+% Definizione stili
+\tikzset{
+    layer/.style={rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, text centered, draw=black, fill=blue!20},
+    threat/.style={rectangle, rounded corners, minimum width=2cm, minimum height=0.8cm, text centered, draw=red, fill=red!20},
+}
+
+% Livelli di difesa
+\node[layer, fill=gdorosso!20] (perimeter) at (0,0) {\textbf{Livello Perimetrale} - Firewall NGFW, IDS/IPS, WAF};
+\node[layer, fill=gdoarancio!20] (network) at (0,-2.5) {\textbf{Livello Rete} - Segmentazione VLAN, Monitoring, DLP};
+\node[layer, fill=gdoverde!20] (endpoint) at (0,-5) {\textbf{Livello Endpoint} - EDR, Antivirus, Device Control};
+\node[layer, fill=gdoblu!20] (application) at (0,-7.5) {\textbf{Livello Applicazione} - WAF, API Security, Code Analysis};
+\node[layer, fill=gdogrigio!20] (data) at (0,-10) {\textbf{Livello Dati} - Encryption, DLP, Access Control, Backup};
+
+% Minacce esterne
+\node[threat] (external) at (-8,0) {Minacce Esterne};
+\node[threat] (malware) at (-8,-2.5) {Malware};
+\node[threat] (insider) at (-8,-5) {Insider Threats};
+\node[threat] (vulns) at (-8,-7.5) {Vulnerabilità App};
+\node[threat] (breach) at (-8,-10) {Data Breach};
+
+% Frecce di attacco
+\draw[->, thick, red] (external) -- (perimeter);
+\draw[->, thick, red] (malware) -- (network);
+\draw[->, thick, red] (insider) -- (endpoint);
+\draw[->, thick, red] (vulns) -- (application);
+\draw[->, thick, red] (breach) -- (data);
+
+% Asset protetti
+\node[draw, fill=green!20, minimum width=3cm, minimum height=8cm] (assets) at (8,-5) {
+\begin{minipage}{2.5cm}
+\centering
+\textbf{Asset Critici}
+
+• Sistemi POS
+• Database Clienti  
+• Dati Pagamento
+• Sistemi ERP
+• Infrastruttura IT
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{I cinque livelli principali di una difesa stratificata tipica per la GDO: perimetrale, rete, endpoint, applicazione, e dati}
+\label{fig:layered_defense}
+\end{figure}
+
+% Tabella 2.3: Confronto Paradigmi Detection IDS/IPS
+\begin{table}[htbp]
+\centering
+\caption{Confronto Paradigmi Detection IDS/IPS}
+\label{tab:detection_paradigms}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Aspetto} & \textbf{Detection Firme} & \textbf{Detection Anomalie} & \textbf{Approccio Ibrido} \\
+\midrule
+Falsi Positivi & Molto Bassi & Medio-Alti & Bassi \\
+Zero-Day Detection & No & Sì & Parziale \\
+Overhead Computazionale & Basso & Alto & Medio \\
+Facilità Tuning & Alta & Bassa & Media \\
+Adattabilità & Bassa & Alta & Alta \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Grafico 2.5: Tempi Deployment Patch
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Tempi Medi di Deployment Patch per Categoria Sistema},
+    xlabel={Categoria Sistema},
+    ylabel={Tempo Deployment (ore)},
+    ybar,
+    bar width=0.8cm,
+    width=14cm,
+    height=8cm,
+    symbolic x coords={Sistemi Non Critici, Back Office, Workstation, Server Applicazioni, Sistemi POS},
+    xtick=data,
+    x tick label style={rotate=45, anchor=east},
+    ymin=0,
+    ymax=600,
+    legend style={at={(0.5,-0.2)}, anchor=north, legend columns=1},
+    grid=major,
+    nodes near coords,
+    nodes near coords align={vertical},
+    log basis y=10,
+]
+\addplot[fill=gdoblu!80, draw=gdoblu] coordinates {
+    (Sistemi Non Critici, 4)
+    (Back Office, 24)
+    (Workstation, 48)
+    (Server Applicazioni, 168)
+    (Sistemi POS, 504)
+};
+\legend{Tempo Medio Deployment}
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico mostra come i tempi di deployment varino significativamente tra categorie di sistemi, da poche ore per sistemi non critici a diverse settimane per sistemi POS critici}
+\label{fig:patch_deployment_times}
+\end{figure}
+
+% Tabella 2.4: Fattori Prioritizzazione CSPM
+\begin{table}[htbp]
+\centering
+\caption{Fattori di Prioritizzazione Rischio CSPM}
+\label{tab:cspm_risk_factors}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Fattore} & \textbf{Descrizione} & \textbf{Peso} & \textbf{Metrica} \\
+\midrule
+Severità CVSS & Score vulnerabilità standard & 25\% & 0-10 \\
+Esposizione Internet & Accessibilità dall'esterno & 20\% & Binario \\
+Sensitività Dati & Classificazione dati contenuti & 20\% & 1-5 \\
+Criticità Business & Impatto operativo disruption & 15\% & 1-5 \\
+Facilità Exploit & Disponibilità exploit pubblici & 10\% & Binario \\
+Patch Disponibili & Esistenza di fix & 10\% & Binario \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% SEZIONE 2.3 - CONFORMITÀ
+% =====================================
+
+\newpage
+\section*{Sezione 2.3 - Requisiti e Vincoli Architetturali}
+
+% Tabella 2.5: Metriche Performance PCI-DSS
+\begin{table}[htbp]
+\centering
+\caption{Metriche di Performance Monitoraggio PCI-DSS}
+\label{tab:pci_performance_metrics}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Componente} & \textbf{Latenza Aggiunta} & \textbf{CPU Overhead} & \textbf{Storage/Giorno} & \textbf{RAM Richiesta} \\
+\midrule
+Event Collection & 2-5ms & 3-5\% & 500MB-1GB & 512MB \\
+Real-time Analysis & 10-20ms & 8-12\% & 1-2GB & 2GB \\
+Correlation Engine & 50-100ms & 15-20\% & 2-3GB & 4GB \\
+Audit Storage & N/A & 2-3\% & 2-5GB & 1GB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Figura 2.6: Architettura Privacy by Design
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, auto]
+% Definizione stili
+\tikzset{
+    process/.style={rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=black, fill=blue!20},
+    control/.style={diamond, minimum width=2cm, minimum height=1cm, text centered, draw=red, fill=red!20},
+    storage/.style={cylinder, shape border rotate=90, minimum width=2cm, minimum height=1.5cm, text centered, draw=green, fill=green!20},
+}
+
+% Fasi del ciclo di vita dei dati
+\node[process] (collect) at (0,0) {Raccolta Dati};
+\node[control] (classify) at (0,-2.5) {Classificazione Privacy};
+\node[process] (process) at (0,-5) {Elaborazione};
+\node[control] (purpose) at (3,-5) {Verifica Finalità};
+\node[process] (store) at (0,-7.5) {Archiviazione};
+\node[storage] (db) at (3,-7.5) {Database};
+\node[process] (retention) at (0,-10) {Gestione Retention};
+\node[process] (delete) at (0,-12.5) {Cancellazione Sicura};
+
+% Controlli privacy
+\node[control, fill=gdoverde!20] (consent) at (-4,-2.5) {Verifica Consenso};
+\node[control, fill=gdoverde!20] (minimize) at (-4,-5) {Minimizzazione};
+\node[control, fill=gdoverde!20] (encrypt) at (-4,-7.5) {Cifratura};
+\node[control, fill=gdoverde!20] (audit) at (-4,-10) {Audit Trail};
+
+% Flusso principale
+\draw[->] (collect) -- (classify);
+\draw[->] (classify) -- (process);
+\draw[->] (process) -- (store);
+\draw[->] (store) -- (db);
+\draw[->] (store) -- (retention);
+\draw[->] (retention) -- (delete);
+
+% Controlli laterali
+\draw[->] (consent) -- (classify);
+\draw[->] (minimize) -- (process);
+\draw[->] (purpose) -- (process);
+\draw[->] (encrypt) -- (store);
+\draw[->] (audit) -- (retention);
+
+\end{tikzpicture}
+\caption{Il flusso di elaborazione dati dalla raccolta alla cancellazione, con controlli privacy integrati in ogni fase}
+\label{fig:privacy_by_design}
+\end{figure}
+
+% Tabella 2.6: Tempi Risposta NIS2
+\begin{table}[htbp]
+\centering
+\caption{Tempi di Risposta NIS2 per Categoria Incidente}
+\label{tab:nis2_response_times}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Categoria} & \textbf{Severità} & \textbf{Detection Time} & \textbf{Response Time} & \textbf{Recovery Time} & \textbf{Reporting} \\
+\midrule
+Critico & Alta & < 5 min & < 15 min & < 4 ore & 24 ore \\
+Importante & Media & < 15 min & < 1 ora & < 8 ore & 72 ore \\
+Standard & Bassa & < 1 ora & < 4 ore & < 24 ore & 7 giorni \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Grafico 2.7: Curva Investimento-Disponibilità
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Curva Investimento-Disponibilità per Architetture NIS2},
+    xlabel={Investimento in Resilienza (Unità Relative)},
+    ylabel={Disponibilità Ottenibile (\%)},
+    width=14cm,
+    height=8cm,
+    xmin=0,
+    xmax=10,
+    ymin=90,
+    ymax=99.99,
+    grid=major,
+    legend style={at={(0.7,0.3)}, anchor=north west},
+]
+
+% Curva logaritmica
+\addplot[color=gdoblu, line width=2pt, smooth] coordinates {
+    (0.5, 95)
+    (1, 98)
+    (2, 99)
+    (3, 99.5)
+    (4, 99.7)
+    (5, 99.8)
+    (6, 99.85)
+    (7, 99.9)
+    (8, 99.93)
+    (9, 99.95)
+    (9.5, 99.97)
+};
+
+% Linea target NIS2
+\draw[dashed, gdorosso, line width=2pt] (axis cs:0,99.9) -- (axis cs:10,99.9) node[right] {Target NIS2 (99.9\%)};
+
+% Punto ottimale
+\node[circle, fill=gdoverde, inner sep=3pt] at (axis cs:4,99.7) {};
+\draw[<-, thick] (axis cs:4,99.7) -- (axis cs:5.5,99.6) node[right] {\footnotesize Punto Ottimale};
+
+\legend{Disponibilità vs Investimento}
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico mostra come la disponibilità aumenti logaritmicamente con gli investimenti in resilienza, con un punto di ottimizzazione intorno al 99.9\%}
+\label{fig:investment_availability}
+\end{figure}
+
+% Figura 2.8: Architettura Motore Policy Multi-Standard
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+% Definizione stili
+\tikzset{
+    standard/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=blue, fill=blue!20},
+    engine/.style={rectangle, rounded corners, minimum width=4cm, minimum height=2cm, text centered, draw=black, fill=gray!20},
+    control/.style={rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=green, fill=green!20},
+}
+
+% Standard di input
+\node[standard] (pci) at (-6,3) {PCI-DSS};
+\node[standard] (gdpr) at (-6,1) {GDPR};
+\node[standard] (nis2) at (-6,-1) {NIS2};
+\node[standard] (iso) at (-6,-3) {ISO 27001};
+
+% Motore centrale
+\node[engine] (mapper) at (-2,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{Mappatura Cross-Standard}
+
+• Identificazione Overlap
+• Risoluzione Conflitti  
+• Ottimizzazione Controlli
+\end{minipage}
+};
+
+\node[engine] (optimizer) at (2,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{Ottimizzatore}
+
+• Set Cover Algorithm
+• Minimizzazione Costi
+• Validazione Coverage
+\end{minipage}
+};
+
+% Controlli di output
+\node[control] (access) at (6,2) {Access Control};
+\node[control] (crypto) at (6,0) {Crittografia};
+\node[control] (monitor) at (6,-2) {Monitoring};
+
+% Connessioni
+\draw[->] (pci) -- (mapper);
+\draw[->] (gdpr) -- (mapper);
+\draw[->] (nis2) -- (mapper);
+\draw[->] (iso) -- (mapper);
+
+\draw[->] (mapper) -- (optimizer);
+
+\draw[->] (optimizer) -- (access);
+\draw[->] (optimizer) -- (crypto);
+\draw[->] (optimizer) -- (monitor);
+
+\end{tikzpicture}
+\caption{Come i diversi standard vengano integrati in un motore unificato che ottimizza l'implementazione dei controlli}
+\label{fig:multi_standard_engine}
+\end{figure}
+
+\end{document}

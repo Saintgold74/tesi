@@ -14,6 +14,17 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption} % Per sottotitoli nelle figure
+% \usepackage{hyperref}   % Per collegamenti URL      
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{color}
+
 \pgfplotsset{compat=1.18}
 % Font Arial nativo dal sistema (REGOLA UNIVERSITÀ)
 \setmainfont{Arial}[
@@ -99,25 +110,13 @@
     colorlinks=false,
     pdfborder={0 0 0},
 ]{hyperref}
-
 % ==========================================
 % COMANDI PERSONALIZZATI PER CITAZIONI
 % ==========================================
-
 % Comando per autori in maiuscoletto (REGOLA UNIVERSITÀ)
 \newcommand{\autore}[1]{\textsc{#1}}
 
-% Comando per citazione libro secondo formato università
-% Uso: \citlibro{F. FORTUNA}{Corporate Governance}{Milano}{F.Angeli}{2001}{16-20}
-\newcommand{\citlibro}[6]{%
-    \autore{#1}, \textit{#2}, #3, #4, #5, pagg. #6%
-}
 
-% Comando per citazione articolo secondo formato università  
-% Uso: \citarticolo{G. ZURZOLO}{Collegio sindacale e internal auditors}{Quaderni di finanza}{14}{Consob}{1996}{46}
-\newcommand{\citarticolo}[7]{%
-    \autore{#1}, #2, in «#3», n. #4, #5, #6, pag. #7%
-}
 
 % Ambiente per prefazione in corsivo (REGOLA UNIVERSITÀ)
 \newenvironment{prefazione}
@@ -145,9 +144,19 @@
 }
 
 % ==========================================
+% DEFINIZIONE GLOSSARIO
+% (separato in file glossario.glo)
+% ==========================================
+\usepackage[toc]{glossaries}
+\makeglossaries
+\input{glossario.glo}
+
+% ==========================================
 % INIZIO DOCUMENTO
 % ==========================================
 \begin{document}
+
+
 
 % ==========================================
 % FRONTESPIZIO
@@ -207,6 +216,7 @@ Qui vanno inseriti i ringraziamenti alle persone che hanno contribuito al lavoro
 
 
 \input{capitoli/chapter_1.tex}
+\input{capitoli/chapter_2.tex} Assicurati che questo file esista e sia corretto
 \input{capitoli/chapter_3.tex}
 
 % ==========================================
@@ -230,5 +240,6 @@ Qui vanno inseriti i ringraziamenti alle persone che hanno contribuito al lavoro
 % \item \autore{Rossi M.}, Seconda opera, Roma, Altro Editore, 2000.
 
 \end{bibliografiauniv}
-
+\printglossaries 
+\end{document}
 \end{document}

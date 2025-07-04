@@ -1,0 +1,650 @@
+% =====================================
+% GRAFICI E DIAGRAMMI - CAPITOLO 4 COMPLIANCE E GOVERNANCE
+% "Compliance Integrata e Governance"
+% Compatibile con XeLaTeX
+% =====================================
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{tabularx}
+
+
+% Configurazioni PGFPlots
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,shapes,arrows,calc,patterns,decorations.pathreplacing,fit,backgrounds,matrix,chains}
+
+% Definizione colori tema
+\definecolor{gdoblu}{RGB}{25,118,188}
+\definecolor{gdorosso}{RGB}{220,38,58}
+\definecolor{gdoverde}{RGB}{0,150,108}
+\definecolor{gdoarancio}{RGB}{255,165,0}
+\definecolor{gdogrigio}{RGB}{128,128,128}
+\definecolor{gdovioletto}{RGB}{128,0,128}
+
+\geometry{margin=2cm}
+
+\begin{document}
+
+% =====================================
+% FIGURA 4.1: ARCHITETTURA CYBER-PHYSICAL REFRIGERAZIONE
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=1.5cm, scale=0.85, transform shape]
+% Definizione stili
+\tikzset{
+    sensor/.style={circle, minimum size=0.8cm, text centered, draw=gdoarancio, fill=gdoarancio!20, thick},
+    controller/.style={rectangle, rounded corners, minimum width=2cm, minimum height=1.2cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    gateway/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1.5cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    bms/.style={rectangle, rounded corners, minimum width=3cm, minimum height=2cm, text centered, draw=gdovioletto, fill=gdovioletto!20, thick},
+    cloud/.style={ellipse, minimum width=3cm, minimum height=1.8cm, text centered, draw=gdogrigio, fill=gdogrigio!20, thick},
+    attack/.style={->, thick, gdorosso, dashed},
+    data/.style={<->, thick, gdoblu},
+    control/.style={<->, thick, gdoverde}
+}
+
+% Layer 1: Sensori fisici
+\node[sensor] (temp1) at (0,0) {\footnotesize T1};
+\node[sensor] (temp2) at (1.5,0) {\footnotesize T2};
+\node[sensor] (humid1) at (3,0) {\footnotesize H1};
+\node[sensor] (press1) at (4.5,0) {\footnotesize P1};
+\node[sensor] (temp3) at (6,0) {\footnotesize T3};
+\node[sensor] (temp4) at (7.5,0) {\footnotesize T4};
+
+% Layer 2: Controller locali (PLC)
+\node[controller] (plc1) at (1,2) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{PLC-1}
+\footnotesize Zona A
+\end{minipage}
+};
+
+\node[controller] (plc2) at (4,2) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{PLC-2}  
+\footnotesize Zona B
+\end{minipage}
+};
+
+\node[controller] (plc3) at (7,2) {
+\begin{minipage}{1.8cm}
+\centering
+\textbf{PLC-3}
+\footnotesize Zona C
+\end{minipage}
+};
+
+% Layer 3: Gateway IoT
+\node[gateway] (gateway) at (4,4.5) {
+\begin{minipage}{2.3cm}
+\centering
+\textbf{IoT Gateway}
+
+• Protocol Translation
+• Data Aggregation
+• Local Analytics
+\end{minipage}
+};
+
+% Layer 4: Building Management System
+\node[bms] (bms) at (4,7) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Building Management System}
+
+• HVAC Control
+• Energy Management  
+• Alarm Management
+• Historical Data
+\end{minipage}
+};
+
+% Layer 5: Cloud Analytics
+\node[cloud] (cloud) at (4,9.5) {
+\begin{minipage}{2.8cm}
+\centering
+\textbf{Cloud Analytics}
+
+• Predictive Maintenance
+• Energy Optimization
+• Performance Analytics
+\end{minipage}
+};
+
+% Connessioni normali
+\draw[control] (temp1) -- (plc1);
+\draw[control] (temp2) -- (plc1);
+\draw[control] (humid1) -- (plc2);
+\draw[control] (press1) -- (plc2);
+\draw[control] (temp3) -- (plc3);
+\draw[control] (temp4) -- (plc3);
+
+\draw[data] (plc1) -- (gateway);
+\draw[data] (plc2) -- (gateway);
+\draw[data] (plc3) -- (gateway);
+
+\draw[data] (gateway) -- (bms);
+\draw[data] (bms) -- (cloud);
+
+% Vettori di attacco
+\node[rectangle, draw=gdorosso, fill=gdorosso!20, minimum width=1cm] (attacker) at (-2,4.5) {\footnotesize Attacker};
+
+% Attack vectors
+\draw[attack] (attacker) to[bend right=20] (temp1) node[midway, left] {\footnotesize 1. IoT Exploit};
+\draw[attack] (attacker) to[bend right=10] (plc2) node[midway, left] {\footnotesize 2. Default Creds};
+\draw[attack] (attacker) to[bend left=10] (gateway) node[midway, above] {\footnotesize 3. Network Sniffing};
+\draw[attack] (attacker) to[bend left=20] (bms) node[midway, above] {\footnotesize 4. Lateral Movement};
+
+% Impact zones
+\node[ellipse, draw=gdorosso, fill=gdorosso!10, minimum width=8cm, minimum height=1.5cm] at (4,0.5) {};
+\node[ellipse, draw=gdorosso, fill=gdorosso!10, minimum width=6cm, minimum height=1.5cm] at (4,2.5) {};
+
+% Legenda attack vectors
+\node at (10,6) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Vettori di Attacco:}
+
+1. Exploit dispositivi IoT
+2. Credenziali default
+3. Protocolli non cifrati
+4. Movimento laterale
+
+\textbf{Zone di Impatto:}
+\tikz \fill[gdorosso!10] (0,0) ellipse (0.3cm and 0.1cm); Controllo fisico
+
+\tikz \fill[gdorosso!20] (0,0) ellipse (0.3cm and 0.1cm); Supervisione
+\end{minipage}
+};
+
+% Protocolli utilizzati
+\node at (10,2) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Protocolli OT:}
+• Modbus TCP
+• BACnet/IP
+• MQTT
+• Proprietary
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Architettura cyber-physical dei sistemi di refrigerazione: superficie di attacco e vettori di compromissione}
+\label{fig:cyberphysical_refrigeration_architecture}
+\end{figure}
+
+% =====================================
+% FIGURA 4.2: TIMELINE ATTACCO CYBER-PHYSICAL
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+% Timeline principale
+\draw[->] (0,0) -- (15,0) node[right] {\textbf{Giorni}};
+
+% Fasi dell'attacco
+\foreach \x in {1,2,...,14} {
+  \draw (\x,-0.1) -- (\x,0.1);
+  \node[below] at (\x,-0.3) {\footnotesize \x};
+}
+
+% Fasi principali
+\node[rectangle, rounded corners, fill=gdoarancio!20, draw=gdoarancio, minimum width=2.5cm, minimum height=1cm] 
+  at (2,2) {\begin{minipage}{2.2cm}\centering\footnotesize\textbf{Reconnaissance}\\ Shodan scanning\\ Device discovery\end{minipage}};
+
+\node[rectangle, rounded corners, fill=gdoverde!20, draw=gdoverde, minimum width=2.5cm, minimum height=1cm] 
+  at (5,2) {\begin{minipage}{2.2cm}\centering\footnotesize\textbf{Initial Access}\\ Default credentials\\ Backdoor install\end{minipage}};
+
+\node[rectangle, rounded corners, fill=gdoblu!20, draw=gdoblu, minimum width=2.5cm, minimum height=1cm] 
+  at (8,2) {\begin{minipage}{2.2cm}\centering\footnotesize\textbf{Lateral Movement}\\ Network mapping\\ BMS compromise\end{minipage}};
+
+\node[rectangle, rounded corners, fill=gdovioletto!20, draw=gdovioletto, minimum width=2.5cm, minimum height=1cm] 
+  at (11,2) {\begin{minipage}{2.2cm}\centering\footnotesize\textbf{Persistence}\\ Multiple backdoors\\ Stealth techniques\end{minipage}};
+
+\node[rectangle, rounded corners, fill=gdorosso!20, draw=gdorosso, minimum width=2.5cm, minimum height=1cm] 
+  at (13.5,2) {\begin{minipage}{2.2cm}\centering\footnotesize\textbf{Attack Execution}\\ Temperature manipulation\\ System disruption\end{minipage}};
+
+% Frecce che collegano timeline a fasi
+\draw[->] (2,0.2) -- (2,1.5);
+\draw[->] (5,0.2) -- (5,1.5);
+\draw[->] (8,0.2) -- (8,1.5);
+\draw[->] (11,0.2) -- (11,1.5);
+\draw[->] (13.5,0.2) -- (13.5,1.5);
+
+% Eventi specifici
+\node at (2,4) {\begin{minipage}{2.5cm}\centering\footnotesize\textbf{Giorno 2:}\\ 847 dispositivi identificati\\ 312 con cred. default\end{minipage}};
+
+\node at (5,4) {\begin{minipage}{2.5cm}\centering\footnotesize\textbf{Giorno 5:}\\ Accesso controller\\ Mapping rete OT\end{minipage}};
+
+\node at (8,4) {\begin{minipage}{2.5cm}\centering\footnotesize\textbf{Giorno 8:}\\ BMS compromesso\\ Zero-day exploit\end{minipage}};
+
+\node at (11,4) {\begin{minipage}{2.5cm}\centering\footnotesize\textbf{Giorno 11:}\\ 156 unità controllate\\ 23 store impattati\end{minipage}};
+
+\node at (13.5,4) {\begin{minipage}{2.5cm}\centering\footnotesize\textbf{Giorno 13-14:}\\ Esecuzione weekend\\ Perdita inventario\end{minipage}};
+
+% Indicatori di severity
+\foreach \x/\severity in {2/Low, 5/Medium, 8/High, 11/High, 13.5/Critical} {
+  \node[circle, inner sep=1pt] at (\x,0.5) {\footnotesize \severity};
+}
+
+% Damage curve
+\begin{scope}[yshift=-2cm]
+\begin{axis}[
+    width=12cm,
+    height=3cm,
+    xlabel={\footnotesize Giorni},
+    ylabel={\footnotesize Damage Potential},
+    xmin=0, xmax=14,
+    ymin=0, ymax=10,
+    grid=major,
+    no marks
+]
+\addplot[gdorosso, thick] coordinates {
+    (0,0) (3,1) (5,2) (8,6) (11,8) (13,10)
+};
+\end{axis}
+\end{scope}
+
+\end{tikzpicture}
+\caption{Timeline dell'attacco cyber-physical: progressione delle fasi e escalation del rischio}
+\label{fig:cyberphysical_attack_timeline}
+\end{figure}
+
+% =====================================
+% TABELLA 4.1: CONFRONTO FRAMEWORK NORMATIVI
+% =====================================
+\begin{table}[htbp]
+\centering
+\caption{Confronto Framework Normativi per la GDO: Requisiti e Sovrapposizioni}
+\label{tab:regulatory_frameworks_comparison}
+\begin{tabular}{@{}llccp{3cm}@{}}
+\toprule
+\textbf{Framework} & \textbf{Scope} & \textbf{Applicabilità GDO} & \textbf{Penalità Max} & \textbf{Requisiti Chiave} \\
+\midrule
+\multirow{2}{*}{PCI-DSS 4.0} & Dati pagamento & Tutte le organizzazioni & \$500K + & MFA universale, Network validation \\
+& & che processano carte & revoca certificazione & Customized approach \\
+\addlinespace
+\multirow{2}{*}{GDPR} & Dati personali & Tutte le organizzazioni & 4\% fatturato & Privacy by design \\
+& & UE o clienti UE & o €20M & Data minimization, Consent \\
+\addlinespace
+\multirow{2}{*}{NIS2} & Infrastrutture & Catene GDO & €10M Essential & Supply chain security \\
+& critiche & con fatturato >€10M & €7M Important & Incident reporting 24h \\
+\addlinespace
+\multirow{2}{*}{ISO 27001} & Sistemi informativi & Volontario & N/A & Risk management, ISMS implementation \\
+& & (spesso richiesto) & (certificazione) & ISMS implementation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 4.3: ANALISI IMPATTI MULTIDIMENSIONALI
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+% Grafico a torta per distribuzione impatti
+\begin{scope}[xshift=-6cm]
+\node at (0,3) {\textbf{Distribuzione Impatti Totali}};
+
+% Dati: Diretti 4.6%, Reputazionali 68.3%, Compliance 21.6%, Competitivi 5.5%
+\def\slices{
+  {"Diretti", 4.6, gdoverde},
+  {"Reputazionali", 68.3, gdorosso},
+  {"Compliance", 21.6, gdoarancio},
+  {"Competitivi", 5.5, gdoblu}
+}
+
+\def\radius{2.5}
+\def\startangle{0}
+
+\foreach \name/\percentage/\color [count=\i] in \slices {
+  % Calcolo angoli
+  \pgfmathsetmacro{\endangle}{\startangle + \percentage * 3.6}
+  
+  % Disegno slice
+  \fill[\color!70] (0,0) -- (\startangle:\radius) arc (\startangle:\endangle:\radius) -- cycle;
+  
+  % Etichetta
+  \pgfmathsetmacro{\midangle}{(\startangle + \endangle) / 2}
+  \node at (\midangle:\radius*0.7) {\footnotesize \percentage\%};
+  
+  % Legenda
+  \node[rectangle, fill=\color!70, minimum width=0.3cm, minimum height=0.3cm] at (4, 2-\i*0.5) {};
+  \node[right] at (4.2, 2-\i*0.5) {\footnotesize \name: €\pgfmathprintnumber[precision=1]{\percentage*0.473}M};
+  
+  \pgfmathsetmacro{\startangle}{\endangle}
+}
+
+\node at (0,-3.5) {\footnotesize\textbf{Totale: €47.3M su 3 anni}};
+\end{scope}
+
+% Breakdown temporale impatti
+\begin{scope}[xshift=6cm]
+\begin{axis}[
+    title={\textbf{Evoluzione Temporale Impatti}},
+    xlabel={Anni},
+    ylabel={Impatto Cumulativo (M€)},
+    width=8cm,
+    height=6cm,
+    xmin=0,
+    xmax=3,
+    ymin=0,
+    ymax=50,
+    legend style={at={(0.02,0.98)}, anchor=north west},
+    stack plots=y
+]
+
+% Impatti diretti (immediati)
+\addplot[fill=gdoverde!70, draw=gdoverde] coordinates {
+    (0,2.2) (0.5,2.2) (1,2.2) (2,2.2) (3,2.2)
+};
+
+% Impatti compliance (0-1 anno)
+\addplot[fill=gdoarancio!70, draw=gdoarancio] coordinates {
+    (0,0) (0.5,10.2) (1,10.2) (2,10.2) (3,10.2)
+};
+
+% Impatti reputazionali (progressivi)
+\addplot[fill=gdorosso!70, draw=gdorosso] coordinates {
+    (0,0) (0.5,8) (1,16) (2,24) (3,32.3)
+};
+
+% Impatti competitivi (1-3 anni)
+\addplot[fill=gdoblu!70, draw=gdoblu] coordinates {
+    (0,0) (0.5,0) (1,1) (2,2) (3,2.6)
+};
+
+\legend{Diretti, Compliance, Reputazionali, Competitivi}
+\end{axis}
+\end{scope}
+
+\end{tikzpicture}
+\caption{Analisi multidimensionale degli impatti: distribuzione per categoria e evoluzione temporale}
+\label{fig:multidimensional_impact_analysis}
+\end{figure}
+
+% =====================================
+% FIGURA 4.4: FRAMEWORK GOVERNANCE INTEGRATO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+% Definizione stili
+\tikzset{
+    governance/.style={rectangle, rounded corners, minimum width=3.5cm, minimum height=2cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    process/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1.5cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    output/.style={rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text centered, draw=gdorosso, fill=gdorosso!20, thick},
+    feedback/.style={<->, thick, gdogrigio, dashed}
+}
+
+% Layer superiore: Governance strategica
+\node[governance] (risk_gov) at (0,6) {
+\begin{minipage}{3.2cm}
+\centering
+\textbf{Risk Governance}
+
+• Risk appetite definition
+• KRI monitoring
+• Board reporting
+\end{minipage}
+};
+
+\node[governance] (compliance_gov) at (5,6) {
+\begin{minipage}{3.2cm}
+\centering
+\textbf{Compliance Governance}
+
+• Multi-standard integration
+• Audit coordination
+• Policy harmonization
+\end{minipage}
+};
+
+\node[governance] (crisis_gov) at (10,6) {
+\begin{minipage}{3.2cm}
+\centering
+\textbf{Crisis Governance}
+
+• Incident command
+• Business continuity
+• Communication management
+\end{minipage}
+};
+
+% Layer intermedio: Processi operativi
+\node[process] (risk_assess) at (-1,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Risk Assessment}
+
+• Quantitative modeling
+• Scenario analysis
+\end{minipage}
+};
+
+\node[process] (monitor) at (2.5,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Continuous Monitoring}
+
+• KRI tracking
+• Threshold management
+\end{minipage}
+};
+
+\node[process] (compliance_check) at (5,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Compliance Validation}
+
+• Control testing
+• Gap analysis
+\end{minipage}
+};
+
+\node[process] (incident_mgmt) at (7.5,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Incident Management}
+
+• Detection \& response
+• Forensic analysis
+\end{minipage}
+};
+
+\node[process] (recovery) at (11,3) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Recovery Management}
+
+• Business continuity
+• Disaster recovery
+\end{minipage}
+};
+
+% Layer inferiore: Output e feedback
+\node[output] (reports) at (1,0.5) {\begin{minipage}{1.8cm}\centering\footnotesize Risk Reports\end{minipage}};
+\node[output] (dashboards) at (3.5,0.5) {\begin{minipage}{1.8cm}\centering\footnotesize KRI Dashboards\end{minipage}};
+\node[output] (audit_results) at (6,0.5) {\begin{minipage}{1.8cm}\centering\footnotesize Audit Results\end{minipage}};
+\node[output] (lessons) at (8.5,0.5) {\begin{minipage}{1.8cm}\centering\footnotesize Lessons Learned\end{minipage}};
+
+% Connessioni principali
+\draw[->] (risk_gov) -- (risk_assess);
+\draw[->] (risk_gov) -- (monitor);
+\draw[->] (compliance_gov) -- (compliance_check);
+\draw[->] (crisis_gov) -- (incident_mgmt);
+\draw[->] (crisis_gov) -- (recovery);
+
+\draw[->] (risk_assess) -- (reports);
+\draw[->] (monitor) -- (dashboards);
+\draw[->] (compliance_check) -- (audit_results);
+\draw[->] (incident_mgmt) -- (lessons);
+
+% Feedback loops
+\draw[feedback] (reports) to[bend right=20] (risk_gov);
+\draw[feedback] (audit_results) to[bend left=20] (compliance_gov);
+\draw[feedback] (lessons) to[bend left=30] (crisis_gov);
+
+% Integrazione trasversale
+\draw[<->, thick, gdovioletto] (risk_gov) -- (compliance_gov) node[midway, above] {\footnotesize Integration};
+\draw[<->, thick, gdovioletto] (compliance_gov) -- (crisis_gov) node[midway, above] {\footnotesize Coordination};
+
+% Key Performance Indicators
+\node at (13,4) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{KPI Integrati:}
+
+• Risk-adjusted ROI
+• Compliance efficiency
+• MTTR incidents
+• Recovery capability
+• Stakeholder confidence
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Framework di governance integrato: coordinamento di risk management, compliance e crisis management}
+\label{fig:integrated_governance_framework}
+\end{figure}
+
+% =====================================
+% TABELLA 4.2: METRICHE RISK MANAGEMENT
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Key Risk Indicators (KRI) per Architetture Cloud-Ibride GDO}
+\label{tab:key_risk_indicators}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{KRI} & \textbf{Soglia Verde} & \textbf{Soglia Gialla} & \textbf{Soglia Rossa} & \textbf{Frequenza} \\
+\midrule
+Availability Cumulative & < 2 ore/anno & 2-4 ore/anno & > 4 ore/anno & Real-time \\
+\addlinespace
+Security Incidents High & 0 & 1/anno & > 1/anno & Daily \\
+\addlinespace
+Vendor Concentration & < 30\% & 30-35\% & > 35\% & Monthly \\
+\addlinespace
+Compliance Score & > 95\% & 90-95\% & < 90\% & Weekly \\
+\addlinespace
+Recovery Time Test & < RTO target & RTO + 20\% & > RTO + 50\% & Quarterly \\
+\addlinespace
+Patch Currency & > 95\% & 90-95\% & < 90\% & Weekly \\
+\addlinespace
+Cyber Insurance Gap & 0\% & < 10\% & > 10\% & Annual \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 4.5: SIMULATION RISK MONTE CARLO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Simulazione Monte Carlo: Distribuzione Annual Risk Exposure},
+    xlabel={Annual Risk Exposure (M€)},
+    ylabel={Probabilità Densità},
+    width=12cm,
+    height=7cm,
+    xmin=0,
+    xmax=25,
+    ymin=0,
+    ymax=0.25,
+    grid=major,
+    legend style={at={(0.98,0.98)}, anchor=north east},
+]
+
+% Distribuzione probability density
+\addplot[color=gdoblu, line width=2pt, smooth] coordinates {
+    (0.5,0.02) (1,0.05) (2,0.12) (3,0.18) (4,0.22) (5,0.23) (6,0.21) (7,0.18) 
+    (8,0.15) (9,0.12) (10,0.09) (12,0.06) (15,0.03) (20,0.01) (25,0.005)
+};
+
+% Percentili di rischio
+\draw[dashed, gdoverde, line width=2pt] (axis cs:3.2,0) -- (axis cs:3.2,0.25) node[above] {\footnotesize 50\% (€3.2M)};
+\draw[dashed, gdoarancio, line width=2pt] (axis cs:8.1,0) -- (axis cs:8.1,0.25) node[above] {\footnotesize 95\% (€8.1M)};
+\draw[dashed, gdorosso, line width=2pt] (axis cs:12.3,0) -- (axis cs:12.3,0.25) node[above] {\footnotesize 99\% (€12.3M)};
+
+% Area sotto la curva per VaR 95%
+\addplot[fill=gdorosso!20, draw=none, domain=8.1:25] {0.23*exp(-0.3*x)};
+
+\legend{Risk Distribution, VaR 95\% Tail}
+
+\end{axis}
+
+% Box statistiche
+\node at (10,-1) {
+\begin{minipage}{10cm}
+\footnotesize
+\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
+\textbf{Statistica} & \textbf{Valore} & \textbf{Statistica} & \textbf{Valore} \\
+\midrule
+Media & €4.7M & Expected Shortfall (95\%) & €11.2M \\
+Mediana & €3.2M & Value at Risk (99\%) & €12.3M \\
+Std Deviation & €3.1M & Maximum Loss & €24.8M \\
+\end{tabular}
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Distribuzione probabilistica dell'esposizione al rischio annuale: risultati simulazione Monte Carlo}
+\label{fig:monte_carlo_risk_simulation}
+\end{figure}
+
+% =====================================
+% TABELLA 4.3: BUSINESS CONTINUITY TARGETS
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Target di Business Continuity per Sistemi Critici GDO}
+\label{tab:business_continuity_targets}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Sistema} & \textbf{RTO Target} & \textbf{RPO Target} & \textbf{Criticità Business} & \textbf{Strategia Recovery} \\
+\midrule
+Core POS Systems & < 5 min & < 1 min & Critica & Hot standby \\
+\addlinespace
+Payment Gateway & < 2 min & < 30 sec & Critica & Active-active \\
+\addlinespace
+Inventory Management & < 30 min & < 15 min & Alta & Warm standby \\
+\addlinespace
+Customer Database & < 1 ora & < 5 min & Alta & Sync replication \\
+\addlinespace
+Analytics Platform & < 4 ore & < 1 ora & Media & Async replication \\
+\addlinespace
+ERP Systems & < 2 ore & < 30 min & Alta & Cluster failover \\
+\addlinespace
+E-commerce Platform & < 15 min & < 5 min & Alta & Multi-region \\
+\addlinespace
+Development/Test & < 24 ore & < 8 ore & Bassa & Backup restore \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

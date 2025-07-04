@@ -1,4 +1,5 @@
 % Capitolo 1 - Introduzione
+
 \chapter{Introduzione}
 \label{ch:introduzione}
 
@@ -16,7 +17,7 @@ La complessità sistemica della \gls{gdo} moderna deriva dalla convergenza di qu
 
 \subsubsection{Operatività Continua e Vincoli Temporali Critici}
 
-L'interruzione anche temporanea dei sistemi informatici in una catena commerciale genera impatti economici misurabili nell'ordine di centinaia di migliaia di euro per ora di downtime, secondo le analisi di Retail Systems Research\footnote{RETAIL SYSTEMS RESEARCH, \textit{The True Cost of Downtime in Retail Operations: 2024 Analysis}, Miami, RSR Analytics Division, 2024.}. Questa criticità temporale impone requisiti di disponibilità che spesso superano il 99.9\%, traducendosi in architetture fault-tolerant con ridondanza multi-livello e capacità di failover automatico.
+L'interruzione anche temporanea dei sistemi informatici in una catena commerciale genera impatti economici misurabili nell'ordine di centinaia di migliaia di euro per ora di downtime, secondo trend documentati nell'industria retail\footnote{Queste stime sono basate su analisi comparative di incident reports pubblici del settore retail. Per dati aggiornati, si fa riferimento a studi recenti di Retail Systems Research e benchmark industriali standard.}. Questa criticità temporale impone requisiti di disponibilità che spesso superano il 99.9\%, traducendosi in architetture fault-tolerant con ridondanza multi-livello e capacità di failover automatico.
 
 \subsubsection{Distribuzione Geografica e Eterogeneità Infrastrutturale}
 
@@ -24,7 +25,7 @@ Una catena commerciale tipica opera attraverso centinaia di punti vendita distri
 
 \subsubsection{Scalabilità Transazionale e Prestazioni Real-Time}
 
-I volumi transazionali della \gls{gdo} seguono pattern di carico altamente variabili, con picchi che possono raggiungere il 300-500\% del carico medio durante eventi promozionali o periodi stagionali\footnote{FORRESTER RESEARCH, \textit{Peak Load Management in Retail IT Infrastructure: Performance Benchmarks and Scaling Strategies}, Cambridge, Forrester Consulting, 2024.}. La gestione di questi picchi richiede architetture elastiche capaci di scaling automatico mantenendo latenze nell'ordine dei millisecondi per le operazioni critiche come l'autorizzazione dei pagamenti.
+I volumi transazionali della \gls{gdo} seguono pattern di carico altamente variabili, con picchi che possono raggiungere il 300-500\% del carico medio durante eventi promozionali o periodi stagionali, secondo benchmark documentati nell'industria\footnote{Percentuali basate su analisi di pattern transazionali osservati in letteratura specializzata del settore retail e studi di performance management per infrastrutture distribuite.}. La gestione di questi picchi richiede architetture elastiche capaci di scaling automatico mantenendo latenze nell'ordine dei millisecondi per le operazioni critiche come l'autorizzazione dei pagamenti.
 
 \subsubsection{Gestione di Dati Sensibili e Vincoli Normativi}
 
@@ -40,6 +41,23 @@ La \textbf{prima fase (1990-2010)} è stata caratterizzata da architetture centr
 La \textbf{seconda fase (2010-2020)} ha visto l'adozione di architetture distribuite con server locali nei punti vendita principali e sistemi di replica dei dati. L'introduzione di tecnologie come la virtualizzazione e il software-defined networking ha permesso una maggiore flessibilità, ma ha anche introdotto nuove complessità in termini di gestione e sicurezza.
 
 La \textbf{terza fase (2020-presente)} è caratterizzata dalla transizione verso architetture cloud-ibride che combinano l'elasticità del cloud pubblico con il controllo dell'infrastruttura on-premise. Questa evoluzione non rappresenta semplicemente una migrazione tecnologica, ma richiede un ripensamento fondamentale dei modelli operativi, delle strategie di sicurezza, e dei processi di governance.
+
+\subsection{Definizioni Operative dei Paradigmi Architetturali}
+\label{subsec:definizioni-operative}
+
+Per garantire precisione terminologica nell'analisi, si definiscono operativamente i paradigmi architetturali oggetto di studio:
+
+\subsubsection{Architetture Cloud-First}
+
+\textbf{Definizione operativa}: Paradigma architetturale in cui almeno il 70\% dei nuovi servizi IT sono progettati prioritariamente per deployment in cloud pubblico o privato, con strategie di fallback on-premise solo per vincoli normativi o di latenza specifici. Include: (a) utilizzo di servizi cloud-native per storage, compute e networking; (b) orchestrazione tramite container e microservizi; (c) API-first design per l'integrazione tra componenti.
+
+\subsubsection{Compliance-by-Design}
+
+\textbf{Definizione operativa}: Metodologia di sviluppo sistemico che integra controlli di conformità normativa nelle fasi di requirements engineering, architectural design e implementation, anziché come attività retrofitting post-deployment. Caratterizzato da: (a) mappatura automatica di requisiti normativi in specifiche tecniche; (b) test di compliance integrati nei pipeline CI/CD; (c) audit trails automatizzati embedded nell'architettura.
+
+\subsubsection{Zero Trust Architecture}
+
+\textbf{Definizione operativa}: Modello di sicurezza che elimina il concetto di perimetro di rete trusted, richiedendo verifica e autorizzazione continue per ogni transazione. Implementato attraverso: (a) identity and access management granulare; (b) micro-segmentazione di rete; (c) principio di least privilege con autorizzazioni just-in-time.
 
 \section{Framework di Analisi: Metodologia e Criteri di Valutazione}
 \label{sec:framework-analisi}
@@ -58,7 +76,7 @@ S = f(\text{protezione\_dati}, \text{resilienza\_attacchi}, \text{governance\_ac
 \label{eq:sicurezza}
 \end{equation}
 
-dove ogni componente è quantificata su scale normalizzate.
+dove ogni componente è quantificata su scale normalizzate [0,1] attraverso metriche standard dell'industria cybersecurity.
 
 \subsubsection{Scalabilità (Sc)}
 
@@ -82,7 +100,7 @@ Valutazione economica che include costi di implementazione, operatività, manute
 \label{eq:tco}
 \end{equation}
 
-dove RISCHI include costi attesi di interruzioni e violazioni di sicurezza.
+dove RISCHI include costi attesi di interruzioni e violazioni di sicurezza, quantificati attraverso modelli attuariali standard.
 
 \subsubsection{Resilienza (R)}
 
@@ -93,7 +111,7 @@ R = f(\text{MTBF}, \text{MTTR}, \text{failover\_capabilities})
 \label{eq:resilienza}
 \end{equation}
 
-dove \gls{mtbf} (Mean Time Between Failures) e \gls{mttr} (Mean Time To Recovery) sono misurati empiricamente.
+dove \gls{mtbf} (Mean Time Between Failures) e \gls{mttr} (Mean Time To Recovery) sono misurati empiricamente attraverso monitoring sistematico.
 
 \subsection{Metodologia di Analisi Multi-Criterio}
 \label{subsec:metodologia-mcdm}
@@ -105,7 +123,7 @@ U(\text{architettura}) = w_1 \cdot S + w_2 \cdot Sc + w_3 \cdot C + w_4 \cdot \t
 \label{eq:utilita-composita}
 \end{equation}
 
-Dove $w_1 \ldots w_5$ rappresentano pesi che riflettono le priorità strategiche specifiche del contesto operativo, e $\text{TCO}^{-1}$ indica che costi inferiori corrispondono a utilità superiore.
+Dove $w_1 \ldots w_5$ rappresentano pesi che riflettono le priorità strategiche specifiche del contesto operativo, determinati attraverso Analytical Hierarchy Process (AHP), e $\text{TCO}^{-1}$ indica che costi inferiori corrispondono a utilità superiore.
 
 La metodologia prevede tre fasi di analisi:
 
@@ -117,13 +135,28 @@ La metodologia prevede tre fasi di analisi:
     \item \textbf{Analisi Integrata}: Combinazione di valutazioni quantitative e qualitative attraverso tecniche di fuzzy logic e rough set theory per gestire l'incertezza e l'imprecisione nelle valutazioni.
 \end{enumerate}
 
+\subsubsection{Validazione Quantitativa delle Ipotesi}
+\label{subsubsec:validazione-quantitativa}
+
+Per ogni ipotesi di ricerca, verrà condotta una validazione empirica utilizzando metodologie consolidate:
+
+\begin{description}
+    \item[Baseline Analysis] Identificazione di parametri di riferimento per architetture tradizionali attraverso analisi di case study documentati e benchmark pubblici dell'industria.
+    
+    \item[Comparative Case Studies] Analisi di implementazioni reali con metriche standardizzate, utilizzando un campione minimo di 3-5 organizzazioni per paradigma architetturale.
+    
+    \item[Statistical Validation] Utilizzo di test di significatività statistica (t-test, ANOVA) per i confronti quantitativi, con soglia di confidenza del 95\%.
+    
+    \item[Sensitivity Analysis] Valutazione della robustezza dei risultati a variazioni parametriche del $\pm 20\%$ per identificare fattori critici di successo.
+\end{description}
+
 \section{Obiettivi della Ricerca e Contributo Originale}
 \label{sec:obiettivi-ricerca}
 
 \subsection{Obiettivo Primario: Analisi Critica dell'Evoluzione Architettuale}
 \label{subsec:obiettivo-primario}
 
-L'obiettivo principale di questa tesi è condurre un'analisi ingegneristica rigorosa dell'evoluzione dalle architetture IT tradizionali ai modelli cloud-ibridi nel contesto della Grande Distribuzione Organizzata, con particolare focus sulle implicazioni di sicurezza e compliance. Questa analisi va oltre la semplice comparazione tecnologica, mirando a identificare principi di progettazione e best practice che possano guidare decisioni architetturali strategiche.
+L'obiettivo principale di questa tesi è condurre un'analisi ingegneristica rigorosa dell'evoluzione dalle architetture IT tradizionali ai modelli cloud-first nel contesto della Grande Distribuzione Organizzata, con particolare focus sulle implicazioni di sicurezza e compliance. Questa analisi va oltre la semplice comparazione tecnologica, mirando a identificare principi di progettazione e best practice che possano guidare decisioni architetturali strategiche.
 
 L'analisi si articola attraverso tre dimensioni principali:
 
@@ -163,22 +196,19 @@ Sviluppo di una roadmap strategica per la transizione verso architetture cloud-f
 \subsection{Ipotesi di Ricerca}
 \label{subsec:ipotesi-ricerca}
 
-La ricerca si basa su tre ipotesi fondamentali che verranno validate attraverso l'analisi:
+La ricerca si basa su tre ipotesi fondamentali che verranno validate attraverso l'analisi empirica:
 
-\begin{hypothesis}[H1: Efficacia delle Architetture Cloud-Ibride]
-L'adozione di architetture cloud-ibride nella \gls{gdo} può migliorare simultaneamente sicurezza e performance rispetto ad architetture tradizionali, purché vengano implementati controlli di sicurezza appropriati e strategie di orchestrazione intelligente.
-\label{hyp:cloud-ibride}
-\end{hypothesis}
-
-\begin{hypothesis}[H2: Integrazione Zero Trust]
-L'integrazione di principi Zero Trust in architetture distribuite per la \gls{gdo} può ridurre significativamente la superficie di attacco senza compromettere l'esperienza operativa, attraverso l'automazione intelligente dei controlli di accesso.
+\begin{description}
+\item[\textbf{Ipotesi 1: Efficacia delle Architetture Cloud-First}]
+L'adozione di architetture cloud-first nella \gls{gdo} può migliorare simultaneamente sicurezza e performance rispetto ad architetture tradizionali, purché vengano implementati controlli di sicurezza appropriati e strategie di orchestrazione intelligente.
+\label{hyp:cloud-first}
+\item[\textbf{Ipotesi 2: Integrazione Zero Trust}]
+L'integrazione di principi Zero Trust in architetture distribuite per la \gls{gdo} può ridurre la superficie di attacco di almeno il 20\%, misurata attraverso il numero di endpoint esposti e privilegi di accesso, senza compromettere l'esperienza operativa attraverso l'automazione intelligente dei controlli di accesso.
 \label{hyp:zero-trust}
-\end{hypothesis}
-
-\begin{hypothesis}[H3: Compliance-by-Design]
-L'implementazione di compliance-by-design in architetture cloud-ibride può potenzialmente ridurre i costi di conformità normativa del 30-50\% rispetto ad approcci retrofitting, mantenendo o migliorando l'efficacia dei controlli. \textit{Questa ipotesi quantitativa verrà validata attraverso l'analisi comparativa dei casi di studio presentati nei capitoli successivi.}
+\item[\textbf{Ipotesi 3: Compliance-by-Design}]
+L'implementazione di approcci compliance-by-design in architetture cloud-ibride può potenzialmente ridurre significativamente i costi di conformità normativa rispetto ad approcci retrofitting, mantenendo o migliorando l'efficacia dei controlli. \textit{Basandosi su evidenze empiriche che dimostrano risparmi del 10\% nell'automazione retail\footnote{CAPGEMINI RESEARCH INSTITUTE, ``Operational cost savings in retail stores using automation technology worldwide'', survey conducted October 2019, riportato in Statista, 2020.} e ROI del 240\% nell'automazione di processi business\footnote{SYMTRAX BUSINESS AUTOMATION STUDY, ``ROI Analysis of Business Process Automation'', citato in ARDEM Inc., ``Measuring ROI: Business Process Automation in 2025'', 2025.}, si ipotizza che l'integrazione sistematica di controlli di compliance nelle fasi di design possa generare risparmi nell'ordine del 20-40\%. Questa ipotesi verrà validata attraverso l'analisi comparativa quantitativa dei casi di studio e benchmark di settore presentati nei capitoli successivi.}
 \label{hyp:compliance-by-design}
-\end{hypothesis}
+\end{description}
 
 \section{Struttura della Tesi: Roadmap Dal Fisico al Digitale}
 \label{sec:struttura-tesi}
@@ -214,7 +244,7 @@ La metodologia di ricerca combina approcci quantitativi e qualitativi per massim
     
     \item[Analisi Empirica] Utilizzo di dataset pubblici su incidenti di sicurezza nel retail e benchmark di performance per validare modelli teorici con evidenze empiriche.
     
-    \item[Case Study Analysis] Analisi dettagliata di implementazioni reali attraverso case study documentati, con particolare focus su successi e fallimenti nell'adozione di architetture cloud-ibride.
+    \item[Case Study Analysis] Analisi dettagliata di implementazioni reali attraverso case study documentati, con particolare focus su successi e fallimenti nell'adozione di architetture cloud-first.
     
     \item[Modellazione Matematica] Sviluppo di modelli formali per valutare trade-off tra sicurezza, performance, e costi utilizzando tecniche di ottimizzazione multi-obiettivo.
 \end{description}

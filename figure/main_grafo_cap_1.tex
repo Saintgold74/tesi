@@ -1,0 +1,548 @@
+% =====================================
+% GRAFICI E DIAGRAMMI - CAPITOLO 1 INTRODUZIONE
+% "Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nel Contesto della GDO"
+% Compatibile con XeLaTeX
+% =====================================
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+% Configurazioni PGFPlots
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,shapes,arrows,calc,patterns,decorations.pathreplacing,fit,backgrounds}
+
+% Definizione colori tema GDO
+\definecolor{gdoblu}{RGB}{25,118,188}
+\definecolor{gdorosso}{RGB}{220,38,58}
+\definecolor{gdoverde}{RGB}{0,150,108}
+\definecolor{gdoarancio}{RGB}{255,165,0}
+\definecolor{gdogrigio}{RGB}{128,128,128}
+\definecolor{gdovioletto}{RGB}{128,0,128}
+
+\geometry{margin=2cm}
+
+\begin{document}
+
+% =====================================
+% FIGURA 1.1: EVOLUZIONE ARCHITETTURE GDO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+% Definizione stili
+\tikzset{
+    fase/.style={rectangle, rounded corners, minimum width=4cm, minimum height=3cm, text centered, draw=black, thick},
+    timeline/.style={->, thick, gdogrigio},
+    anno/.style={rectangle, fill=white, draw=gdogrigio, text centered}
+}
+
+% Timeline orizzontale
+\draw[timeline] (0,0) -- (15,0);
+
+% Fasi evolutive
+\node[fase, fill=gdorosso!20] (fase1) at (2.5,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{Fase I}
+\textbf{Architetture Centralizzate}
+
+• Mainframe centrali
+• Terminali stupidi
+• Connettività dedicata
+• Single point of failure
+\end{minipage}
+};
+
+\node[fase, fill=gdoarancio!20] (fase2) at (7.5,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{Fase II}
+\textbf{Sistemi Distribuiti}
+
+• Server locali
+• Virtualizzazione
+• Replica dati
+• SD-WAN emergence
+\end{minipage}
+};
+
+\node[fase, fill=gdoverde!20] (fase3) at (12.5,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{Fase III}
+\textbf{Cloud Ibrido}
+
+• Cloud-first strategy
+• Edge computing
+• API-driven architecture
+• Zero Trust security
+\end{minipage}
+};
+
+% Anni sulla timeline
+\node[anno] at (2.5,-2) {1990-2010};
+\node[anno] at (7.5,-2) {2010-2020};
+\node[anno] at (12.5,-2) {2020-Presente};
+
+% Caratteristiche evolutive sopra
+\node[rectangle, fill=gdoblu!10, draw=gdoblu, minimum width=2cm] at (2.5,4) {\footnotesize Controllo};
+\node[rectangle, fill=gdoblu!10, draw=gdoblu, minimum width=2cm] at (7.5,4) {\footnotesize Flessibilità};
+\node[rectangle, fill=gdoblu!10, draw=gdoblu, minimum width=2cm] at (12.5,4) {\footnotesize Elasticità};
+
+% Frecce di transizione
+\draw[->, thick, gdogrigio] (fase1.east) -- (fase2.west) node[midway, above] {\footnotesize Distribuzione};
+\draw[->, thick, gdogrigio] (fase2.east) -- (fase3.west) node[midway, above] {\footnotesize Ibridazione};
+
+\end{tikzpicture}
+\caption{Evoluzione delle architetture IT nella GDO: dalla centralizzazione al cloud ibrido}
+\label{fig:evoluzione_architetture}
+\end{figure}
+
+% =====================================
+% FIGURA 1.2: FRAMEWORK VALUTAZIONE MULTI-CRITERIO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+% Pentagono per i 5 criteri
+\def\radius{4}
+\def\angles{90, 162, 234, 306, 18} % Angoli per i 5 criteri
+
+% Disegno del pentagono di base
+\draw[thick, gdogrigio] 
+  (90:\radius) -- (162:\radius) -- (234:\radius) -- (306:\radius) -- (18:\radius) -- cycle;
+
+% Griglia interna (3 livelli)
+\foreach \r in {1.33, 2.66} {
+  \draw[gdogrigio!50, thin] 
+    (90:\r) -- (162:\r) -- (234:\r) -- (306:\r) -- (18:\r) -- cycle;
+}
+
+% Assi per ogni criterio
+\foreach \angle in \angles {
+  \draw[gdogrigio!70, thin] (0,0) -- (\angle:\radius);
+}
+
+% Etichette criteri
+\node at (90:\radius+0.7) {\textbf{Sicurezza (S)}};
+\node at (162:\radius+0.7) {\textbf{Scalabilità (Sc)}};
+\node at (234:\radius+0.7) {\textbf{Compliance (C)}};
+\node at (306:\radius+0.7) {\textbf{TCO}};
+\node at (18:\radius+0.7) {\textbf{Resilienza (R)}};
+
+% Esempio di valutazione architettura (area colorata)
+\filldraw[fill=gdoblu!30, draw=gdoblu, thick] 
+  (90:3.2) -- (162:2.8) -- (234:3.6) -- (306:2.4) -- (18:3.0) -- cycle;
+
+% Valori numerici sui punti
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (90:3.2) {\footnotesize 8};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (162:2.8) {\footnotesize 7};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (234:3.6) {\footnotesize 9};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (306:2.4) {\footnotesize 6};
+\node[circle, fill=gdoblu, text=white, inner sep=2pt] at (18:3.0) {\footnotesize 7.5};
+
+% Scala di valutazione
+\node at (-6,3) {\begin{minipage}{3cm}
+\textbf{Scala di Valutazione:}
+\begin{itemize}
+\item[\footnotesize 10] Eccellente
+\item[\footnotesize 7-9] Buono  
+\item[\footnotesize 4-6] Accettabile
+\item[\footnotesize 1-3] Critico
+\end{itemize}
+\end{minipage}};
+
+% Formula di utilità
+\node at (-6,-2) {\begin{minipage}{4cm}
+\footnotesize
+\textbf{Funzione di Utilità:}
+
+$U = w_1 \cdot S + w_2 \cdot Sc + w_3 \cdot C + w_4 \cdot TCO^{-1} + w_5 \cdot R$
+
+Dove $\sum w_i = 1$
+\end{minipage}};
+
+\end{tikzpicture}
+\caption{Framework di valutazione multi-criterio per architetture GDO}
+\label{fig:framework_valutazione}
+\end{figure}
+
+% =====================================
+% FIGURA 1.3: METODOLOGIA DI RICERCA
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, auto]
+% Definizione stili
+\tikzset{
+    process/.style={rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    analysis/.style={diamond, minimum width=2.5cm, minimum height=1.5cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    output/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=gdorosso, fill=gdorosso!20, thick},
+    data/.style={cylinder, shape border rotate=90, minimum width=2cm, minimum height=1.2cm, text centered, draw=gdoarancio, fill=gdoarancio!20, thick}
+}
+
+% Flusso metodologico principale
+\node[process] (literature) at (0,8) {Revisione Letteratura};
+\node[data] (sources) at (4,8) {
+\begin{minipage}{2cm}
+\centering
+\footnotesize
+IEEE/ACM
+Gartner
+Forrester
+\end{minipage}
+};
+
+\node[process] (empirical) at (0,5.5) {Analisi Empirica};
+\node[data] (datasets) at (4,5.5) {
+\begin{minipage}{2cm}
+\centering
+\footnotesize
+Dataset Pubblici
+Benchmark
+Case Study
+\end{minipage}
+};
+
+\node[analysis] (quantitative) at (-3,3) {Analisi Quantitativa};
+\node[analysis] (qualitative) at (3,3) {Analisi Qualitativa};
+
+\node[process] (modeling) at (0,0.5) {Modellazione Matematica};
+
+\node[output] (framework) at (-3,-2) {Framework Integrato};
+\node[output] (principles) at (0,-2) {Design Principles};
+\node[output] (roadmap) at (3,-2) {Strategic Roadmap};
+
+% Connessioni principali
+\draw[->] (literature) -- (empirical);
+\draw[->] (sources) -- (literature);
+\draw[->] (datasets) -- (empirical);
+
+\draw[->] (empirical) -- (quantitative);
+\draw[->] (empirical) -- (qualitative);
+
+\draw[->] (quantitative) -- (modeling);
+\draw[->] (qualitative) -- (modeling);
+
+\draw[->] (modeling) -- (framework);
+\draw[->] (modeling) -- (principles);
+\draw[->] (modeling) -- (roadmap);
+
+% Feedback loops
+\draw[->, dashed, gdogrigio] (framework) to[bend right=20] (quantitative);
+\draw[->, dashed, gdogrigio] (principles) to[bend left=20] (qualitative);
+
+% Tecniche utilizzate (annotazioni)
+\node[rectangle, fill=yellow!20, draw=none] at (6,3) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Tecniche MCDM:}
+• Fuzzy Logic
+• Rough Set Theory
+• AHP Analysis
+• TOPSIS
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Metodologia di ricerca integrata: approccio multi-fase per l'analisi delle architetture GDO}
+\label{fig:metodologia_ricerca}
+\end{figure}
+
+% =====================================
+% FIGURA 1.4: ROADMAP DAL FISICO AL DIGITALE
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=1.5cm]
+% Definizione stili
+\tikzset{
+    layer/.style={rectangle, rounded corners, minimum width=13cm, minimum height=2cm, text centered, draw=black, thick},
+    arrow/.style={->, thick, gdogrigio},
+    chapter/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=gdoblu, fill=gdoblu!20}
+}
+
+% Livelli dell'architettura (dal fisico al digitale)
+\node[layer, fill=gdogrigio!20] (fisico) at (0,0) {
+\textbf{Livello Fisico} - Alimentazione, Cooling, Connettività, Vincoli Ambientali
+};
+
+\node[layer, fill=gdoarancio!20] (infra) at (0,3) {
+\textbf{Livello Infrastrutturale} - Data Center, Edge Computing, SD-WAN, Networking
+};
+
+\node[layer, fill=gdoverde!20] (platform) at (0,6) {
+\textbf{Livello Piattaforma} - Virtualizzazione, Container, Cloud Services, Orchestrazione
+};
+
+\node[layer, fill=gdoblu!20] (application) at (0,9) {
+\textbf{Livello Applicativo} - POS Systems, ERP, Analytics, Customer Experience
+};
+
+\node[layer, fill=gdovioletto!20] (security) at (0,12) {
+\textbf{Livello Sicurezza} - Zero Trust, Compliance, Governance, Incident Response
+};
+
+% Frecce di trasformazione
+\draw[arrow] (fisico.north) -- (infra.south);
+\draw[arrow] (infra.north) -- (platform.south);
+\draw[arrow] (platform.north) -- (application.south);
+\draw[arrow] (application.north) -- (security.south);
+
+% Mapping capitoli tesi
+\node[chapter] (cap2) at (8,3) {Cap. 2 Threat Landscape};
+\node[chapter] (cap3) at (8,6) {Cap. 3 Evoluzione Infrastrutturale};
+\node[chapter] (cap4) at (8,9) {Cap. 4 Compliance};
+\node[chapter] (cap5) at (8,12) {Cap. 5 Strategia};
+
+% Connessioni capitoli-livelli
+\draw[dashed, gdorosso] (cap2) -- (infra.east);
+\draw[dashed, gdorosso] (cap3) -- (platform.east);
+\draw[dashed, gdorosso] (cap4) -- (application.east);
+\draw[dashed, gdorosso] (cap5) -- (security.east);
+
+% Innovazioni tecnologiche (lato sinistro)
+\node at (-8,6) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Tecnologie Abilitanti:}
+• AI/ML
+• IoT
+• Blockchain
+• 5G/6G
+• Quantum-Ready
+• Sustainable IT
+\end{minipage}
+};
+
+% Drivers di cambiamento (lato destro)
+\node at (15,6) {
+\begin{minipage}{3cm}
+\footnotesize
+\textbf{Drivers di Evoluzione:}
+• Customer Experience
+• Operational Efficiency  
+• Regulatory Compliance
+• Cyber Resilience
+• Cost Optimization
+• Innovation Speed
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Roadmap "Dal Fisico al Digitale": evoluzione stratificata dell'architettura GDO}
+\label{fig:roadmap_fisico_digitale}
+\end{figure}
+
+% =====================================
+% TABELLA 1.1: SFIDE SISTEMICHE GDO
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Sfide Sistemiche della GDO Moderna: Impatti e Requisiti Architetturali}
+\label{tab:sfide_sistemiche_gdo}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Categoria Sfida} & \textbf{Descrizione} & \textbf{Impatto Economico} & \textbf{Requisito SLA} \\
+\midrule
+\multirow{2}{*}{\begin{minipage}{3cm}Operatività Continua\end{minipage}} 
+& Downtime sistemi critici & 100k-500k €/ora & Disponibilità > 99.9\% \\
+& Interruzione pagamenti & 50k-200k €/ora & Latenza < 200ms \\
+\addlinespace
+\multirow{2}{*}{\begin{minipage}{3cm}Distribuzione Geografica\end{minipage}} 
+& Coordinamento multi-sito & 20-30\% OPEX IT & Sincronizzazione < 1s \\
+& Gestione configurazioni & 15-25\% effort IT & Standardizzazione 95\% \\
+\addlinespace
+\multirow{2}{*}{\begin{minipage}{3cm}Scalabilità Transazionale\end{minipage}} 
+& Picchi stagionali & 300-500\% carico base & Scaling automatico \\
+& Black Friday events & 1000\% throughput & Elasticità < 60s \\
+\addlinespace
+\multirow{2}{*}{\begin{minipage}{3cm}Dati Sensibili\end{minipage}} 
+& Violazioni GDPR & 4\% fatturato annuo & Encryption 100\% \\
+& Breach PCI-DSS & 50k-500k \$ multa & Audit readiness \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================
+% FIGURA 1.5: ARCHITETTURA TIPICA GDO
+% =====================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+% Definizione stili
+\tikzset{
+    datacenter/.style={rectangle, rounded corners, minimum width=4cm, minimum height=3cm, text centered, draw=gdoblu, fill=gdoblu!20, thick},
+    store/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=2cm, text centered, draw=gdoverde, fill=gdoverde!20, thick},
+    cloud/.style={ellipse, minimum width=3cm, minimum height=2cm, text centered, draw=gdoarancio, fill=gdoarancio!20, thick},
+    connection/.style={->, thick, gdogrigio},
+    secure/.style={->, thick, gdorosso, dashed}
+}
+
+% Data Center Centrale
+\node[datacenter] (hq) at (0,0) {
+\begin{minipage}{3.5cm}
+\centering
+\textbf{HQ Data Center}
+
+• ERP Systems
+• Data Warehouse
+• Security Operations
+• Backup \& DR
+\end{minipage}
+};
+
+% Punti Vendita
+\node[store] (store1) at (-6,-4) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Store A}
+
+• POS Systems
+• Local Server
+• IoT Sensors
+• Edge Computing
+\end{minipage}
+};
+
+\node[store] (store2) at (-3,-4) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Store B}
+
+• POS Systems
+• Local Server
+• IoT Sensors
+• Edge Computing
+\end{minipage}
+};
+
+\node[store] (store3) at (3,-4) {
+\begin{minipage}{2.2cm}
+\centering
+\textbf{Store N}
+
+• POS Systems
+• Local Server
+• IoT Sensors
+• Edge Computing
+\end{minipage}
+};
+
+% Cloud Services
+\node[cloud] (cloud1) at (-4,4) {
+\begin{minipage}{2.5cm}
+\centering
+\textbf{Public Cloud}
+
+• Analytics
+• CRM
+• E-commerce
+\end{minipage}
+};
+
+\node[cloud] (cloud2) at (4,4) {
+\begin{minipage}{2.5cm}
+\centering
+\textbf{Hybrid Cloud}
+
+• DR Site
+• Development
+• AI/ML Services
+\end{minipage}
+};
+
+% Connessioni
+\draw[connection] (hq) -- (store1) node[midway, left] {\footnotesize SD-WAN};
+\draw[connection] (hq) -- (store2);
+\draw[connection] (hq) -- (store3) node[midway, right] {\footnotesize SD-WAN};
+
+\draw[secure] (hq) -- (cloud1) node[midway, above left] {\footnotesize VPN};
+\draw[secure] (hq) -- (cloud2) node[midway, above right] {\footnotesize VPN};
+
+% Indicazione "..." per altri store
+\node at (0,-4) {\Large ...};
+
+% Payment Processors (esterni)
+\node[rectangle, draw=gdorosso, fill=gdorosso!20, minimum width=2cm] (payment) at (8,0) {
+\begin{minipage}{1.8cm}
+\centering
+\footnotesize
+\textbf{Payment Processors}
+\end{minipage}
+};
+
+\draw[secure] (hq) -- (payment) node[midway, above] {\footnotesize Secure Gateway};
+
+% Internet/External
+\node[ellipse, draw=gdogrigio, minimum width=2cm] (internet) at (0,6) {\textbf{Internet}};
+\draw[connection] (cloud1) -- (internet);
+\draw[connection] (cloud2) -- (internet);
+
+% Legenda sicurezza
+\node at (-8,2) {
+\begin{minipage}{2.5cm}
+\footnotesize
+\textbf{Legenda:}
+\tikz \draw[connection] (0,0) -- (0.5,0); Connessioni Standard
+\tikz \draw[secure] (0,0) -- (0.5,0); Connessioni Sicure
+\end{minipage}
+};
+
+\end{tikzpicture}
+\caption{Architettura tipica GDO: infrastruttura distribuita con componenti on-premise, edge e cloud}
+\label{fig:architettura_tipica_gdo}
+\end{figure}
+
+% =====================================
+% TABELLA 1.2: CONTRIBUTI ORIGINALI ATTESI
+% =====================================
+
+\begin{table}[htbp]
+\centering
+\caption{Contributi Originali della Ricerca: Metodologici, Analitici e Strategici}
+\label{tab:contributi_originali}
+\begin{tabular}{@{}llcp{5cm}@{}}
+\toprule
+\textbf{Tipo Contributo} & \textbf{Ambito} & \textbf{Novità} & \textbf{Impatto Atteso} \\
+\midrule
+\multirow{2}{*}{Metodologico} 
+& Framework MCDM & Alto & Framework quantitativo per valutazione architetture GDO \\
+& Metriche integrate & Medio & Standardizzazione criteri valutazione settore retail \\
+\addlinespace
+\multirow{2}{*}{Analitico} 
+& Threat modeling & Alto & Modelli predittivi rischio per architetture cloud-ibride \\
+& Pattern analysis & Medio & Identificazione vulnerabilità emergenti IT-OT \\
+\addlinespace
+\multirow{2}{*}{Progettuale} 
+& Design principles & Alto & Principi architetturali sicurezza-per-progettazione \\
+& Reference architecture & Medio & Template implementativo per transizione cloud \\
+\addlinespace
+\multirow{2}{*}{Strategico} 
+& Strategic roadmap & Alto & Guida pianificazione trasformazione digitale GDO \\
+& ROI models & Medio & Modelli economici investimenti sicurezza \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
