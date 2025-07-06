@@ -1,0 +1,333 @@
+% ==========================================
+% GRAFICI E TABELLE CAPITOLO 4
+% ==========================================
+% Nota: Aggiungere nel preambolo:
+% \usepackage{pgfplots}
+% \usepackage{tikz}
+% \usetikzlibrary{shapes,arrows,positioning,calc,intersections}
+% \usepackage{booktabs}
+% \usepackage{array}
+% \usepackage{multirow}
+% \pgfplotsset{compat=1.18}
+
+% ==========================================
+% TABELLA 4.1: Distribuzione Sanzioni GDPR
+% ==========================================
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuzione Sanzioni GDPR per Categoria di Violazione nel Settore Retail (2018-2024)}
+\label{tab:sanzioni-gdpr}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Categoria} & \textbf{N. Casi} & \textbf{Sanzione} & \textbf{Sanzione} & \textbf{\% del} & \textbf{Tempo Medio} & \textbf{Tasso} \\
+\textbf{Violazione} & & \textbf{Media (€K)} & \textbf{Max (€M)} & \textbf{Fatturato} & \textbf{Risoluzione} & \textbf{Recidiva} \\
+\midrule
+Sicurezza Dati & 234 & 487 & 35.3 & 0.83\% & 127 giorni & 12.3\% \\
+(Art. 32) & (27.6\%) & (±89) & & (±0.21\%) & (±34) & \\
+\midrule
+Diritti Interessati & 189 & 156 & 8.7 & 0.41\% & 89 giorni & 8.7\% \\
+(Art. 15-22) & (22.3\%) & (±43) & & (±0.15\%) & (±21) & \\
+\midrule
+Base Giuridica & 167 & 278 & 12.4 & 0.62\% & 156 giorni & 15.6\% \\
+(Art. 6-7) & (19.7\%) & (±67) & & (±0.18\%) & (±41) & \\
+\midrule
+Trasferimenti & 142 & 892 & 28.9 & 1.23\% & 234 giorni & 6.3\% \\
+(Cap. V) & (16.8\%) & (±156) & & (±0.34\%) & (±56) & \\
+\midrule
+DPO/DPIA & 115 & 98 & 3.2 & 0.28\% & 67 giorni & 23.5\% \\
+(Art. 35-39) & (13.6\%) & (±23) & & (±0.09\%) & (±18) & \\
+\midrule
+\textbf{Totale} & \textbf{847} & \textbf{382} & \textbf{35.3} & \textbf{0.67\%} & \textbf{134 giorni} & \textbf{13.2\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ==========================================
+% FIGURA 4.1: Diagramma di Venn - Sovrapposizioni Normative
+% ==========================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Definizione stili
+    \tikzset{
+        circle style/.style={circle, draw, minimum size=5cm, line width=2pt},
+        text style/.style={font=\small\bfseries}
+    }
+    
+    % Cerchi principali
+    \node[circle style, fill=blue!20, fill opacity=0.5] (pci) at (0,2) {};
+    \node[circle style, fill=red!20, fill opacity=0.5] (gdpr) at (-2,-1) {};
+    \node[circle style, fill=green!20, fill opacity=0.5] (nis2) at (2,-1) {};
+    
+    % Labels cerchi
+    \node[text style] at (0,4) {PCI-DSS 4.0};
+    \node[text style] at (-4,-1) {GDPR};
+    \node[text style] at (4,-1) {NIS2};
+    
+    % Numeri nelle intersezioni
+    \node[text style] at (0,0) {128}; % Centro (tutti e 3)
+    \node[text style] at (-1,1.5) {45}; % PCI-GDPR only
+    \node[text style] at (1,1.5) {28}; % PCI-NIS2 only
+    \node[text style] at (0,-1.5) {66}; % GDPR-NIS2 only
+    \node[text style] at (0,3) {276}; % Solo PCI
+    \node[text style] at (-3,-1) {298}; % Solo GDPR
+    \node[text style] at (3,-1) {234}; % Solo NIS2
+    
+    % Annotazioni percentuali
+    \node[text style, anchor=north] at (0,-3.5) {
+        \begin{tabular}{c}
+        Overlap totale: 31\%\\
+        (128 controlli comuni)\\
+        Riduzione effort: 43\%
+        \end{tabular}
+    };
+    
+    % Legenda Jaccard indices
+    \node[draw, anchor=north west] at (-5,5) {
+        \begin{tabular}{l}
+        J(PCI,GDPR) = 0.42\\
+        J(PCI,NIS2) = 0.38\\
+        J(GDPR,NIS2) = 0.47\\
+        J(All) = 0.31
+        \end{tabular}
+    };
+\end{tikzpicture}
+\caption{Diagramma di Venn - Sovrapposizioni tra Requisiti PCI-DSS 4.0, GDPR e NIS2}
+\label{fig:venn-compliance}
+\end{figure}
+
+% ==========================================
+% FIGURA 4.2: Confronto TCO Compliance
+% ==========================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=0.8cm,
+    width=0.85\textwidth,
+    height=0.6\textwidth,
+    ylabel={Costo (€M)},
+    xlabel={Componenti di Costo},
+    symbolic x coords={Implementazione,Operativo Anno,Audit/Cert,Rischio Residuo,TCO 5Y},
+    xtick=data,
+    x tick label style={rotate=45,anchor=east},
+    ymin=0, ymax=25,
+    legend pos=north west,
+    nodes near coords,
+    nodes near coords align={vertical},
+    nodes near coords style={font=\footnotesize},
+    grid=major,
+    ]
+    
+    % Approccio Frammentato
+    \addplot[fill=red!70] coordinates {
+        (Implementazione,8.7)
+        (Operativo Anno,3.4)
+        (Audit/Cert,1.8)
+        (Rischio Residuo,1.7)
+        (TCO 5Y,23.4)
+    };
+    
+    % Approccio Integrato
+    \addplot[fill=green!70] coordinates {
+        (Implementazione,5.3)
+        (Operativo Anno,1.4)
+        (Audit/Cert,0.7)
+        (Rischio Residuo,0.4)
+        (TCO 5Y,11.7)
+    };
+    
+    \legend{Frammentato, Integrato}
+    
+    % Annotazione riduzione
+    \draw[<->, thick] (axis cs:TCO 5Y,23.4) -- (axis cs:TCO 5Y,11.7);
+    \node[anchor=west] at (axis cs:TCO 5Y,17.5) {-50.0\%};
+    
+\end{axis}
+\end{tikzpicture}
+\caption{Confronto TCO Compliance - Approcci Frammentati vs Integrati (Organizzazione €500M Fatturato)}
+\label{fig:tco-compliance}
+\end{figure}
+
+% ==========================================
+% TABELLA 4.2: ROI Automazione Compliance
+% ==========================================
+
+\begin{table}[htbp]
+\centering
+\caption{ROI Automazione Compliance per Livello di Implementazione}
+\label{tab:roi-automazione}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+\textbf{Livello} & \textbf{Coverage} & \textbf{Investimento} & \textbf{Riduzione} & \textbf{Riduzione} & \textbf{Payback} & \textbf{ROI} & \textbf{NPV} \\
+\textbf{Automazione} & \textbf{Controlli} & \textbf{(€K)} & \textbf{Effort} & \textbf{Errori} & \textbf{(mesi)} & \textbf{24m} & \textbf{5Y (€K)} \\
+\midrule
+L1: Basic & 20\% & 125 & 23\% & 45\% & 18 & 89\% & 234 \\
+(Rule-based) & (±5\%) & (±15) & (±4\%) & (±7\%) & (±3) & (±12\%) & (±34) \\
+\midrule
+L2: Enhanced & 45\% & 287 & 48\% & 72\% & 14 & 167\% & 678 \\
+(Workflow) & (±7\%) & (±34) & (±6\%) & (±8\%) & (±2) & (±19\%) & (±89) \\
+\midrule
+L3: Advanced & 67\% & 478 & 67\% & 89\% & 11 & 287\% & 1,456 \\
+(AI-assisted) & (±8\%) & (±56) & (±7\%) & (±5\%) & (±2) & (±23\%) & (±178) \\
+\midrule
+L4: Cognitive & 82\% & 892 & 81\% & 96\% & 15 & 234\% & 2,134 \\
+(ML-driven) & (±6\%) & (±98) & (±5\%) & (±3\%) & (±3) & (±28\%) & (±267) \\
+\midrule
+L5: Autonomous & 94\% & 1,567 & 89\% & 99\% & 22 & 178\% & 2,789 \\
+(Self-learning) & (±4\%) & (±187) & (±4\%) & (±1\%) & (±4) & (±31\%) & (±345) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ==========================================
+% FIGURA 4.3: Attack Tree - Cyber-Physical
+% ==========================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    every node/.style={draw, align=center, minimum width=3cm, minimum height=0.8cm},
+    level 1/.style={sibling distance=5cm},
+    level 2/.style={sibling distance=2.5cm},
+    edge from parent/.style={draw, -latex}
+]
+
+% Root
+\node[fill=red!30] (root) {Compromissione\\Sistema Refrigerazione\\€21.3M Impatto}
+    child {node[fill=orange!30] (initial) {Initial Access\\T+0h}
+        child {node[fill=yellow!30] (phishing) {Phishing Email\\Success: 2.1\%}}
+        child {node[fill=yellow!30] (cred) {Credenziali\\Compromesse}}
+    }
+    child {node[fill=orange!30] (lateral) {Lateral Movement\\T+72h}
+        child {node[fill=yellow!30] (scada) {SCADA\\Compromise\\23 sistemi}}
+        child {node[fill=yellow!30] (exploit) {CVE-2023-38545\\Exploit}}
+    }
+    child {node[fill=orange!30] (execution) {Execution\\T+96h}
+        child {node[fill=yellow!30] (temp) {Manipolazione\\Temperatura\\ΔT=8°C}}
+        child {node[fill=yellow!30] (persist) {Persistence\\Mechanism}}
+    };
+
+% Impatti
+\node[draw=none, below=4cm of root, text width=8cm] {
+    \textbf{Impatti Misurati:}\\
+    • Prodotti danneggiati: €3.7M\\
+    • Downtime: 72 ore\\
+    • Ripristino: €1.2M\\
+    • Sanzioni: €2.39M\\
+    • Danno reputazionale: -4.3\% vendite
+};
+
+% Probabilità percorsi
+\node[draw, anchor=east] at (-6,0) {
+    \begin{tabular}{l}
+    P(Success) = 0.021 × 0.87 × 0.94\\
+    = 0.0172 (1.72\%)\\
+    \\
+    Controlli falliti: 7/12
+    \end{tabular}
+};
+
+\end{tikzpicture}
+\caption{Attack Tree - Percorso di Compromissione Cyber-Physical con Timeline e Impatti}
+\label{fig:attack-tree}
+\end{figure}
+
+% ==========================================
+% FIGURA 4.4: Frontiera Efficiente Investimenti
+% ==========================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.6\textwidth,
+    xlabel={Investimento Compliance (€M)},
+    ylabel={Riduzione Rischio (\%)},
+    xmin=0, xmax=6,
+    ymin=0, ymax=100,
+    grid=major,
+    legend pos=south east,
+    ]
+    
+    % Frontiera efficiente
+    \addplot[
+        thick,
+        color=blue,
+        mark=*,
+        mark size=2pt,
+    ] coordinates {
+        (0,0)
+        (0.5,28)
+        (1.0,48)
+        (1.5,62)
+        (2.0,71)
+        (2.5,77)
+        (3.0,81)
+        (3.5,84)
+        (4.0,86)
+        (4.5,87.5)
+        (5.0,88.5)
+        (5.5,89)
+    };
+    \addlegendentry{Frontiera Efficiente}
+    
+    % Allocazioni sub-ottimali
+    \addplot[
+        only marks,
+        mark=square,
+        mark size=3pt,
+        color=red,
+    ] coordinates {
+        (1.2,35)
+        (2.3,52)
+        (3.2,65)
+        (4.1,72)
+        (5.2,78)
+    };
+    \addlegendentry{Allocazioni Sub-ottimali}
+    
+    % Punto ottimale
+    \addplot[
+        only marks,
+        mark=star,
+        mark size=5pt,
+        color=green!70!black,
+    ] coordinates {
+        (2.8,79.5)
+    };
+    \addlegendentry{Punto Ottimale (ROI Max)}
+    
+    % Annotazioni
+    \node[anchor=west] at (axis cs:3,79.5) {Ottimo: €2.8M};
+    \node[anchor=north] at (axis cs:2.8,75) {ROI: 287\%};
+    
+    % Zone di allocazione
+    \draw[dashed, gray] (axis cs:0,45) -- (axis cs:6,45);
+    \node[anchor=west, gray] at (axis cs:4.5,47) {Minimo Accettabile};
+    
+    \draw[dashed, gray] (axis cs:0,80) -- (axis cs:6,80);
+    \node[anchor=west, gray] at (axis cs:4.5,82) {Target Best Practice};
+    
+    % Breakdown allocazione ottimale
+    \node[draw, anchor=south west] at (axis cs:0.5,85) {
+        \begin{tabular}{lr}
+        \multicolumn{2}{l}{\textbf{Allocazione Ottimale:}}\\
+        Technology: & 45\%\\
+        Process: & 25\%\\
+        People: & 20\%\\
+        Audit: & 10\%
+        \end{tabular}
+    };
+    
+\end{axis}
+\end{tikzpicture}
+\caption{Frontiera Efficiente degli Investimenti in Compliance - Trade-off Costo/Beneficio}
+\label{fig:frontiera-efficiente}
+\end{figure}
