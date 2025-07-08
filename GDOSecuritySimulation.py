@@ -74,13 +74,13 @@ class GDODataSimulator:
                 org_id += 1
         
         return pd.DataFrame(orgs)
-```
+#
 
 ## D.2 Dataset Preliminare
 
 ### D.2.1 Dati Raccolti dalle Organizzazioni Pilota
 
-```python
+#python
 # Dati reali anonimizzati da 3 organizzazioni pilota
 pilot_data = {
     'ORG-PILOT-001': {
@@ -197,13 +197,13 @@ print("Analisi Dati Pilota:")
 print(f"Availability: μ={pilot_results['availability']['mean']:.4f}, σ={pilot_results['availability']['std']:.4f}")
 print(f"Security Incidents: μ={pilot_results['incidents']['mean']:.1f}, median={pilot_results['incidents']['median']:.0f}")
 print(f"MTTR: μ={pilot_results['mttr']['mean']:.1f}h, CV={pilot_results['mttr']['cv']:.2f}")
-```
+#
 
 ## D.3 Generazione Dataset Completo mediante Simulazione
 
 ### D.3.1 Simulazione Serie Temporali per 15 Organizzazioni
 
-```python
+#python
 def simulate_gdo_timeseries(orgs_df, n_months=24):
     """
     Simula 24 mesi di dati per validazione framework GIST
@@ -349,11 +349,11 @@ def calculate_gist_total(p, a, s, c):
                        s**weights['s'] * c**weights['c'])
     
     return weighted_product**(1/gamma) * k_gdo
-```
+#
 
 ### D.3.2 Generazione Dataset Completo
 
-```python
+#python
 # Genera organizzazioni
 simulator = GDODataSimulator(seed=42)
 organizations = simulator.generate_organizations(n_orgs=15)
@@ -367,13 +367,13 @@ organizations.to_csv('gdo_organizations.csv', index=False)
 
 print(f"Dataset generato: {len(timeseries_data)} record")
 print(f"Periodo: {timeseries_data['date'].min()} - {timeseries_data['date'].max()}")
-```
+#
 
 ## D.4 Analisi Statistiche per Validazione Ipotesi
 
 ### D.4.1 Test Ipotesi H1: Architetture Cloud-Ibride
 
-```python
+#python
 def test_hypothesis_h1(data):
     """
     H1: Architetture cloud-ibride permettono SLA ≥99.95% con riduzione TCO >30%
@@ -432,11 +432,11 @@ def test_hypothesis_h1(data):
 h1_results = test_hypothesis_h1(timeseries_data)
 print(f"H1 Validation Rate: {h1_results['validation_rate']:.1%}")
 print(f"Average TCO Reduction: {h1_results['avg_tco_reduction']:.1%}")
-```
+#
 
 ### D.4.2 Test Ipotesi H2: Zero Trust e Superficie di Attacco
 
-```python
+#python
 def test_hypothesis_h2(data):
     """
     H2: Zero Trust riduce superficie attacco >35% mantenendo latenze <50ms
@@ -494,11 +494,11 @@ def calculate_assa_score(df):
     
     # ASSA score (più alto = peggio)
     return 0.4 * incidents_norm + 0.3 * patches_norm + 0.3 * failed_logins_norm
-```
+#
 
 ### D.4.3 Test Ipotesi H3: Compliance Integrata
 
-```python
+#python
 def test_hypothesis_h3(data, organizations):
     """
     H3: Compliance-by-design riduce costi 30-40% con overhead <10%
@@ -578,13 +578,13 @@ def calculate_compliance_costs(org_data, org_info):
     
     annual_cost = base_cost * size_factor * complexity_factor * efficiency_factor
     return annual_cost / 12  # Mensile
-```
+
 
 ## D.5 Analisi di Robustezza e Sensibilità
 
 ### D.5.1 Bootstrap Confidence Intervals
 
-```python
+#python
 def bootstrap_analysis(data, n_bootstrap=1000):
     """
     Calcola intervalli di confidenza robusti via bootstrap
@@ -615,11 +615,11 @@ def bootstrap_analysis(data, n_bootstrap=1000):
 
 # Esegui bootstrap
 bootstrap_results = bootstrap_analysis(timeseries_data)
-```
+#
 
 ### D.5.2 Sensitivity Analysis del Framework GIST
 
-```python
+#python
 def gist_sensitivity_analysis(base_params={'p': 0.15, 'a': 0.35, 's': 0.30, 'c': 0.20}):
     """
     Analizza sensibilità GIST score a variazioni parametri
@@ -663,13 +663,13 @@ def calculate_gist_with_weights(p, a, s, c, weights):
     weighted_product = np.prod(components ** weights)
     
     return weighted_product**(1/gamma) * k_gdo
-```
+#
 
 ## D.6 Visualizzazioni e Report Statistici
 
 ### D.6.1 Summary Statistics
 
-```python
+#python
 def generate_summary_statistics(data, organizations):
     """Genera tabella riassuntiva delle statistiche chiave"""
     
@@ -705,11 +705,11 @@ def generate_summary_statistics(data, organizations):
 # Genera summary
 summary_stats = generate_summary_statistics(timeseries_data, organizations)
 print(summary_stats.to_string(index=False))
-```
+#
 
 ### D.6.2 Correlation Analysis
 
-```python
+#python
 def correlation_analysis(data):
     """Analizza correlazioni tra metriche chiave"""
     
