@@ -1,0 +1,1103 @@
+{
+  "metadata": {
+    "execution_date": "2025-07-08T23:01:43.923903",
+    "num_organizations": 15,
+    "random_seed": 42,
+    "framework_version": "1.0"
+  },
+  "parameters": {
+    "legacy_availability": 0.997,
+    "cloud_target_availability": 0.9995,
+    "cloud_tco_reduction_min": 0.15,
+    "cloud_tco_reduction_max": 0.25,
+    "migration_overhead_min": 0.01,
+    "migration_overhead_max": 0.05,
+    "assa_baseline": 100,
+    "zt_reduction_min": 0.35,
+    "zt_reduction_max": 0.55,
+    "baseline_latency_min": 45,
+    "baseline_latency_max": 85,
+    "zt_latency_overhead_min": 15,
+    "zt_latency_overhead_max": 25,
+    "zt_max_acceptable_latency": 25,
+    "compliance_cost_min_percent": 2.0,
+    "compliance_cost_max_percent": 3.5,
+    "cost_reduction_min": 0.3,
+    "cost_reduction_max": 0.45,
+    "operational_overhead_min": 0.05,
+    "operational_overhead_max": 0.12,
+    "audit_baseline_min": 45,
+    "audit_baseline_max": 90,
+    "audit_integrated_min": 20,
+    "audit_integrated_max": 40
+  },
+  "organizations": [
+    {
+      "org_id": "GDO_01",
+      "revenue_m_euro": 52.78853596915768,
+      "num_stores": 42,
+      "num_employees": 4168,
+      "current_architecture": "legacy",
+      "security_maturity": 0.5209413642492037,
+      "compliance_baseline_cost": 1.5916003478651775,
+      "it_budget_m_euro": 0.9096577203320788
+    },
+    {
+      "org_id": "GDO_02",
+      "revenue_m_euro": 82.8435913540969,
+      "num_stores": 69,
+      "num_employees": 7557,
+      "current_architecture": "cloud-first",
+      "security_maturity": 0.36559139244108096,
+      "compliance_baseline_cost": 2.284853531725941,
+      "it_budget_m_euro": 1.267338957017612
+    },
+    {
+      "org_id": "GDO_03",
+      "revenue_m_euro": 110.53071939367727,
+      "num_stores": 97,
+      "num_employees": 12172,
+      "current_architecture": "hybrid",
+      "security_maturity": 0.5551101555101742,
+      "compliance_baseline_cost": 3.1875937871657163,
+      "it_budget_m_euro": 2.2602885296904507
+    },
+    {
+      "org_id": "GDO_04",
+      "revenue_m_euro": 206.18860913355653,
+      "num_stores": 165,
+      "num_employees": 22507,
+      "current_architecture": "hybrid",
+      "security_maturity": 0.585062629129498,
+      "compliance_baseline_cost": 4.604643709895715,
+      "it_budget_m_euro": 4.532313045342999
+    },
+    {
+      "org_id": "GDO_05",
+      "revenue_m_euro": 359.1442614441356,
+      "num_stores": 335,
+      "num_employees": 28974,
+      "current_architecture": "legacy",
+      "security_maturity": 0.7118735915868649,
+      "compliance_baseline_cost": 10.435256323630629,
+      "it_budget_m_euro": 5.734515238936106
+    },
+    {
+      "org_id": "GDO_06",
+      "revenue_m_euro": 506.1425654654876,
+      "num_stores": 552,
+      "num_employees": 64879,
+      "current_architecture": "legacy",
+      "security_maturity": 0.5946335943020884,
+      "compliance_baseline_cost": 14.314020229617029,
+      "it_budget_m_euro": 12.517491574736582
+    },
+    {
+      "org_id": "GDO_07",
+      "revenue_m_euro": 806.5880932850599,
+      "num_stores": 844,
+      "num_employees": 118429,
+      "current_architecture": "legacy",
+      "security_maturity": 0.6761429590537309,
+      "compliance_baseline_cost": 16.686182899282954,
+      "it_budget_m_euro": 16.755675059242808
+    },
+    {
+      "org_id": "GDO_08",
+      "revenue_m_euro": 1194.557965513031,
+      "num_stores": 1093,
+      "num_employees": 93544,
+      "current_architecture": "cloud-first",
+      "security_maturity": 0.7202002858819457,
+      "compliance_baseline_cost": 28.871993037223397,
+      "it_budget_m_euro": 20.699191558709536
+    },
+    {
+      "org_id": "GDO_09",
+      "revenue_m_euro": 1802.713688885288,
+      "num_stores": 1705,
+      "num_employees": 180581,
+      "current_architecture": "hybrid",
+      "security_maturity": 0.7533955644098227,
+      "compliance_baseline_cost": 61.382074483103544,
+      "it_budget_m_euro": 30.817517256174046
+    },
+    {
+      "org_id": "GDO_10",
+      "revenue_m_euro": 2502.960707704932,
+      "num_stores": 2612,
+      "num_employees": 240250,
+      "current_architecture": "hybrid",
+      "security_maturity": 0.7326804987523856,
+      "compliance_baseline_cost": 64.30564506976178,
+      "it_budget_m_euro": 55.79416787761835
+    },
+    {
+      "org_id": "GDO_11",
+      "revenue_m_euro": 3209.790467012732,
+      "num_stores": 3389,
+      "num_employees": 403245,
+      "current_architecture": "legacy",
+      "security_maturity": 0.8685703840379619,
+      "compliance_baseline_cost": 101.55776611751253,
+      "it_budget_m_euro": 70.1215399692746
+    },
+    {
+      "org_id": "GDO_12",
+      "revenue_m_euro": 4094.580961439282,
+      "num_stores": 3328,
+      "num_employees": 339727,
+      "current_architecture": "cloud-first",
+      "security_maturity": 0.7421965687172652,
+      "compliance_baseline_cost": 139.80392169887264,
+      "it_budget_m_euro": 72.38158135528111
+    },
+    {
+      "org_id": "GDO_13",
+      "revenue_m_euro": 5507.527352529453,
+      "num_stores": 5099,
+      "num_employees": 641865,
+      "current_architecture": "cloud-first",
+      "security_maturity": 0.8829095179481087,
+      "compliance_baseline_cost": 148.05763398384772,
+      "it_budget_m_euro": 104.40244545419016
+    },
+    {
+      "org_id": "GDO_14",
+      "revenue_m_euro": 7995.297603329961,
+      "num_stores": 7184,
+      "num_employees": 857020,
+      "current_architecture": "hybrid",
+      "security_maturity": 0.8169171980447081,
+      "compliance_baseline_cost": 267.5813693088244,
+      "it_budget_m_euro": 140.93643757913424
+    },
+    {
+      "org_id": "GDO_15",
+      "revenue_m_euro": 11997.988010102808,
+      "num_stores": 10650,
+      "num_employees": 1595664,
+      "current_architecture": "legacy",
+      "security_maturity": 0.7181818824347588,
+      "compliance_baseline_cost": 248.43928581343818,
+      "it_budget_m_euro": 241.1027237751656
+    }
+  ],
+  "simulation_results": {
+    "h1_results": [
+      {
+        "org_id": "GDO_01",
+        "revenue": 52.78853596915768,
+        "security_maturity": 0.5209413642492037,
+        "migration_duration_months": 9.068135648242587,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9997061451062124,
+        "availability_improvement": 0.0027061451062123654,
+        "baseline_tco_m_euro": 0.9096577203320788,
+        "tco_reduction_percent": 23.112790719058477,
+        "tco_savings_m_euro": 0.21024728516011162,
+        "operational_overhead_percent": 2.6323360804047966,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_02",
+        "revenue": 82.8435913540969,
+        "security_maturity": 0.36559139244108096,
+        "migration_duration_months": 12.120785285423892,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9996858877173521,
+        "availability_improvement": 0.00268588771735212,
+        "baseline_tco_m_euro": 1.267338957017612,
+        "tco_reduction_percent": 15.249095801312478,
+        "tco_savings_m_euro": 0.19325773168297003,
+        "operational_overhead_percent": 3.107214378065094,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": false
+        }
+      },
+      {
+        "org_id": "GDO_03",
+        "revenue": 110.53071939367727,
+        "security_maturity": 0.5551101555101742,
+        "migration_duration_months": 16.267860046721538,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9993332934459418,
+        "availability_improvement": 0.0023332934459417976,
+        "baseline_tco_m_euro": 2.2602885296904507,
+        "tco_reduction_percent": 23.123857288893873,
+        "tco_savings_m_euro": 0.5226658939228574,
+        "operational_overhead_percent": 2.9835049160530502,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": false,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_04",
+        "revenue": 206.18860913355653,
+        "security_maturity": 0.585062629129498,
+        "migration_duration_months": 19.966841271216715,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9999745720820643,
+        "availability_improvement": 0.0029745720820643085,
+        "baseline_tco_m_euro": 4.532313045342999,
+        "tco_reduction_percent": 16.39605392676342,
+        "tco_savings_m_euro": 0.7431204910441715,
+        "operational_overhead_percent": 2.693540717970661,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_05",
+        "revenue": 359.1442614441356,
+        "security_maturity": 0.7118735915868649,
+        "migration_duration_months": 14.268244961380564,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9998263195735894,
+        "availability_improvement": 0.0028263195735893643,
+        "baseline_tco_m_euro": 5.734515238936106,
+        "tco_reduction_percent": 18.45322657642572,
+        "tco_savings_m_euro": 1.0582030901005401,
+        "operational_overhead_percent": 1.770813772840483,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_06",
+        "revenue": 506.1425654654876,
+        "security_maturity": 0.5946335943020884,
+        "migration_duration_months": 8.24068552183143,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9997238090846765,
+        "availability_improvement": 0.0027238090846765095,
+        "baseline_tco_m_euro": 12.517491574736582,
+        "tco_reduction_percent": 17.943881739476,
+        "tco_savings_m_euro": 2.246123884919604,
+        "operational_overhead_percent": 4.18431385698717,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": false
+        }
+      },
+      {
+        "org_id": "GDO_07",
+        "revenue": 806.5880932850599,
+        "security_maturity": 0.6761429590537309,
+        "migration_duration_months": 18.230616625656733,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9993875565233002,
+        "availability_improvement": 0.0023875565233002494,
+        "baseline_tco_m_euro": 16.755675059242808,
+        "tco_reduction_percent": 17.09446061837763,
+        "tco_savings_m_euro": 2.8642922743455843,
+        "operational_overhead_percent": 2.244355247481104,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": false,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_08",
+        "revenue": 1194.557965513031,
+        "security_maturity": 0.7202002858819457,
+        "migration_duration_months": 9.441228432870577,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9996029308954429,
+        "availability_improvement": 0.0026029308954429453,
+        "baseline_tco_m_euro": 20.699191558709536,
+        "tco_reduction_percent": 20.911611944435236,
+        "tco_savings_m_euro": 4.328534614392633,
+        "operational_overhead_percent": 1.6486374108390631,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_09",
+        "revenue": 1802.713688885288,
+        "security_maturity": 0.7533955644098227,
+        "migration_duration_months": 18.17991491518038,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9993837280013651,
+        "availability_improvement": 0.002383728001365104,
+        "baseline_tco_m_euro": 30.817517256174046,
+        "tco_reduction_percent": 21.869021869302944,
+        "tco_savings_m_euro": 6.739489588328912,
+        "operational_overhead_percent": 1.3849431623002966,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": false,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_10",
+        "revenue": 2502.960707704932,
+        "security_maturity": 0.7326804987523856,
+        "migration_duration_months": 14.362584650742338,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9998212627199875,
+        "availability_improvement": 0.002821262719987505,
+        "baseline_tco_m_euro": 55.79416787761835,
+        "tco_reduction_percent": 18.088124055295175,
+        "tco_savings_m_euro": 10.092118301323259,
+        "operational_overhead_percent": 1.6779983039466273,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_11",
+        "revenue": 3209.790467012732,
+        "security_maturity": 0.8685703840379619,
+        "migration_duration_months": 7.418800545437515,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9994223740455922,
+        "availability_improvement": 0.0024223740455922016,
+        "baseline_tco_m_euro": 70.1215399692746,
+        "tco_reduction_percent": 24.039022639529477,
+        "tco_savings_m_euro": 16.85653286840063,
+        "operational_overhead_percent": 2.336826429621949,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": false,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_12",
+        "revenue": 4094.580961439282,
+        "security_maturity": 0.7421965687172652,
+        "migration_duration_months": 9.540473021825354,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.999821392754375,
+        "availability_improvement": 0.002821392754374985,
+        "baseline_tco_m_euro": 72.38158135528111,
+        "tco_reduction_percent": 19.071274613360334,
+        "tco_savings_m_euro": 13.804090149758483,
+        "operational_overhead_percent": 1.9575149222889567,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_13",
+        "revenue": 5507.527352529453,
+        "security_maturity": 0.8829095179481087,
+        "migration_duration_months": 9.719991089581407,
+        "baseline_availability": 0.997,
+        "achieved_availability": 1.0000231894059846,
+        "availability_improvement": 0.003023189405984561,
+        "baseline_tco_m_euro": 104.40244545419016,
+        "tco_reduction_percent": 27.455263949049186,
+        "tco_savings_m_euro": 28.66396696871001,
+        "operational_overhead_percent": 2.7874476732065707,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_14",
+        "revenue": 7995.297603329961,
+        "security_maturity": 0.8169171980447081,
+        "migration_duration_months": 15.238643373787864,
+        "baseline_availability": 0.997,
+        "achieved_availability": 1.0000145274427505,
+        "availability_improvement": 0.0030145274427505475,
+        "baseline_tco_m_euro": 140.93643757913424,
+        "tco_reduction_percent": 18.41465098698532,
+        "tco_savings_m_euro": 25.952953093687988,
+        "operational_overhead_percent": 0.9984721604187089,
+        "h1_success": true,
+        "success_factors": {
+          "availability_target_met": true,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      },
+      {
+        "org_id": "GDO_15",
+        "revenue": 11997.988010102808,
+        "security_maturity": 0.7181818824347588,
+        "migration_duration_months": 18.429383046708292,
+        "baseline_availability": 0.997,
+        "achieved_availability": 0.9993174751506573,
+        "availability_improvement": 0.0023174751506572777,
+        "baseline_tco_m_euro": 241.1027237751656,
+        "tco_reduction_percent": 20.914515257892667,
+        "tco_savings_m_euro": 50.425465951151814,
+        "operational_overhead_percent": 1.6470725650593019,
+        "h1_success": false,
+        "success_factors": {
+          "availability_target_met": false,
+          "tco_reduction_adequate": true,
+          "overhead_acceptable": true
+        }
+      }
+    ],
+    "h2_results": [
+      {
+        "org_id": "GDO_01",
+        "revenue": 52.78853596915768,
+        "security_maturity": 0.5209413642492037,
+        "implementation_duration_months": 8.508221649215656,
+        "baseline_assa_score": 67.90586357507962,
+        "final_assa_score": 38.59222377135782,
+        "assa_reduction_percent": 43.168053921163065,
+        "baseline_latency_ms": 84.84485520960388,
+        "zt_latency_overhead_ms": 15.807990534753044,
+        "final_latency_ms": 100.65284574435692,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_02",
+        "revenue": 82.8435913540969,
+        "security_maturity": 0.36559139244108096,
+        "implementation_duration_months": 11.62978965063365,
+        "baseline_assa_score": 83.4408607558919,
+        "final_assa_score": 41.95796569548293,
+        "assa_reduction_percent": 49.715324943456785,
+        "baseline_latency_ms": 80.03411761512777,
+        "zt_latency_overhead_ms": 16.47725907496971,
+        "final_latency_ms": 96.51137669009748,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_03",
+        "revenue": 110.53071939367727,
+        "security_maturity": 0.5551101555101742,
+        "implementation_duration_months": 14.229011829044467,
+        "baseline_assa_score": 64.48898444898258,
+        "final_assa_score": 34.10492127176154,
+        "assa_reduction_percent": 47.11512118981802,
+        "baseline_latency_ms": 45.02287584511774,
+        "zt_latency_overhead_ms": 13.587953216273847,
+        "final_latency_ms": 58.610829061391584,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_04",
+        "revenue": 206.18860913355653,
+        "security_maturity": 0.585062629129498,
+        "implementation_duration_months": 8.553700147747069,
+        "baseline_assa_score": 61.49373708705019,
+        "final_assa_score": 29.04057454462729,
+        "assa_reduction_percent": 52.77474435564452,
+        "baseline_latency_ms": 75.63337717227951,
+        "zt_latency_overhead_ms": 11.64197912377427,
+        "final_latency_ms": 87.27535629605379,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_05",
+        "revenue": 359.1442614441356,
+        "security_maturity": 0.7118735915868649,
+        "implementation_duration_months": 15.961194853287157,
+        "baseline_assa_score": 48.8126408413135,
+        "final_assa_score": 22.405387495554688,
+        "assa_reduction_percent": 54.09921055410003,
+        "baseline_latency_ms": 62.52400335658017,
+        "zt_latency_overhead_ms": 11.865896330893722,
+        "final_latency_ms": 74.38989968747389,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_06",
+        "revenue": 506.1425654654876,
+        "security_maturity": 0.5946335943020884,
+        "implementation_duration_months": 14.877083202029972,
+        "baseline_assa_score": 60.53664056979115,
+        "final_assa_score": 37.23916390097776,
+        "assa_reduction_percent": 38.48491830654912,
+        "baseline_latency_ms": 54.520185374759805,
+        "zt_latency_overhead_ms": 15.299240595154894,
+        "final_latency_ms": 69.8194259699147,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_07",
+        "revenue": 806.5880932850599,
+        "security_maturity": 0.6761429590537309,
+        "implementation_duration_months": 11.388628984159366,
+        "baseline_assa_score": 52.3857040946269,
+        "final_assa_score": 26.70274683938061,
+        "assa_reduction_percent": 49.02665278461064,
+        "baseline_latency_ms": 74.16303397839403,
+        "zt_latency_overhead_ms": 13.55868775371927,
+        "final_latency_ms": 87.7217217321133,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_08",
+        "revenue": 1194.557965513031,
+        "security_maturity": 0.7202002858819457,
+        "implementation_duration_months": 9.998451583056804,
+        "baseline_assa_score": 47.97997141180542,
+        "final_assa_score": 18.938098623198453,
+        "assa_reduction_percent": 60.52915817590764,
+        "baseline_latency_ms": 62.72522980213828,
+        "zt_latency_overhead_ms": 13.691095358738327,
+        "final_latency_ms": 76.41632516087661,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_09",
+        "revenue": 1802.713688885288,
+        "security_maturity": 0.7533955644098227,
+        "implementation_duration_months": 11.208322340395622,
+        "baseline_assa_score": 44.66044355901773,
+        "final_assa_score": 26.049404957713396,
+        "assa_reduction_percent": 41.672310255294,
+        "baseline_latency_ms": 60.15892475907664,
+        "zt_latency_overhead_ms": 13.584808378214934,
+        "final_latency_ms": 73.74373313729157,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_10",
+        "revenue": 2502.960707704932,
+        "security_maturity": 0.7326804987523856,
+        "implementation_duration_months": 15.749674919753271,
+        "baseline_assa_score": 46.73195012476143,
+        "final_assa_score": 21.923329948287584,
+        "assa_reduction_percent": 53.08706379734136,
+        "baseline_latency_ms": 66.68780805497097,
+        "zt_latency_overhead_ms": 12.753203737310773,
+        "final_latency_ms": 79.44101179228174,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_11",
+        "revenue": 3209.790467012732,
+        "security_maturity": 0.8685703840379619,
+        "implementation_duration_months": 9.88163116000745,
+        "baseline_assa_score": 33.142961596203804,
+        "final_assa_score": 18.00725039703872,
+        "assa_reduction_percent": 45.667950207861715,
+        "baseline_latency_ms": 80.6114925651775,
+        "zt_latency_overhead_ms": 7.533690168834632,
+        "final_latency_ms": 88.14518273401214,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_12",
+        "revenue": 4094.580961439282,
+        "security_maturity": 0.7421965687172652,
+        "implementation_duration_months": 13.37352178367977,
+        "baseline_assa_score": 45.78034312827347,
+        "final_assa_score": 24.282823931681634,
+        "assa_reduction_percent": 46.957968699267326,
+        "baseline_latency_ms": 57.64708785087416,
+        "zt_latency_overhead_ms": 12.560977406525074,
+        "final_latency_ms": 70.20806525739923,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_13",
+        "revenue": 5507.527352529453,
+        "security_maturity": 0.8829095179481087,
+        "implementation_duration_months": 10.956216709911072,
+        "baseline_assa_score": 31.709048205189127,
+        "final_assa_score": 16.830887018007974,
+        "assa_reduction_percent": 46.920869686483904,
+        "baseline_latency_ms": 78.34979818559228,
+        "zt_latency_overhead_ms": 9.190755295752801,
+        "final_latency_ms": 87.54055348134509,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_14",
+        "revenue": 7995.297603329961,
+        "security_maturity": 0.8169171980447081,
+        "implementation_duration_months": 8.856287821675341,
+        "baseline_assa_score": 38.308280195529186,
+        "final_assa_score": 17.30628388531183,
+        "assa_reduction_percent": 54.82364701057089,
+        "baseline_latency_ms": 55.89392849259265,
+        "zt_latency_overhead_ms": 10.168070904808332,
+        "final_latency_ms": 66.06199939740098,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      },
+      {
+        "org_id": "GDO_15",
+        "revenue": 11997.988010102808,
+        "security_maturity": 0.7181818824347588,
+        "implementation_duration_months": 8.028365512702258,
+        "baseline_assa_score": 48.18181175652412,
+        "final_assa_score": 20.707032233896552,
+        "assa_reduction_percent": 57.02313491544309,
+        "baseline_latency_ms": 70.48453509205518,
+        "zt_latency_overhead_ms": 10.25137494023723,
+        "final_latency_ms": 80.73591003229241,
+        "h2_success": true,
+        "success_factors": {
+          "assa_reduction_adequate": true,
+          "latency_acceptable": true,
+          "ux_maintained": true
+        }
+      }
+    ],
+    "h3_results": [
+      {
+        "org_id": "GDO_01",
+        "revenue": 52.78853596915768,
+        "security_maturity": 0.5209413642492037,
+        "implementation_duration_months": 17.768627020908944,
+        "baseline_compliance_cost_m_euro": 1.5916003478651775,
+        "cost_reduction_percent": 43.271147312204796,
+        "cost_savings_m_euro": 0.688703731146305,
+        "operational_overhead_percent": 3.449867188436594,
+        "baseline_audit_days": 77.43248187120875,
+        "integrated_audit_days": 33.63420738053149,
+        "audit_efficiency_improvement_percent": 56.56318050547016,
+        "compliance_coverage_percent": 78.76138201536429,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_02",
+        "revenue": 82.8435913540969,
+        "security_maturity": 0.36559139244108096,
+        "implementation_duration_months": 14.004688904402386,
+        "baseline_compliance_cost_m_euro": 2.284853531725941,
+        "cost_reduction_percent": 30.92280081424592,
+        "cost_savings_m_euro": 0.706540706512876,
+        "operational_overhead_percent": 9.50257471032511,
+        "baseline_audit_days": 84.17333564265451,
+        "integrated_audit_days": 25.968895828972656,
+        "audit_efficiency_improvement_percent": 69.14831088645485,
+        "compliance_coverage_percent": 75.5480392090858,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_03",
+        "revenue": 110.53071939367727,
+        "security_maturity": 0.5551101555101742,
+        "implementation_duration_months": 10.15581393908666,
+        "baseline_compliance_cost_m_euro": 3.1875937871657163,
+        "cost_reduction_percent": 44.90501772545113,
+        "cost_savings_m_euro": 1.4313895551421438,
+        "operational_overhead_percent": 7.191200928423536,
+        "baseline_audit_days": 82.42494882125308,
+        "integrated_audit_days": 26.15028250805323,
+        "audit_efficiency_improvement_percent": 68.27382621157243,
+        "compliance_coverage_percent": 74.30783188851065,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_04",
+        "revenue": 206.18860913355653,
+        "security_maturity": 0.585062629129498,
+        "implementation_duration_months": 13.802259024789851,
+        "baseline_compliance_cost_m_euro": 4.604643709895715,
+        "cost_reduction_percent": 39.54841188698329,
+        "cost_savings_m_euro": 1.8210634603176252,
+        "operational_overhead_percent": 4.215639440077896,
+        "baseline_audit_days": 84.25948684883659,
+        "integrated_audit_days": 28.46275880401774,
+        "audit_efficiency_improvement_percent": 66.22011375991339,
+        "compliance_coverage_percent": 76.82973005051646,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_05",
+        "revenue": 359.1442614441356,
+        "security_maturity": 0.7118735915868649,
+        "implementation_duration_months": 10.968033566946126,
+        "baseline_compliance_cost_m_euro": 10.435256323630629,
+        "cost_reduction_percent": 36.19858774541703,
+        "cost_savings_m_euro": 3.777415416768612,
+        "operational_overhead_percent": 3.5958314803772864,
+        "baseline_audit_days": 71.4738923305755,
+        "integrated_audit_days": 24.60229465193154,
+        "audit_efficiency_improvement_percent": 65.57862759433483,
+        "compliance_coverage_percent": 80.2681458515319,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_06",
+        "revenue": 506.1425654654876,
+        "security_maturity": 0.5946335943020884,
+        "implementation_duration_months": 11.713894458963509,
+        "baseline_compliance_cost_m_euro": 14.314020229617029,
+        "cost_reduction_percent": 33.195407737382055,
+        "cost_savings_m_euro": 4.751597378832724,
+        "operational_overhead_percent": 6.991134281586282,
+        "baseline_audit_days": 70.6969391996378,
+        "integrated_audit_days": 29.45342052623588,
+        "audit_efficiency_improvement_percent": 58.33847849754324,
+        "compliance_coverage_percent": 83.62278158260756,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_07",
+        "revenue": 806.5880932850599,
+        "security_maturity": 0.6761429590537309,
+        "implementation_duration_months": 17.873321690927728,
+        "baseline_compliance_cost_m_euro": 16.686182899282954,
+        "cost_reduction_percent": 33.69399726621501,
+        "cost_savings_m_euro": 5.6222420099200345,
+        "operational_overhead_percent": 4.0956971589799585,
+        "baseline_audit_days": 60.268617242773345,
+        "integrated_audit_days": 37.233450727055825,
+        "audit_efficiency_improvement_percent": 38.22083128757962,
+        "compliance_coverage_percent": 79.66011428922155,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_08",
+        "revenue": 1194.557965513031,
+        "security_maturity": 0.7202002858819457,
+        "implementation_duration_months": 14.402602499598785,
+        "baseline_compliance_cost_m_euro": 28.871993037223397,
+        "cost_reduction_percent": 33.46806576119859,
+        "cost_savings_m_euro": 9.662897616266603,
+        "operational_overhead_percent": 5.755186669263539,
+        "baseline_audit_days": 82.62124132859783,
+        "integrated_audit_days": 39.379925145695026,
+        "audit_efficiency_improvement_percent": 52.33680284580233,
+        "compliance_coverage_percent": 88.89700892274035,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_09",
+        "revenue": 1802.713688885288,
+        "security_maturity": 0.7533955644098227,
+        "implementation_duration_months": 12.121624465377216,
+        "baseline_compliance_cost_m_euro": 61.382074483103544,
+        "cost_reduction_percent": 45.99388587845386,
+        "cost_savings_m_euro": 28.23200128758619,
+        "operational_overhead_percent": 3.6554834635410294,
+        "baseline_audit_days": 64.03533686955733,
+        "integrated_audit_days": 39.14635281719346,
+        "audit_efficiency_improvement_percent": 38.86757729261856,
+        "compliance_coverage_percent": 90.69472681884332,
+        "h3_success": true,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": true
+        }
+      },
+      {
+        "org_id": "GDO_10",
+        "revenue": 2502.960707704932,
+        "security_maturity": 0.7326804987523856,
+        "implementation_duration_months": 10.457322183259866,
+        "baseline_compliance_cost_m_euro": 64.30564506976178,
+        "cost_reduction_percent": 42.37039030614528,
+        "cost_savings_m_euro": 27.24655280494254,
+        "operational_overhead_percent": 3.981540037274904,
+        "baseline_audit_days": 83.37239514217285,
+        "integrated_audit_days": 23.148654558789666,
+        "audit_efficiency_improvement_percent": 72.23462931667628,
+        "compliance_coverage_percent": 89.67182220554672,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_11",
+        "revenue": 3209.790467012732,
+        "security_maturity": 0.8685703840379619,
+        "implementation_duration_months": 14.756153228267529,
+        "baseline_compliance_cost_m_euro": 101.55776611751253,
+        "cost_reduction_percent": 45.08328135021179,
+        "cost_savings_m_euro": 45.78557343174823,
+        "operational_overhead_percent": 2.6297529486505926,
+        "baseline_audit_days": 71.26525301810511,
+        "integrated_audit_days": 30.455654310639176,
+        "audit_efficiency_improvement_percent": 57.26437075456416,
+        "compliance_coverage_percent": 93.32061861402428,
+        "h3_success": true,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": true
+        }
+      },
+      {
+        "org_id": "GDO_12",
+        "revenue": 4094.580961439282,
+        "security_maturity": 0.7421965687172652,
+        "implementation_duration_months": 10.580344915945258,
+        "baseline_compliance_cost_m_euro": 139.80392169887264,
+        "cost_reduction_percent": 40.446612750312106,
+        "cost_savings_m_euro": 56.54595081929257,
+        "operational_overhead_percent": 5.488688239432209,
+        "baseline_audit_days": 89.82434015347926,
+        "integrated_audit_days": 21.46521442199266,
+        "audit_efficiency_improvement_percent": 76.10312039552319,
+        "compliance_coverage_percent": 80.98270610069068,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_13",
+        "revenue": 5507.527352529453,
+        "security_maturity": 0.8829095179481087,
+        "implementation_duration_months": 14.8934221258076,
+        "baseline_compliance_cost_m_euro": 148.05763398384772,
+        "cost_reduction_percent": 51.67153578883532,
+        "cost_savings_m_euro": 76.50365333206668,
+        "operational_overhead_percent": 3.0370400710933754,
+        "baseline_audit_days": 45.35203982184711,
+        "integrated_audit_days": 36.342082702309234,
+        "audit_efficiency_improvement_percent": 19.866707550379186,
+        "compliance_coverage_percent": 85.76940431687284,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      },
+      {
+        "org_id": "GDO_14",
+        "revenue": 7995.297603329961,
+        "security_maturity": 0.8169171980447081,
+        "implementation_duration_months": 15.740897497110383,
+        "baseline_compliance_cost_m_euro": 267.5813693088244,
+        "cost_reduction_percent": 37.24410699996179,
+        "cost_savings_m_euro": 99.65829149734147,
+        "operational_overhead_percent": 3.6161735905491703,
+        "baseline_audit_days": 56.879275573368425,
+        "integrated_audit_days": 29.77063704298753,
+        "audit_efficiency_improvement_percent": 47.65995743988253,
+        "compliance_coverage_percent": 91.45433192232447,
+        "h3_success": true,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": true
+        }
+      },
+      {
+        "org_id": "GDO_15",
+        "revenue": 11997.988010102808,
+        "security_maturity": 0.7181818824347588,
+        "implementation_duration_months": 15.929847266783447,
+        "baseline_compliance_cost_m_euro": 248.43928581343818,
+        "cost_reduction_percent": 41.61558894281552,
+        "cost_savings_m_euro": 103.38947195658703,
+        "operational_overhead_percent": 3.851561731300047,
+        "baseline_audit_days": 45.4351364823753,
+        "integrated_audit_days": 21.50487720147534,
+        "audit_efficiency_improvement_percent": 52.66905996900157,
+        "compliance_coverage_percent": 88.32340712764646,
+        "h3_success": false,
+        "success_factors": {
+          "cost_reduction_adequate": true,
+          "overhead_acceptable": true,
+          "coverage_adequate": false
+        }
+      }
+    ]
+  },
+  "statistical_analysis": {
+    "h1": {
+      "success_rate": 0.5333333333333333,
+      "availability_mean": 0.9996696309299529,
+      "availability_std": 0.0002501545583002263,
+      "availability_target_met_rate": 0.6666666666666666,
+      "tco_reduction_mean": 20.142456799077195,
+      "tco_reduction_std": 3.3150281446196925,
+      "overhead_mean": 2.270332773165589,
+      "overhead_std": 0.8163376965377054,
+      "total_savings_m_euro": 164.70106218692956
+    },
+    "h2": {
+      "success_rate": 1.0,
+      "assa_reduction_mean": 49.40440858690081,
+      "assa_reduction_std": 6.021642868014565,
+      "assa_target_met_rate": 1.0,
+      "latency_overhead_mean": 12.53153218799739,
+      "latency_overhead_std": 2.4899492775321264,
+      "latency_acceptable_rate": 1.0
+    },
+    "h3": {
+      "success_rate": 0.2,
+      "cost_reduction_mean": 39.97525588438889,
+      "cost_reduction_std": 5.822060231185162,
+      "cost_target_met_rate": 1.0,
+      "overhead_mean": 4.737158129287435,
+      "overhead_std": 1.893027278367898,
+      "coverage_mean": 83.87413672770182,
+      "total_savings_m_euro": 465.8233450044716,
+      "audit_efficiency_mean": 55.95637295382109
+    }
+  },
+  "hypothesis_validation": {
+    "h1_validated": false,
+    "h2_validated": true,
+    "h3_validated": false,
+    "total_validated": 1,
+    "statistical_tests": {
+      "h1": {
+        "availability": 0.009965099701654573,
+        "tco": 1.6051972648413416e-05,
+        "overhead": 0.0019070911831768373
+      },
+      "h2": {
+        "assa": 1.1459007366647306e-11,
+        "latency": 8.15584552163395e-12
+      },
+      "h3": {
+        "cost": 5.609070268675209e-06,
+        "overhead": 1.855316778678646e-08
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+RIASSUNTO RISULTATI PER TESI
+===================================
+
+VALIDAZIONE IPOTESI:
+H1 (Cloud-First): NON VALIDATA
+H2 (Zero Trust): VALIDATA
+H3 (Compliance): NON VALIDATA
+Totale: 1/3
+
+METRICHE PRINCIPALI:
+• Availability media: 0.9997 (target: ≥0.9995)
+• TCO reduction: 20.1% (target: ≥15%)
+• ASSA reduction: 49.4% (target: ≥20%)
+• Cost reduction compliance: 40.0% (target: 30-40%)
+• Latency overhead: 12.5ms (target: <25ms)
+
+SIGNIFICATIVITÀ STATISTICA (α=0.05):
+• H1 Availability: p=0.0100
+• H1 TCO: p=0.0000
+• H2 ASSA: p=0.0000
+• H2 Latency: p=0.0000
+• H3 Cost: p=0.0000
+• H3 Overhead: p=0.0000
+
+BENEFICI ECONOMICI:
+• Risparmi TCO: €164.7M
+• Risparmi compliance: €465.8M
+• Totale: €630.5M

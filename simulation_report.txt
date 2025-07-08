@@ -1,0 +1,11 @@
+=== GDO Security Simulation Report ===
+
+Data di generazione: 2025-07-08 22:41:27.837753
+Numero organizzazioni: 15
+Periodo simulato: 2024-02-01 00:00:00 - 2025-12-22 00:00:00
+Record totali: 360
+
+Risultati Test Ipotesi:
+H1: H1 parzialmente supportata
+H2: H2 non supportata
+H3: H3 supportata
