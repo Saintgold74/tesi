@@ -1,0 +1,59 @@
+================================================================================
+REPORT GENERAZIONE DATI SINTETICI GDO - FRAMEWORK GIST
+================================================================================
+
+Data generazione: 2025-07-09 19:25:41.880165
+Versione framework: 2.0
+Random seed: 42
+Numero organizzazioni: 15
+
+DISCLAIMER
+----------------------------------------
+Questi dati sono COMPLETAMENTE SINTETICI e generati per validazione
+accademica del framework GIST. NON rappresentano organizzazioni reali.
+
+METODOLOGIA
+----------------------------------------
+Livello 1: Parametri da fonti pubbliche verificabili
+Livello 2: Parametri derivati usando modelli dalla letteratura
+Livello 3: Parametri simulati usando distribuzioni statistiche
+
+STATISTICHE AGGREGATE
+----------------------------------------
+
+Per categoria dimensionale:
+              num_stores                ... employees baseline_availability_pct baseline_security_incidents_year
+                   count   sum    mean  ...      mean                      mean                              sum
+size_category                           ...                                                                     
+large                  3  1017  339.00  ...   3390.00                     99.89                             68.0
+medium                 6   997  166.17  ...   1661.67                     99.89                             82.0
+small                  6   426   71.00  ...    710.00                     99.89                             63.0
+
+[3 rows x 9 columns]
+
+FONTI BIBLIOGRAFICHE UTILIZZATE
+----------------------------------------
+
+[federdistribuzione_2023]
+Federdistribuzione (2023). La Distribuzione Moderna Organizzata - Rapporto Annuale 2023.
+
+[istat_2023]
+ISTAT (2023). Annuario Statistico Italiano 2023.
+Istituto Nazionale di Statistica. ISBN: 978-88-458-2061-2
+
+[mediobanca_2023]
+Ufficio Studi Mediobanca (2023). Le maggiori società italiane 2023.
+
+[polimi_2023]
+Osservatorio Innovazione Digitale nel Retail (2023). Digital Transformation nel Retail Italiano.
+
+[basker_2005]
+Basker, E. (2005). Job Creation or Destruction? Labor Market Effects of Wal-Mart Expansion.
+Journal of Labor Economics, 23(2), 211-248.
+
+[trivedi_2016]
+Trivedi, K.S. (2016). Probability and Statistics with Reliability, Queuing and Computer Science Applications.
+Wiley. ISBN: 978-0-471-33341-8
+
+[patki_2016]
+Patki, N., Wedge, R., Veeramachaneni, K. (2016). The Synthetic Data Vault.

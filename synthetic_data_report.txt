@@ -1,0 +1,17 @@
+REPORT GENERAZIONE DATI SINTETICI GDO
+==================================================
+Data generazione: 2025-07-09 19:26:43.353547
+Numero organizzazioni: 15
+
+DISCLAIMER: Dati completamente sintetici per simulazione
+
+FONTI UTILIZZATE:
+- Federdistribuzione: Struttura mercato
+- ISTAT: Distribuzione geografica
+- Mediobanca: Fatturati medi
+- PoliMi: Budget IT
+
+PARAMETRI STIMATI/SIMULATI:
+- Tutti i parametri operativi (availability, MTTR, etc.)
+- Numero dipendenti e POS
+- Metriche di sicurezza e compliance

@@ -1,0 +1,120 @@
+{
+  "generation_info": {
+    "timestamp": "20250709_192541",
+    "framework_version": "2.0",
+    "random_seed": 42,
+    "n_organizations": 15
+  },
+  "parameters_summary": {
+    "level1": [
+      "size_category",
+      "num_stores",
+      "annual_revenue_meur",
+      "it_budget_pct",
+      "geographic_region"
+    ],
+    "level2": [
+      "avg_store_surface_sqm",
+      "employees",
+      "pos_terminals_total",
+      "legacy_system_ratio"
+    ],
+    "level3": [
+      "baseline_availability_pct",
+      "baseline_mttr_hours",
+      "baseline_security_incidents_year",
+      "compliance_scores",
+      "baseline_patch_lag_days"
+    ]
+  },
+  "validation_results": {
+    "revenue_per_employee": {
+      "value": 546959.0163934428,
+      "unit": "€/dipendente",
+      "in_range": false,
+      "benchmark_range": [
+        150000,
+        350000
+      ],
+      "source": "KPMG Retail Trends Italia 2023, p. 34"
+    },
+    "it_budget_pct": {
+      "mean": 1.9726666666666668,
+      "std": 0.6030971913566023,
+      "unit": "% fatturato",
+      "all_in_range": true,
+      "out_of_range_count": 0,
+      "source": "Gartner IT Spending Forecast 2023"
+    }
+  },
+  "bibliography": {
+    "federdistribuzione_2023": {
+      "autore": "Federdistribuzione",
+      "titolo": "La Distribuzione Moderna Organizzata - Rapporto Annuale 2023",
+      "editore": "Federdistribuzione",
+      "anno": 2023,
+      "url": "https://www.federdistribuzione.it/studi-e-ricerche/",
+      "accesso": "15 gennaio 2024",
+      "pagine": "45-47",
+      "tipo": "report"
+    },
+    "istat_2023": {
+      "autore": "ISTAT",
+      "titolo": "Annuario Statistico Italiano 2023",
+      "editore": "Istituto Nazionale di Statistica",
+      "anno": 2023,
+      "isbn": "978-88-458-2061-2",
+      "capitolo": "19 - Commercio interno",
+      "tavola": "19.4",
+      "tipo": "libro"
+    },
+    "mediobanca_2023": {
+      "autore": "Ufficio Studi Mediobanca",
+      "titolo": "Le maggiori società italiane 2023",
+      "editore": "Mediobanca",
+      "anno": 2023,
+      "url": "https://www.mbres.it/it/publications/italian-companies",
+      "sezione": "GDO Food",
+      "pagine": "127-131",
+      "tipo": "report"
+    },
+    "polimi_2023": {
+      "autore": "Osservatorio Innovazione Digitale nel Retail",
+      "titolo": "Digital Transformation nel Retail Italiano",
+      "editore": "Politecnico di Milano",
+      "anno": 2023,
+      "url": "https://www.osservatori.net/it/ricerche/osservatori-attivi/innovazione-digitale-nel-retail",
+      "pagine": "89-92",
+      "tipo": "report"
+    },
+    "basker_2005": {
+      "autore": "Basker, E.",
+      "titolo": "Job Creation or Destruction? Labor Market Effects of Wal-Mart Expansion",
+      "rivista": "Journal of Labor Economics",
+      "anno": 2005,
+      "volume": 23,
+      "numero": 2,
+      "pagine": "211-248",
+      "doi": "10.1086/428824",
+      "tipo": "articolo"
+    },
+    "trivedi_2016": {
+      "autore": "Trivedi, K.S.",
+      "titolo": "Probability and Statistics with Reliability, Queuing and Computer Science Applications",
+      "editore": "Wiley",
+      "anno": 2016,
+      "isbn": "978-0-471-33341-8",
+      "edizione": "2nd",
+      "tipo": "libro"
+    },
+    "patki_2016": {
+      "autore": "Patki, N., Wedge, R., Veeramachaneni, K.",
+      "titolo": "The Synthetic Data Vault",
+      "conferenza": "IEEE International Conference on Data Science and Advanced Analytics",
+      "anno": 2016,
+      "pagine": "399-410",
+      "doi": "10.1109/DSAA.2016.49",
+      "tipo": "conferenza"
+    }
+  }
+}

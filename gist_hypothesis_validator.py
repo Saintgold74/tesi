@@ -54,23 +54,23 @@ class GISTHypothesisValidator:
             org_results = {
                 'org_id': org['org_id'],
                 'size': org['size_category'],
-                'baseline_availability': org['baseline_availability'],
-                'baseline_tco': org['annual_revenue'] * 0.02  # 2% IT budget
+                'baseline_availability': org['baseline_availability_pct'],
+                'baseline_tco': org['annual_revenue_meur'] * 0.02 # 2% IT budget
             }
             
             # Simula 24 mesi
             monthly_data = []
             for month in range(self.simulation_months):
                 if month < 6:  # Pre-migrazione
-                    availability = org['baseline_availability']
+                    availability = org['baseline_availability_pct']
                     tco_factor = 1.0
                 elif month < 12:  # Durante migrazione (investimento)
-                    availability = org['baseline_availability']
+                    availability = org['baseline_availability_pct']
                     tco_factor = 1.1  # +10% costi temporanei
                 else:  # Post-migrazione
                     progress = min((month - 12) / 12, 1.0)
                     # Availability migliora
-                    availability = org['baseline_availability'] + 0.0055 * progress
+                    availability = org['baseline_availability_pct'] + 0.0055 * progress
                     availability = min(availability, 0.9999)
                     # TCO si riduce
                     tco_factor = 1.0 - 0.382 * progress
@@ -107,13 +107,20 @@ class GISTHypothesisValidator:
         
         for _, org in self.orgs.iterrows():
             # ASSA baseline (inverso del compliance score)
-            assa_baseline = 100 - (org['baseline_compliance_score'] * 100)
-            
+            # La nuova logica corretta
+            # 1. Calcoliamo il punteggio di compliance medio dai dati esistenti
+            compliance_score_medio = (org['baseline_gdpr_compliance'] + 
+                                        org['baseline_pci_compliance'] + 
+                                        org['baseline_nis2_readiness']) / 3
+
+            # 2. Usiamo questo nuovo valore calcolato nella sua formula
+            assa_baseline = 100 - (compliance_score_medio * 100)
+                        
             org_results = {
                 'org_id': org['org_id'],
                 'size': org['size_category'],
                 'assa_baseline': assa_baseline,
-                'baseline_incidents': org['baseline_security_incidents']
+                'baseline_incidents': org['baseline_security_incidents_year']
             }
             
             # Simula implementazione Zero Trust
@@ -134,7 +141,7 @@ class GISTHypothesisValidator:
             org_results['h2_validated'] = (assa_reduction > 0.35 and latency_increase < 50)
             
             # Riduzione incidenti
-            org_results['incidents_final'] = int(org['baseline_security_incidents'] * (1 - assa_reduction))
+            org_results['incidents_final'] = int(org['baseline_security_incidents_year'] * (1 - assa_reduction))
             
             results.append(org_results)
             
@@ -161,13 +168,13 @@ class GISTHypothesisValidator:
             else:
                 compliance_cost_pct = 0.002  # 0.2% revenue
                 
-            cost_baseline = org['annual_revenue'] * compliance_cost_pct * 1000  # in k€
+            cost_baseline = org['annual_revenue_meur'] * compliance_cost_pct * 1000  # in k€
             
             org_results = {
                 'org_id': org['org_id'],
                 'size': org['size_category'],
                 'compliance_cost_baseline': cost_baseline,
-                'it_budget': org['annual_revenue'] * org['it_budget_pct'] / 100 * 1000
+                'it_budget': org['annual_revenue_meur'] * org['it_budget_pct'] / 100 * 1000
             }
             
             # Simula approccio integrato
