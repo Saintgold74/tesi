@@ -1,6 +1,6 @@
 % --- PREAMBOLO ---
 % Definisce il tipo di documento. 'report' è adatto per una tesi.
-\documentclass{report} 
+\documentclass[12pt,a4paper,oneside]{book}
 
 % Fix for undefined \tightlist (inserted by Pandoc/Markdown)
 \providecommand{\tightlist}{%
@@ -35,7 +35,7 @@
 \setcounter{secnumdepth}{3}
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
 % !TEX program = xelatex
-\documentclass[12pt,a4paper,oneside]{book}
+
 
 % ==========================================
 % PACCHETTI ESSENZIALI PER XeLaTeX
@@ -130,7 +130,6 @@
 % ==========================================
 % COMANDI PERSONALIZZATI PER CITAZIONI
 % ==========================================
-
 % Comando per autori in maiuscoletto (REGOLA UNIVERSITÀ)
 \newcommand{\autore}[1]{\textsc{#1}}
 
@@ -661,8 +660,8 @@ operativi.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figura 1-3}
-\caption{Decomposizione dei pesi relativi nel Framework GIST per diversi scenari operativi}
-\label{fig:gist_decomposition}
+    \caption{Decomposizione dei pesi relativi nel Framework GIST per diversi scenari operativi}
+    \label{fig:gist_decomposition}
 \end{figure}
 
 \subsection{\texorpdfstring{\textbf{Raccolta e Analisi
