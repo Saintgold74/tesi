@@ -1,0 +1,163 @@
+% ===================================
+% FIGURA 1.5 - Dashboard Impatto Multidimensionale
+% Con posizionamento assoluto
+% ===================================
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, shadows, shapes.geometric}
+
+\begin{document}
+\begin{tikzpicture}
+    % Definizione stili
+    \tikzset{
+        dimension/.style={
+            regular polygon, 
+            regular polygon sides=6, 
+            draw=#1!70, 
+            fill=#1!12,
+            minimum size=3.8cm,
+            align=center,
+            font=\normalsize\bfseries,
+            line width=1.5pt,
+            drop shadow
+        },
+        metric/.style={
+            rectangle,
+            rounded corners=6pt,
+            draw=#1!60,
+            fill=white,
+            text width=3.2cm,
+            minimum height=1.5cm,
+            align=center,
+            font=\small,
+            line width=0.8pt
+        },
+        critical/.style={
+            metric=#1,
+            fill=#1!15,
+            line width=1.5pt,
+            drop shadow
+        },
+        value/.style={font=\large\bfseries, text=#1!80},
+        unit/.style={font=\footnotesize, text=gray!60}
+    }
+
+    % Titolo
+    \node[font=\large\bfseries, text=gray!80] at (0,6) {Framework GIST: Analisi d'Impatto Multidimensionale};
+
+    % Tre dimensioni principali (esagoni)
+    \node[dimension=blue] at (-3.5,2) (academic) {
+        Dimensione\\Accademica
+    };
+
+    \node[dimension=green] at (3.5,2) (practical) {
+        Dimensione\\Pratica
+    };
+
+    \node[dimension=orange] at (0,-3) (social) {
+        Dimensione\\Sociale
+    };
+
+    % Triangolo di connessione
+    \draw[gray!30, line width=1pt] (academic) -- (practical) -- (social) -- (academic) -- cycle;
+
+    % Centro
+    \node[circle, fill=gray!90, text=white, minimum size=2.2cm,
+          font=\small\bfseries, align=center, drop shadow] at (0,0.4) {
+        GIST\\Core
+    };
+
+    % Metriche Accademiche (posizioni assolute)
+    \node[metric=blue] at (-7.5,3.5) {
+        \textbf{Ricerca}\\
+        \textcolor{blue!80}{\large\bfseries 6} \textcolor{gray!60}{\footnotesize pubblicazioni}\\
+        \footnotesize peer-reviewed
+    };
+
+    \node[metric=blue] at (-7.5,1.5) {
+        \textbf{Modelli}\\
+        \textcolor{blue!80}{\large\bfseries 4} \textcolor{gray!60}{\footnotesize validati}\\
+        \footnotesize R² > 0.85
+    };
+
+    \node[metric=blue] at (-7.5,-0.5) {
+        \textbf{Dataset}\\
+        \textcolor{blue!80}{\large\bfseries 24} \textcolor{gray!60}{\footnotesize mesi}\\
+        \footnotesize 15 organizzazioni
+    };
+
+    % Metriche Pratiche
+    \node[metric=green] at (7.5,3.5) {
+        \textbf{Efficienza}\\
+        \textcolor{green!80}{\large\bfseries -35\%} \textcolor{gray!60}{\footnotesize costi}\\
+        \footnotesize compliance
+    };
+
+    \node[critical=green] at (7.5,1.5) {
+        \textbf{ROI}\\
+        \textcolor{green!80}{\large\bfseries 18} \textcolor{gray!60}{\footnotesize mesi}\\
+        \footnotesize break-even
+    };
+
+    \node[metric=green] at (7.5,-0.5) {
+        \textbf{Adoption}\\
+        \textcolor{green!80}{\large\bfseries +67\%} \textcolor{gray!60}{\footnotesize YoY}\\
+        \footnotesize trend 2024
+    };
+
+    % Metriche Sociali
+    \node[metric=orange] at (-3,-5) {
+        \textbf{Copertura}\\
+        \textcolor{orange!80}{\large\bfseries 45M} \textcolor{gray!60}{\footnotesize utenti}\\
+        \footnotesize Italia
+    };
+
+    \node[critical=orange] at (0,-6) {
+        \textbf{Resilienza}\\
+        \textcolor{orange!80}{\large\bfseries 99.95\%} \textcolor{gray!60}{\footnotesize SLA}\\
+        \footnotesize H24 garantito
+    };
+
+    \node[metric=orange] at (3,-5) {
+        \textbf{Sicurezza}\\
+        \textcolor{orange!80}{\large\bfseries -40\%} \textcolor{gray!60}{\footnotesize breach}\\
+        \footnotesize riduzione
+    };
+
+    % Collegamenti sottili (linee dalle dimensioni alle metriche)
+    \foreach \x in {-7.5} {
+        \draw[gray!20, line width=0.5pt] (academic) -- (\x,3.5);
+        \draw[gray!20, line width=0.5pt] (academic) -- (\x,1.5);
+        \draw[gray!20, line width=0.5pt] (academic) -- (\x,-0.5);
+    }
+    
+    \foreach \x in {7.5} {
+        \draw[gray!20, line width=0.5pt] (practical) -- (\x,3.5);
+        \draw[gray!20, line width=0.5pt] (practical) -- (\x,1.5);
+        \draw[gray!20, line width=0.5pt] (practical) -- (\x,-0.5);
+    }
+    
+    \foreach \x in {-3,0,3} {
+        \draw[gray!20, line width=0.5pt] (social) -- (\x,-5);
+    }
+    \draw[gray!20, line width=0.5pt] (social) -- (0,-6);
+
+    % Box di sintesi
+    \node[rectangle, draw=gray!60, fill=gray!5, rounded corners=8pt,
+          text width=13cm, align=center, line width=1pt] at (0,-8) {
+        \footnotesize
+        \textbf{Validazione:} Simulazione di 15 organizzazioni GDO | 50-500 punti vendita | Fatturato 100M-2B€\\
+        \textbf{Periodo osservazione:} 24 mesi (2022-2024) | \textbf{Significatività:} p < 0.001
+    };
+
+    % Indicatore metriche critiche
+    \node[font=\tiny, text=gray!60] at (9.2,1.5) {★};
+    \node[font=\tiny, text=gray!60] at (1.7,-6) {★};
+    
+    \node[font=\scriptsize\itshape, text=gray!60] at (0,-9) {
+        ★ Metriche critiche per il successo dell'implementazione
+    };
+
+\end{tikzpicture}
+\end{document}

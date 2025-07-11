@@ -1,0 +1,40 @@
+% ===================================
+% CODICE LaTeX PER GRAFICI E TABELLE
+% Tesi GDO - Capitoli 1 e 2
+% ===================================
+% filepath: c:\Users\saint\tesi\nuovi grafi 1 e 2.tex
+\documentclass[varwidth=true,border=10pt]{standalone}
+% Pacchetti necessari
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}    
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption} % Per sottotitoli nelle figure
+% Preambolo necessario:
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{pgfplots.polar}
+\begin{document}
+
+% TABELLA 2.1: Metriche di Evoluzione degli Attacchi POS
+\begin{table}[h]
+\centering
+\caption{Metriche di evoluzione degli attacchi POS 2019-2025}
+\label{tab:evoluzione_attacchi}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Periodo} & \textbf{n Campioni} & \textbf{Success Rate (\%)} & \textbf{Detection Rate (\%)} & \textbf{Persistenza (giorni)} & \textbf{p-value} \\
+\midrule
+2019-2021 & 89 & $73.0 \pm 4.2$ & $85.4 \pm 3.1$ & $14.3 \pm 2.1$ & $<0.001$ \\
+2022-2023 & 76 & $45.1 \pm 5.3$ & $62.7 \pm 4.8$ & $23.7 \pm 3.4$ & $<0.001$ \\
+2024-2025 & 69 & $61.8 \pm 4.7$ & $33.9 \pm 5.9$ & $41.2 \pm 5.2$ & $<0.001$ \\
+\bottomrule
+\multicolumn{6}{l}{\scriptsize Test $\chi^2$: $\chi^2(4)=67.82$, $p<0.001$ (differenze significative tra periodi)}
+\end{tabular}
+\end{table}
+\end{document}
