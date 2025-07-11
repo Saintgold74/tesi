@@ -34,6 +34,142 @@
 % Imposta la profondità di numerazione fino a subsubsection (livello 3)
 \setcounter{secnumdepth}{3}
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
+% !TEX program = xelatex
+\documentclass[12pt,a4paper,oneside]{book}
+
+% ==========================================
+% PACCHETTI ESSENZIALI PER XeLaTeX
+% ==========================================
+\usepackage{fontspec}
+\usepackage[italian]{babel}
+
+% Font Arial nativo dal sistema (REGOLA UNIVERSITÀ)
+\setmainfont{Arial}[
+    Ligatures=TeX,
+    Numbers=Lining,
+    BoldFont=Arial Bold,
+    ItalicFont=Arial Italic,
+    BoldItalicFont=Arial Bold Italic,
+]
+
+% MARGINI ESATTI SECONDO REGOLAMENTO UNIVERSITÀ
+\usepackage[
+    top=3.5cm,        % Superiore: 3,5 cm
+    bottom=3.5cm,     % Inferiore: 3,5 cm  
+    left=4.5cm,       % Sinistro: 4,5 cm
+    right=3cm         % Destro: 3 cm
+]{geometry}
+
+% INTERLINEA 1,5 RIGHE (REGOLA UNIVERSITÀ)
+\usepackage{setspace}
+\onehalfspacing
+
+% GESTIONE PARAGRAFI - RIENTRO PRIMA RIGA 1,25 CM
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+% NOTE A PIÈ PAGINA - NUMERATE PER CAPITOLO (REGOLA UNIVERSITÀ)
+\usepackage{footmisc}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\counterwithin{footnote}{chapter}
+
+% PERSONALIZZAZIONE FORMATO NOTE (PARENTESI TONDE)
+\renewcommand{\thefootnote}{(\arabic{footnote})}
+
+% FORMATO NOTE: Arial 10pt, rientro 0,6cm, interlinea singola
+\renewcommand{\footnotesize}{\fontsize{10pt}{10pt}\selectfont}
+\renewcommand{\footnoterule}{\kern-3pt\hrule width 0.4\columnwidth \kern 2.6pt}
+
+% Configurazione layout note
+\setlength{\footnotemargin}{0.6cm}
+\setlength{\footnotesep}{0pt}
+
+% GESTIONE INDICE - TITOLI A SINISTRA, NUMERI A DESTRA
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsecfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsubsecfont}{\normalfont\bfseries\fontsize{11pt}{13pt}\selectfont}
+
+% TITOLI: 11PT GRASSETTO (REGOLA UNIVERSITÀ)
+\usepackage{titlesec}
+
+% Capitoli: 11pt grassetto
+\titleformat{\chapter}[display]
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\chaptertitlename\ \thechapter}
+    {10pt}
+    {}
+
+% Sezioni: 11pt grassetto  
+\titleformat{\section}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesection}
+    {1em}
+    {}
+
+% Sottosezioni: 11pt grassetto
+\titleformat{\subsection}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesubsection}
+    {1em}
+    {}
+
+% Sotto-sottosezioni: 11pt grassetto
+\titleformat{\subsubsection}
+    {\normalfont\fontsize{11pt}{13pt}\bfseries}
+    {\thesubsubsection}
+    {1em}
+    {}
+
+% HYPERLINKS (devono essere dopo altri pacchetti)
+\usepackage[
+    colorlinks=false,
+    pdfborder={0 0 0},
+]{hyperref}
+% ==========================================
+% COMANDI PERSONALIZZATI PER CITAZIONI
+% ==========================================
+
+% Comando per autori in maiuscoletto (REGOLA UNIVERSITÀ)
+\newcommand{\autore}[1]{\textsc{#1}}
+
+% Comando per citazione libro secondo formato università
+% Uso: \citlibro{F. FORTUNA}{Corporate Governance}{Milano}{F.Angeli}{2001}{16-20}
+\newcommand{\citlibro}[6]{%
+    \autore{#1}, \textit{#2}, #3, #4, #5, pagg. #6%
+}
+
+% Comando per citazione articolo secondo formato università  
+% Uso: \citarticolo{G. ZURZOLO}{Collegio sindacale e internal auditors}{Quaderni di finanza}{14}{Consob}{1996}{46}
+\newcommand{\citarticolo}[7]{%
+    \autore{#1}, #2, in «#3», n. #4, #5, #6, pag. #7%
+}
+
+% Ambiente per prefazione in corsivo (REGOLA UNIVERSITÀ)
+\newenvironment{prefazione}
+    {\chapter*{Prefazione}
+     \addcontentsline{toc}{chapter}{Prefazione}
+     \itshape}  % Tutto il testo in corsivo
+    {\normalfont\clearpage}
+
+% Ambiente per bibliografia manuale secondo regole università
+\newenvironment{bibliografiauniv}
+    {\chapter*{Bibliografia}
+     \addcontentsline{toc}{chapter}{Bibliografia}
+     \begin{list}{}{\setlength{\leftmargin}{0pt}\setlength{\itemindent}{-\leftmargin}}
+     \raggedright}
+    {\end{list}}
+
+% ==========================================
+% METADATI DOCUMENTO
+% ==========================================
+\hypersetup{
+    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
+    pdfauthor={Marco Santoro},
+    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
+    pdfkeywords={ingegneria informatica, tesi, università},
+}
 \setcounter{tocdepth}{3}
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.17}
@@ -49,8 +185,66 @@
 \definecolor{gdogrigio}{RGB}{128,128,128}
 \definecolor{gdovioletto}{RGB}{128,0,128}
 %\geometry{margin=2cm}
-% --- INIZIO DEL DOCUMENTO VERO E PROPRIO ---
+% ==========================================
+% INIZIO DOCUMENTO
+% ==========================================
 \begin{document}
+
+% ==========================================
+% FRONTESPIZIO
+% ==========================================
+\begin{titlepage}
+    \begin{center}
+        \vspace*{2cm}
+        
+        {\Large \textbf{UNIVERSITÀ DEGLI STUDI "NICCOLO' CUSANO"}}\\
+        \vspace{0.5cm}
+        {\large DIPARTIMENTO DI INGEGNERIA}\\
+        \vspace{0.5cm}
+        {\large CORSO DI LAUREA IN INGEGNERIA INFORMATICA}\\
+        
+        \vspace{3cm}
+        
+        {\Huge \textbf{"DALL'ALIMENTAZIONE ALLA CYBERSECURITY: FONDAMENTI DI UN'INFRASTRUTTURA IT SICURA NELLA GRANDE DISTRIBUZIONE"}}        
+        \vspace{3cm}
+        
+        \begin{flushleft}
+            \begin{tabular}{ll}
+                \textbf{Relatore:} & Prof. [Giovanni Farina] \\
+                
+                & \\
+                \textbf{Candidato:} & [Marco Santoro] \\
+                \textbf{Matricola:} & [IN08000291] \\
+            \end{tabular}
+        \end{flushleft}
+        
+        \vfill
+        
+        {\large ANNO ACCADEMICO 2024/2025}
+        
+    \end{center}
+\end{titlepage}
+
+% ==========================================
+% INDICE GENERALE (titoli a sinistra, numeri a destra)
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% PREFAZIONE (tutto in corsivo come da regole)
+% ==========================================
+\begin{prefazione}
+Questa è una prefazione di esempio scritta completamente in corsivo, come richiesto dalle regole dell'università.
+
+Il template XeLaTeX è stato completamente adattato per rispettare tutte le specifiche del regolamento universitario: font Arial nativo, margini esatti, interlinea 1,5, note numerate per capitolo con parentesi tonde, e formato citazioni conforme.
+
+Qui vanno inseriti i ringraziamenti alle persone che hanno contribuito al lavoro di tesi e una breve introduzione personale al contenuto della ricerca.
+\end{prefazione}
+
+% ==========================================
+% CAPITOLI
+% ==========================================
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract} % Aggiunge all'indice senza numerazione
 
@@ -199,7 +393,7 @@ durante picchi di carico estremi, sottovaluando le criticità reali.
 \label{fig:gap_ricerca}
 \end{figure}
 
-\section{\texorpdfstring{\textbf{1.2 Definizione del Problema di
+\section{\texorpdfstring{\textbf{Definizione del Problema di
 Ricerca}}{1.2 Definizione del Problema di Ricerca}}\label{definizione-del-problema-di-ricerca}
 
 \subsection{\texorpdfstring{\textbf{Problema
@@ -301,10 +495,10 @@ che considerino interdipendenze sistemiche e possibili effetti cascata?
 La natura distribuita e interconnessa delle operazioni GDO amplifica
 l'impatto potenziale di singoli punti di failure.
 
-\section{\texorpdfstring{\textbf{1.3 Obiettivi e Contributi della
+\section{\texorpdfstring{\textbf{Obiettivi e Contributi della
 Ricerca}}{1.3 Obiettivi e Contributi della Ricerca}}\label{obiettivi-e-contributi-della-ricerca}
 
-\subsection{\texorpdfstring{\textbf{1.3.1 Obiettivo
+\subsection{\texorpdfstring{\textbf{Obiettivo
 Generale}}{1.3.1 Obiettivo Generale}}\label{obiettivo-generale}
 
 L'obiettivo generale della nostra ricerca è quello di sviluppare e
@@ -386,7 +580,7 @@ variabili chiave includono il TCO misurato in euro/anno, la disponibilità misur
 \subsection{\texorpdfstring{\textbf{Ipotesi sulla
 Sicurezza}}{1.4.2 Ipotesi sulla Sicurezza}}\label{ipotesi-sulla-sicurezza}
 
-\textbf{Ipotesi H2}: L'integrazione di principi Zero Trust in architetture GDO distribuite, implementata attraverso micro-segmentazione della rete e verifica continua delle identità, riduce la superficie di attacco aggregata (misurata attraverso l'Aggregated System Surface Attack score - ASSA) di almeno il 35\% mantenendo l'impatto sulla latenza delle transazioni critiche entro 50 millisecondi, soglia che garantisce esperienza utente accettabile nei sistemi di pagamento.
+\textbf{Ipotesi H2}: L'integrazione di principi Zero Trust in architetture GDO distribuite, implementata attraverso micro-segmentazione della rete e verifica continua delle identità, riduce la superficie di attacco aggregata (misurata attraverso l'\textbf{Aggregated System Surface Attack score - ASSA}) di almeno il 35\% mantenendo l'impatto sulla latenza delle transazioni critiche entro 50 millisecondi, soglia che garantisce esperienza utente accettabile nei sistemi di pagamento.
 
 Questa formulazione enfatizza l'aspetto ingegneristico della riduzione della superficie di attacco e del mantenimento delle performance, elementi centrali per la validità tecnica della soluzione. Le variabili includono l'ASSA score normalizzato su scala 0-100, la latenza transazionale misurata in millisecondi, e l'architettura di sicurezza classificata come perimeter-based o Zero Trust.
 
