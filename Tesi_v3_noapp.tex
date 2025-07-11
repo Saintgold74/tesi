@@ -31,6 +31,10 @@
 \usepackage{enumitem}
 \usepackage{standalone}
 \graphicspath{{figure/}}
+% Imposta la profondità di numerazione fino a subsubsection (livello 3)
+\setcounter{secnumdepth}{3}
+% Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
+\setcounter{tocdepth}{3}
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.17}
 \usetikzlibrary{pgfplots.polar}
@@ -78,13 +82,12 @@ di infrastrutture IT sicure nel settore retail.
 Architecture, Cloud-Hybrid Systems, Compliance Integration, Retail IT
 Security
 
-\chapter{\texorpdfstring{\textbf{Capitolo 1 -
-Introduzione}}{Capitolo 1 - Introduzione}}\label{capitolo-1---introduzione}
+\chapter{\texorpdfstring{\textbf{Introduzione}}{Capitolo 1 - Introduzione}}\label{capitolo-1---introduzione}
 
-\section{\texorpdfstring{\textbf{1.1 Contesto e Motivazione della
+\section{\texorpdfstring{\textbf{Contesto e Motivazione della
 Ricerca}}{1.1 Contesto e Motivazione della Ricerca}}\label{contesto-e-motivazione-della-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.1.1 La Complessità Sistemica
+\subsection{\texorpdfstring{\textbf{La Complessità Sistemica
 della GDO
 Moderna}}{1.1.1 La Complessità Sistemica della GDO Moderna}}\label{la-complessituxe0-sistemica-della-gdo-moderna}
 
@@ -114,9 +117,9 @@ Questa architettura distribuita crea sfide uniche in termini di gestione
 della consistenza dei dati, propagazione degli aggiornamenti, e
 contenimento delle minacce informatiche.
 
-\subsubsection{\texorpdfstring{\textbf{1.1.2 L'Evoluzione del Panorama
+\subsection{\texorpdfstring{\textbf{L'Evoluzione del Panorama
 Tecnologico e
-Normativo}}{1.1.2 L'Evoluzione del Panorama Tecnologico e Normativo}}\label{levoluzione-del-panorama-tecnologico-e-normativo}
+Normativo}}{L'Evoluzione del Panorama Tecnologico e Normativo}}\label{levoluzione-del-panorama-tecnologico-e-normativo}
 
 Il settore della GDO sta attraversando una trasformazione profonda
 guidata da tre trend convergenti che ridefiniscono i paradigmi
@@ -155,7 +158,7 @@ I costi di conformità per approcci tradizionali sono stimati nel 2-3\%
 del fatturato⁵, rendendo essenziale lo sviluppo di strategie più
 efficienti.
 
-\subsubsection{\texorpdfstring{\textbf{1.1.3 Il Gap tra Teoria e
+\subsection{\texorpdfstring{\textbf{Il Gap tra Teoria e
 Implementazione}}{1.1.3 Il Gap tra Teoria e Implementazione}}\label{il-gap-tra-teoria-e-implementazione}
 
 L'analisi della letteratura scientifica e tecnica rivela disconnessioni
@@ -199,7 +202,7 @@ durante picchi di carico estremi, sottovaluando le criticità reali.
 \section{\texorpdfstring{\textbf{1.2 Definizione del Problema di
 Ricerca}}{1.2 Definizione del Problema di Ricerca}}\label{definizione-del-problema-di-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.2.1 Problema
+\subsection{\texorpdfstring{\textbf{Problema
 Principale}}{1.2.1 Problema Principale}}\label{problema-principale}
 
 Come progettare e implementare un'infrastruttura IT per la Grande
@@ -259,7 +262,7 @@ massimizzino il ritorno sugli investimenti e riducano gli sprechi,
 garantendo che le risorse siano allocate nel modo più efficace possibile
 per raggiungere gli obiettivi prefissati.
 
-\subsubsection{\texorpdfstring{\textbf{1.2.2 Sotto-Problemi
+\subsection{\texorpdfstring{\textbf{Sotto-Problemi
 Specifici}}{1.2.2 Sotto-Problemi Specifici}}\label{sotto-problemi-specifici}
 
 Il problema principale si articola in cinque sotto-problemi
@@ -290,8 +293,7 @@ ambienti retail.
 Il quarto sotto-problema affronta la compliance unificata: come
 integrare requisiti normativi multipli e spesso sovrapposti in un
 framework unificato che riduca overhead operativo e costi di conformità?
-La molteplicità di standard applicabili crea complessità che richiedono
-approcci innovativi.
+La molteplicità di standard applicabili crea complessità che richiedono approcci innovativi.
 
 Il quinto sotto-problema riguarda la continuità operativa: come
 progettare strategie di business continuity per architetture multi-cloud
@@ -302,7 +304,7 @@ l'impatto potenziale di singoli punti di failure.
 \section{\texorpdfstring{\textbf{1.3 Obiettivi e Contributi della
 Ricerca}}{1.3 Obiettivi e Contributi della Ricerca}}\label{obiettivi-e-contributi-della-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.3.1 Obiettivo
+\subsection{\texorpdfstring{\textbf{1.3.1 Obiettivo
 Generale}}{1.3.1 Obiettivo Generale}}\label{obiettivo-generale}
 
 L'obiettivo generale della nostra ricerca è quello di sviluppare e
@@ -321,7 +323,7 @@ Il framework deve essere sufficientemente rigoroso da garantire
 risultati ripetibili, ma anche sufficientemente flessibile da adattarsi
 alle specificità di diverse organizzazioni GDO.
 
-\subsubsection{\texorpdfstring{\textbf{1.3.2 Obiettivi
+\subsection{\texorpdfstring{\textbf{Obiettivi
 Specifici}}{1.3.2 Obiettivi Specifici}}\label{obiettivi-specifici}
 
 La ricerca persegue quattro obiettivi specifici interconnessi che
@@ -330,57 +332,34 @@ contribuiscono al raggiungimento dell'obiettivo generale.
 Il primo obiettivo specifico (OS1) consiste nell'analizzare
 quantitativamente l'evoluzione delle minacce specifiche alla GDO e
 l'efficacia delle contromisure moderne: questo obiettivo mira a
-documentare una riduzione degli incidenti superiore al 40\% attraverso
-l'implementazione di strategie difensive appropriate, fornendo la base
-empirica per le decisioni architetturali successive.
-
+documentare una riduzione degli incidenti superiore al 40\% attraverso l'implementazione di strategie difensive appropriate, fornendo la base empirica per le decisioni architetturali successive.
 Il secondo obiettivo specifico (OS2) riguarda la modellazione
-dell'impatto di architetture cloud-ibride su performance operative,
-resilienza sistemica e sostenibilità economica: l'obiettivo è sviluppare
-un modello predittivo con coefficiente di determinazione R² superiore a
-0.85, che permetta di stimare con accuratezza l'impatto di diverse
-scelte architetturali.
+dell'impatto di architetture cloud-ibride su performance operative, resilienza sistemica e sostenibilità economica: l'obiettivo è sviluppare un modello predittivo con coefficiente di determinazione R² superiore a 0.85, che permetta di stimare con accuratezza l'impatto di diverse scelte architetturali.
 
 Il terzo obiettivo specifico (OS3) consiste nel quantificare i benefici
-dell'integrazione \textbf{compliance-by-design} rispetto ad approcci
-tradizionali frammentati: l'obiettivo è dimostrare una riduzione dei
-costi di compliance superiore al 30\% mantenendo o migliorando
-l'efficacia dei controlli.
+dell'integrazione \textbf{compliance-by-design} rispetto ad approcci tradizionali frammentati: l'obiettivo è dimostrare una riduzione dei costi di compliance superiore al 30\% mantenendo o migliorando l'efficacia dei controlli.
 
 Il quarto obiettivo specifico (OS4) mira a sviluppare linee guida
-pratiche per roadmap di trasformazione validate su casi reali: lo scopo
-è quelo di garantire che le raccomandazioni siano applicabili ad almeno
-l'80\% delle organizzazioni target, considerando la varietà di contesti
-operativi nel settore.
+pratiche per roadmap di trasformazione validate su casi reali: lo scopo è quelo di garantire che le raccomandazioni siano applicabili ad almeno l'80\% delle organizzazioni target, considerando la varietà di contesti operativi nel settore.
 
-\subsubsection{\texorpdfstring{\textbf{1.3.3 Contributi
-Originali}}{1.3.3 Contributi Originali}}\label{contributi-originali}
+\subsection{\texorpdfstring{\textbf{Contributi
+Originali}}{Contributi Originali}}\label{contributi-originali}
 
 La ricerca apporta quattro contributi originali alla letteratura
-scientifica e alla pratica professionale.
-
-Il primo contributo consiste nel Framework GIST (GDO Integrated Security
-Transformation), un modello multi-livello che integra considerazioni
-relative all'infrastruttura fisica, all'architettura di sistema, alla
-sicurezza e alla compliance in un approccio unificato. Questo framework
+scientifica e alla pratica professionale.\\
+Il primo contributo consiste nella creazione  \textbf{Framework GIST (GDO Integrated Security Transformation)}, un modello multi-livello che integra considerazioni relative all'infrastruttura fisica, all'architettura di sistema, alla sicurezza e alla compliance in un approccio unificato. \\Questo framework
 colma il gap identificato nella letteratura fornendo un approccio
 olistico specificamente calibrato per le esigenze della GDO.
 
-Il secondo contributo è il Modello Economico GDO-Cloud, un framework
-quantitativo per la valutazione del TCO e del ROI specificamente
+Il secondo contributo è il Modello Economico GDO-Cloud, un framework quantitativo per la valutazione del TCO e del ROI specificamente
 progettato per il settore retail e validato attraverso dati empirici.
-Questo modello permette ai decision maker di valutare oggettivamente
-l'impatto economico di diverse scelte architetturali.
+Questo modello permette ai decision maker di valutare oggettivamente l'impatto economico di diverse scelte architetturali.
 
-Il terzo contributo consiste nella Matrice di Integrazione Normativa,
-che mappa sistematicamente overlap e sinergie tra PCI-DSS 4.0, GDPR e
-NIS2, fornendo strategie concrete per l'implementazione unificata.
-Questa matrice riduce significativamente la complessità della gestione
-della compliance multipla.
+Il terzo contributo consiste nella Matrice di Integrazione Normativa, che mappa sistematicamente overlap e sinergie tra PCI-DSS 4.0, GDPR e NIS2, fornendo strategie concrete per l'implementazione unificata.
+Questa matrice riduce significativamente la complessità della gestione della compliance multipla.
 
 Il quarto contributo è un Dataset Empirico Anonimizzato contenente
-metriche operative da 15 organizzazioni GDO monitorate per 24 mesi, che
-fornisce una base empirica robusta per future ricerche nel settore.
+metriche operative dalla simulazione di 15 organizzazioni GDO monitorate per 24 mesi, che fornisce una base empirica robusta per future ricerche nel settore.
 
 % FIGURA 1.2: Framework GIST - Architettura Concettuale
 \begin{figure}[htbp]
@@ -390,77 +369,46 @@ fornisce una base empirica robusta per future ricerche nel settore.
     \label{fig:gist_framework}
 \end{figure}
 
-\section{\texorpdfstring{\textbf{1.4 Ipotesi di
-Ricerca}}{1.4 Ipotesi di Ricerca}}\label{ipotesi-di-ricerca}
+\section{\texorpdfstring{\textbf {Ipotesi di
+Ricerca}}{Ipotesi di Ricerca}}\label{ipotesi-di-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.4.1 Ipotesi sull'Evoluzione
-Architetturale}}{1.4.1 Ipotesi sull'Evoluzione Architetturale}}\label{ipotesi-sullevoluzione-architetturale}
+\subsection{\texorpdfstring{\textbf{Ipotesi sull'Evoluzione
+Architetturale}}{Ipotesi sull'Evoluzione Architetturale}}\label{ipotesi-sullevoluzione-architetturale}
 
-\textbf{H1}: L'implementazione di architetture cloud-ibride progettate
+\textbf{Ipotesi H1}: L'implementazione di architetture cloud-ibride progettate
 secondo pattern architetturali specifici per la GDO permette di
-conseguire e mantenere livelli di disponibilità del servizio (Service
-Level Agreement - SLA) superiori al 99.95\% in presenza di carichi
-transazionali variabili tipici del retail, ottenendo come beneficio
-aggiuntivo una riduzione del TCO superiore al 30\% rispetto ad
-architetture tradizionali on-premise.
+conseguire e mantenere livelli di disponibilità del servizio (Service Level Agreement - SLA) superiori al 99.95\% in presenza di carichi transazionali variabili tipici del retail, ottenendo come beneficio aggiuntivo una riduzione del TCO superiore al 30\% rispetto ad architetture tradizionali on-premise.
 
 Questa ipotesi pone l'enfasi sul risultato tecnico primario (il
-mantenimento di SLA elevati sotto stress operativo) considerando il
-beneficio economico come conseguenza positiva ma secondaria. Le
-variabili chiave includono il TCO misurato in euro/anno, l'availability
-misurata secondo standard industriali, e il tipo di architettura
-classificato come traditional, hybrid o cloud-native.
+mantenimento di SLA elevati sotto stress operativo) considerando il beneficio economico come conseguenza positiva ma secondaria. Le
+variabili chiave includono il TCO misurato in euro/anno, la disponibilità misurata secondo standard industriali, e il tipo di architettura classificato come traditional, hybrid o cloud-native.
 
-\subsubsection{\texorpdfstring{\textbf{1.4.2 Ipotesi sulla
+\subsection{\texorpdfstring{\textbf{Ipotesi sulla
 Sicurezza}}{1.4.2 Ipotesi sulla Sicurezza}}\label{ipotesi-sulla-sicurezza}
 
-\textbf{H2}: L'integrazione di principi Zero Trust in architetture GDO
-distribuite, implementata attraverso micro-segmentazione della rete e
-verifica continua delle identità, riduce la superficie di attacco
-aggregata (misurata attraverso l'Aggregated System Surface Attack score
-- ASSA) di almeno il 35\% mantenendo l'impatto sulla latenza delle
-transazioni critiche entro 50 millisecondi, soglia che garantisce
-esperienza utente accettabile nei sistemi di pagamento.
+\textbf{Ipotesi H2}: L'integrazione di principi Zero Trust in architetture GDO distribuite, implementata attraverso micro-segmentazione della rete e verifica continua delle identità, riduce la superficie di attacco aggregata (misurata attraverso l'Aggregated System Surface Attack score - ASSA) di almeno il 35\% mantenendo l'impatto sulla latenza delle transazioni critiche entro 50 millisecondi, soglia che garantisce esperienza utente accettabile nei sistemi di pagamento.
 
-Questa formulazione enfatizza l'aspetto ingegneristico della riduzione
-della superficie di attacco e del mantenimento delle performance,
-elementi centrali per la validità tecnica della soluzione. Le variabili
-includono l'ASSA score normalizzato su scala 0-100, la latenza
-transazionale misurata in millisecondi, e l'architettura di sicurezza
-classificata come perimeter-based o Zero Trust.
+Questa formulazione enfatizza l'aspetto ingegneristico della riduzione della superficie di attacco e del mantenimento delle performance, elementi centrali per la validità tecnica della soluzione. Le variabili includono l'ASSA score normalizzato su scala 0-100, la latenza transazionale misurata in millisecondi, e l'architettura di sicurezza classificata come perimeter-based o Zero Trust.
 
-\subsubsection{\texorpdfstring{\textbf{1.4.3 Ipotesi sulla
+\subsection{\texorpdfstring{\textbf{Ipotesi sulla
 Compliance}}{1.4.3 Ipotesi sulla Compliance}}\label{ipotesi-sulla-compliance}
 
-\textbf{H3}: L'implementazione di un sistema di gestione della
-compliance basato su automazione e policy unificate, progettato secondo
-principi di compliance-by-design, permette di soddisfare simultaneamente
-i requisiti di PCI-DSS 4.0, GDPR e NIS2 con un overhead operativo
-inferiore al 10\% delle risorse IT, conseguendo una riduzione dei costi
-totali di conformità del 30-40\% rispetto a implementazioni separate per
-singolo standard.
+\textbf{Ipotesi H3}: L'implementazione di un sistema di gestione della compliance basato su automazione e regole unificate, progettato secondo principi di compliance-by-design, permette di soddisfare simultaneamente i requisiti di PCI-DSS 4.0, GDPR e NIS2 con un sovraccarico operativo inferiore al 10\% delle risorse IT, conseguendo una riduzione dei costi
+totali di conformità del 30-40\% rispetto a implementazioni separate per singolo standard.
 
 Questa riformulazione pone l'accento sul risultato tecnico
-dell'integrazione efficiente dei requisiti normativi, con il beneficio
-economico come metrica di validazione dell'efficacia. Le variabili
-chiave includono i costi di compliance in euro/anno, l'approccio
-implementativo classificato come siloed o integrated, e l'audit score su
-scala 0-100.
+dell'integrazione efficiente dei requisiti normativi, con il beneficio economico come metrica di validazione dell'efficacia. Le variabili chiave includono i costi di compliance in euro/anno, l'approccio implementativo classificato come siloed o integrated, e l'audit score su scala 0-100.
 
-\section{\texorpdfstring{\textbf{1.5 Metodologia della
+\section{\texorpdfstring{\textbf{Metodologia della
 Ricerca}}{1.5 Metodologia della Ricerca}}\label{metodologia-della-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.5.1 Approccio
+\subsection{\texorpdfstring{\textbf{Approccio
 Mixed-Methods}}{1.5.1 Approccio Mixed-Methods}}\label{approccio-mixed-methods}
 
-``La ricerca adotta un approccio mixed-methods che combina analisi della
-letteratura, modellazione matematica e \textbf{simulazioni basate su
-parametri derivati da fonti pubbliche verificabili}.
+La ricerca adotta un approccio mixed-methods che combina analisi della letteratura, modellazione matematica e \textbf{simulazioni basate su parametri derivati da fonti pubbliche verificabili}.
 
 \emph{Nota metodologica fondamentale}: Per ragioni di sicurezza
-aziendale e privacy, non è stato possibile raccogliere dati diretti da
-organizzazioni GDO. Pertanto, lo studio utilizza un approccio di
-\textbf{simulazione parametrica} dove:
+aziendale e privacy, non è stato possibile raccogliere dati diretti da organizzazioni GDO. Pertanto, lo studio utilizza un approccio di \textbf{simulazione parametrica} dove:
 
 \begin{itemize}
 \tightlist
@@ -490,28 +438,31 @@ garantisce:
   Trasparenza metodologica attraverso fonti verificabili''
 \end{enumerate}
 
-\subsubsection{\texorpdfstring{\textbf{1.5.2 Framework
+\subsection{\texorpdfstring{\textbf{Framework
 Analitico}}{1.5.2 Framework Analitico}}\label{framework-analitico}
 
-Il framework GIST (GDO Integrated Security Transformation) rappresenta
-il contributo metodologico centrale di questa ricerca. Il framework
-modella l'infrastruttura IT della GDO come un sistema complesso con
-molteplici dimensioni interagenti:
+Il framework \textbf{GIST (GDO Integrated Security Transformation)} rappresenta il contributo metodologico centrale di questa ricerca. 
+Il framework modella l'infrastruttura IT della GDO come un sistema complesso con molteplici dimensioni interagenti:
+\begin{equation}
+   GIST = f(Physical, Architectural, Security, Compliance) × ContextGDO 
+\end{equation}
 
-GIST = f(Physical, Architectural, Security, Compliance) × ContextGDO
-
-La componente Physical comprende l'infrastruttura di alimentazione
+\begin{itemize}
+\item 
+La componente \textbf{Physical} comprende l'infrastruttura di alimentazione
 elettrica, i sistemi di raffreddamento e la connettività di rete,
-elementi fondamentali per garantire l'operatività continua. La
-componente Architectural modella l'evoluzione dai sistemi legacy
-attraverso architetture ibride verso soluzioni cloud-native. La
-componente Security integra metriche di sicurezza perimetrale,
-implementazione Zero Trust e capacità di incident response. La
-componente Compliance quantifica l'aderenza a PCI-DSS, GDPR e NIS2
-considerando il fattore di integrazione che cattura le sinergie. Il
-ContextGDO rappresenta i fattori specifici del settore inclusi scala
+elementi fondamentali per garantire l'operatività continua.
+\item 
+La componente \textbf{Architectural} modella l'evoluzione dai sistemi legacy
+attraverso architetture ibride verso soluzioni cloud-native.
+\item
+La componente \textbf{Security} integra metriche di sicurezza perimetrale, implementazione Zero Trust e capacità di incident response.
+\item La componente \textbf{Compliance} quantifica l'aderenza a PCI-DSS, GDPR e NIS2 considerando il fattore di integrazione che cattura le sinergie. 
+\item 
+Il \textbf{ContextGDO} rappresenta i fattori specifici del settore inclusi scala
 operativa, distribuzione geografica, criticità del servizio e vincoli
 operativi.
+\end{itemize}
 % FIGURA 1.3: Decomposizione del Framework GIST
 \begin{figure}[htbp]
     \centering
@@ -520,20 +471,21 @@ operativi.
 \label{fig:gist_decomposition}
 \end{figure}
 
-\subsubsection{\texorpdfstring{\textbf{1.5.3 Raccolta e Analisi
+\subsection{\texorpdfstring{\textbf{Raccolta e Analisi
 Dati}}{1.5.3 Raccolta e Analisi Dati}}\label{raccolta-e-analisi-dati}
 
 Il processo di raccolta dati combina fonti multiple per garantire
 robustezza e validità dei risultati.
 
-I dati quantitativi includono metriche da sistemi SIEM (Security
-Information and Event Management) e SOC (Security Operations Center) con
+I dati quantitativi includono metriche da sistemi \textbf{SIEM (Security
+Information and Event Management)} e \textbf{SOC (Security Operations Center)} con
 oltre 50 milioni di eventi analizzati per identificare pattern e
 anomalie. I log infrastrutturali forniscono dati su utilizzo risorse,
-availability e performance per validare il mantenimento degli SLA. I
-dati finanziari comprendono Capital Expenditure (CAPEX), Operational
-Expenditure (OPEX) e costi diretti e indiretti degli incidenti di
-sicurezza. Gli audit score pre e post implementazione per ogni normativa
+availability e performance per validare il mantenimento degli SLA. 
+I dati finanziari comprendono \textbf{Capital Expenditure (CAPEX), Operational
+Expenditure (OPEX)} e costi diretti e indiretti degli incidenti di
+sicurezza. 
+Gli audit score pre e post implementazione per ogni normativa
 permettono di quantificare l'efficacia delle strategie di compliance.
 
 L'analisi statistica utilizza metodologie rigorose appropriate per la
@@ -545,36 +497,20 @@ applicata per confronti tra gruppi multipli quando si comparano diverse
 strategie architetturali. Il livello di significatività α = 0.05 è
 mantenuto consistentemente per tutti i test statistici.
 
-\section{\texorpdfstring{\textbf{1.6 Delimitazioni e
+\section{\texorpdfstring{\textbf{Delimitazioni e
 Limitazioni}}{1.6 Delimitazioni e Limitazioni}}\label{delimitazioni-e-limitazioni}
 
-\subsubsection{\texorpdfstring{\textbf{1.6.1 Delimitazioni
+\subsection{\texorpdfstring{\textbf{Delimitazioni
 (Scope)}}{1.6.1 Delimitazioni (Scope)}}\label{delimitazioni-scope}
 
-La ricerca si focalizza specificamente su organizzazioni GDO italiane
-con caratteristiche ben definite per garantire omogeneità del campione e
-applicabilità dei risultati.
+La ricerca si focalizza specificamente su organizzazioni GDO italiane con caratteristiche ben definite per garantire omogeneità del campione e applicabilità dei risultati.
 
-L'ambito include organizzazioni con un numero di punti vendita compreso
-tra 50 e 500, dimensione che rappresenta la fascia media-grande del
-mercato italiano dove le sfide di complessità sistemica diventano
-significative ma gestibili. Il fatturato annuo tra €100M e €2B
-identifica organizzazioni con risorse sufficienti per investimenti
-infrastrutturali significativi ma che devono ancora ottimizzare i costi.
-Il focus su infrastrutture IT mission-critical esclude sistemi secondari
-o sperimentali per concentrarsi su componenti che impattano direttamente
-l'operatività aziendale. Il periodo di osservazione 2022-2024 cattura le
-trasformazioni più recenti includendo l'impatto di normative aggiornate
-come PCI-DSS 4.0.
+L'ambito include organizzazioni con un numero di punti vendita compreso tra 50 e 500, dimensione che rappresenta la fascia media-grande del mercato italiano dove le sfide di complessità sistemica diventano significative ma gestibili. Il fatturato annuo tra €100M e €2B identifica organizzazioni con risorse sufficienti per investimenti infrastrutturali significativi ma che devono ancora ottimizzare i costi.
+Il focus su infrastrutture IT mission-critical esclude sistemi secondario sperimentali per concentrarsi su componenti che impattano direttamente l'operatività aziendale. Il periodo di osservazione 2022-2024 cattura le trasformazioni più recenti includendo l'impatto di normative aggiornate come PCI-DSS 4.0.
 
-L'ambito esclude deliberatamente e-commerce puro per mantenere il focus
-sulla complessità delle operazioni fisiche distribuite, micro-retail con
-meno di 50 negozi dove le economie di scala non giustificano
-architetture complesse, settori non-food che presentano dinamiche
-operative significativamente diverse, e mercati non-EU dove il framework
-normativo differisce sostanzialmente.
+L'ambito esclude deliberatamente e-commerce puro per mantenere il focus sulla complessità delle operazioni fisiche distribuite, micro-retail con meno di 50 negozi dove le economie di scala non giustificano architetture complesse, settori non-food che presentano dinamiche operative significativamente diverse, e mercati non-EU dove la piattaforma normativa differisce sostanzialmente.
 
-\subsubsection{\texorpdfstring{\textbf{1.6.2
+\subsubsection{\texorpdfstring{\textbf{
 Limitazioni}}{1.6.2 Limitazioni}}\label{limitazioni}
 
 La ricerca riconosce quattro limitazioni principali che devono essere
