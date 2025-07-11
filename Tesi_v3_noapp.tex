@@ -78,7 +78,7 @@
 \renewcommand{\thefootnote}{(\arabic{footnote})}
 
 % FORMATO NOTE: Arial 10pt, rientro 0,6cm, interlinea singola
-\renewcommand{\footnotesize}{\fontsize{10pt}{10pt}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
 \renewcommand{\footnoterule}{\kern-3pt\hrule width 0.4\columnwidth \kern 2.6pt}
 
 % Configurazione layout note
@@ -123,16 +123,15 @@
     {}
 
 % HYPERLINKS (devono essere dopo altri pacchetti)
-\usepackage[
+\hypersetup{
     colorlinks=false,
     pdfborder={0 0 0},
-]{hyperref}
+}
 % ==========================================
 % COMANDI PERSONALIZZATI PER CITAZIONI
 % ==========================================
 % Comando per autori in maiuscoletto (REGOLA UNIVERSITÀ)
 \newcommand{\autore}[1]{\textsc{#1}}
-
 % Comando per citazione libro secondo formato università
 % Uso: \citlibro{F. FORTUNA}{Corporate Governance}{Milano}{F.Angeli}{2001}{16-20}
 \newcommand{\citlibro}[6]{%
