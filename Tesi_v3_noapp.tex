@@ -30,8 +30,9 @@
 \usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{standalone}
+
 \graphicspath{{figure/}}
-% Imposta la profondità di numerazione fino a subsubsection (livello 3)
+% Imposta la profondità di numerazione fino a subsection (livello 2)
 \setcounter{secnumdepth}{3}
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
 % !TEX program = xelatex
@@ -168,7 +169,7 @@
     pdfsubject={Tesi di Laurea in Ingegneria Informatica},
     pdfkeywords={ingegneria informatica, tesi, università},
 }
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{2}
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.17}
 \usetikzlibrary{pgfplots.polar}
@@ -183,6 +184,10 @@
 \definecolor{gdogrigio}{RGB}{128,128,128}
 \definecolor{gdovioletto}{RGB}{128,0,128}
 %\geometry{margin=2cm}
+%Definizione stile caption
+\numberwithin{figure}{chapter} % Numera le figure per capitolo
+\numberwithin{table}{chapter}  % Numera le tabelle per capitolo
+\captionsetup{font=small}
 % ==========================================
 % INIZIO DOCUMENTO
 % ==========================================
@@ -286,14 +291,14 @@ Moderna}}{1.1.1 La Complessità Sistemica della GDO Moderna}}\label{la-complessi
 Il settore della Grande Distribuzione Organizzata in Italia gestisce
 un'infrastruttura tecnologica di complessità paragonabile a quella di
 operatori di telecomunicazioni o servizi finanziari; con 27.432 punti
-vendita attivi¹, 45 milioni di transazioni giornaliere e requisiti di
+vendita attivi$^1$, 45 milioni di transazioni giornaliere e requisiti di
 disponibilità superiori al 99.9\%, la GDO rappresenta un caso di studio
 unico per l'ingegneria dei sistemi distribuiti mission-critical.
 
 L'infrastruttura IT della GDO moderna deve garantire simultaneamente
 continuità operativa H24 in ambienti fisicamente distribuiti, processare
 volumi transazionali con picchi del 300-500\% durante eventi
-promozionali², proteggere dati sensibili di pagamento e personali sotto
+promozionali $^2$, proteggere dati sensibili di pagamento e personali sotto
 multiple normative, integrare sistemi legacy con tecnologie
 cloud-native, e gestire la convergenza tra \textbf{Information Technology (IT)} e
 \textbf{Operational Technology (OT)}.
@@ -319,7 +324,7 @@ architetturali tradizionali.
 
 - Il primo trend riguarda \textbf{la trasformazione infrastrutturale}:
 il passaggio da data center tradizionali ad architetture cloud-ibride,
-documentato nel report di settore del 2024³, indica che il 67\% delle
+documentato nel report di settore del 2024$^3$, indica che il 67\% delle
 organizzazioni GDO europee ha iniziato processi di migrazione verso
 modelli cloud-first.
 
@@ -329,7 +334,7 @@ operativi, delle strategie di sicurezza, e dei processi di governance.
 
 - Il secondo trend concerne \textbf{l'evoluzione delle minacce
 informatiche}: l'incremento del 312\% negli attacchi ai sistemi retail
-tra il 2021 e il 2023⁴ e l'emergere di attacchi cyber-fisici che possono
+tra il 2021 e il 2023$^4$ e l'emergere di attacchi cyber-fisici che possono
 compromettere sistemi OT come refrigerazione e \textbf{HVAC (Heating,
 Ventilation, and Air Conditioning)} richiedono un ripensamento radicale
 delle strategie di sicurezza.
@@ -347,7 +352,7 @@ Information Security 2 (NIS2)} creano un panorama normativo che richiede
 approcci integrati alla compliance.
 
 I costi di conformità per approcci tradizionali sono stimati nel 2-3\%
-del fatturato⁵, rendendo essenziale lo sviluppo di strategie più
+del fatturato$^5$, rendendo essenziale lo sviluppo di strategie più
 efficienti.
 
 \subsection{\texorpdfstring{\textbf{Il Gap tra Teoria e
@@ -359,8 +364,8 @@ settore GDO; queste lacune rappresentano opportunità per contributi
 originali che possano colmare il divario tra teoria e pratica, come la nostra ricerca si prefigge di fare.
 
 La prima lacuna riguarda la mancanza di \textbf{approcci olistici}; gli studi
-esistenti tendono a trattare separatamente \textbf{l'infrastruttura fisica}⁶, \textbf{la
-sicurezza cloud}⁷, e \textbf{la compliance normativa}⁸, senza considerare le
+esistenti tendono a trattare separatamente \textbf{l'infrastruttura fisica}$^6$, \textbf{la
+sicurezza cloud}$^7$, e \textbf{la compliance normativa}$^8$, senza considerare le
 complesse interdipendenze sistemiche che caratterizzano gli ambienti GDO
 reali.
 
@@ -376,12 +381,12 @@ specificamente calibrati per il settore retail e validati attraverso
 implementazioni reali.
 
 La terza lacuna riguarda la limitata considerazione dei \textbf{vincoli
-operativi specifici della GDO}; le ricerche su \textbf{Zero Trust}⁹ o
-\textbf{cloud migration}¹⁰ sono spesso sviluppate in contesti enterprise
+operativi specifici della GDO}; le ricerche su \textbf{Zero Trust}$^9$ o
+\textbf{cloud migration}$^{10}$ sono spesso sviluppate in contesti enterprise
 generici che non considerano vincoli critici come la continuità
 operativa H24, la gestione di personale con competenze tecniche
 limitate, o la necessità di mantenere performance transazionali elevate
-durante picchi di carico estremi, sottovaluando le criticità reali.
+durante picchi di carico estremi, sottovalutando le criticità reali.
 
 % FIGURA 1.1: Gap tra Ricerca e Implementazione
 \begin{figure}[htbp]
@@ -394,8 +399,7 @@ durante picchi di carico estremi, sottovaluando le criticità reali.
 \section{\texorpdfstring{\textbf{Definizione del Problema di
 Ricerca}}{1.2 Definizione del Problema di Ricerca}}\label{definizione-del-problema-di-ricerca}
 
-\subsection{\texorpdfstring{\textbf{Problema
-Principale}}{1.2.1 Problema Principale}}\label{problema-principale}
+\subsection{\texorpdfstring{\textbf{Problema Principale}}{1.2.1 Problema Principale}}\label{problema-principale}
 
 Come progettare e implementare un'infrastruttura IT per la Grande
 Distribuzione Organizzata che bilanci in maniera ottimale sicurezza,
@@ -423,7 +427,7 @@ guasti o picchi di traffico imprevisti.
 - La \emph{dimensione della sicurezza} rappresenta una sfida continua,
 data la natura dinamica e in continua evoluzione delle minacce
 informatiche; è imperativo implementare strategie di protezione robuste
-e proattive, capaci di difendere i sistemi da attacchi sempre più
+e pro attive, capaci di difendere i sistemi da attacchi sempre più
 sofisticati e diversificati.\\
 Allo stesso tempo, è fondamentale che queste misure di sicurezza non
 compromettano l'usabilità del sistema per gli operatori; questo implica
@@ -627,7 +631,7 @@ garantisce:
 \item
   Assenza di rischi di violazione della confidenzialità\\
 \item
-  Trasparenza metodologica attraverso fonti verificabili''
+  Trasparenza metodologica attraverso fonti verificabili
 \end{enumerate}
 
 \subsection{\texorpdfstring{\textbf{Framework
@@ -702,7 +706,7 @@ Il focus su infrastrutture IT mission-critical esclude sistemi secondario sperim
 
 L'ambito esclude deliberatamente e-commerce puro per mantenere il focus sulla complessità delle operazioni fisiche distribuite, micro-retail con meno di 50 negozi dove le economie di scala non giustificano architetture complesse, settori non-food che presentano dinamiche operative significativamente diverse, e mercati non-EU dove la piattaforma normativa differisce sostanzialmente.
 
-\subsubsection{\texorpdfstring{\textbf{
+\subsection{\texorpdfstring{\textbf{
 Limitazioni}}{1.6.2 Limitazioni}}\label{limitazioni}
 
 La ricerca riconosce quattro limitazioni principali che devono essere
@@ -711,8 +715,7 @@ considerate nell'interpretazione dei risultati.
 La generalizzabilità dei risultati è limitata al contesto italiano ed
 europeo. Le specificità normative, culturali e di mercato potrebbero
 richiedere adattamenti significativi per l'applicazione in altri
-contesti geografici, particolarmente in mercati con framework normativi
-o maturità tecnologica differenti.
+contesti geografici, particolarmente in mercati con framework normativi o maturità tecnologica differenti.
 
 L'orizzonte temporale di 24 mesi, pur essendo significativo per valutare
 l'impatto immediato delle trasformazioni, potrebbe non catturare tutti i
@@ -733,7 +736,7 @@ aggiornamenti nel tempo. Tuttavia, i principi architetturali e
 metodologici identificati sono progettati per rimanere validi anche con
 l'evoluzione delle tecnologie specifiche.
 
-\section{\texorpdfstring{\textbf{1.7 Struttura della
+\section{\texorpdfstring{\textbf{Struttura della
 Tesi}}{1.7 Struttura della Tesi}}\label{struttura-della-tesi}
 
 La tesi si articola in cinque capitoli principali oltre
@@ -770,22 +773,18 @@ il framework GIST nella sua forma completa e validata, fornisce una
 roadmap implementativa dettagliata per organizzazioni che intendono
 intraprendere la trasformazione, e identifica direzioni per ricerca
 futura nel dominio.
-
-{[}FIGURA 1.4: Struttura della Tesi e Interdipendenze tra Capitoli -
-Inserire qui{]}
-
 % FIGURA 1.4: Struttura della Tesi e Interdipendenze tra Capitoli
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{figura 1-4}
+    \includegraphics[width=0.9\textwidth]{figure/figura 1-4.pdf}
 \caption{Struttura della tesi e interdipendenze tra capitoli. Il Framework GIST emerge progressivamente attraverso l'integrazione dei contributi specifici di ciascun capitolo.}
 \label{fig:struttura_tesi}
 \end{figure}
 
-\section{\texorpdfstring{\textbf{1.8 Rilevanza della
+\section{\texorpdfstring{\textbf{Rilevanza della
 Ricerca}}{1.8 Rilevanza della Ricerca}}\label{rilevanza-della-ricerca}
 
-\subsubsection{\texorpdfstring{\textbf{1.8.1 Rilevanza
+\subsection{\texorpdfstring{\textbf{Rilevanza
 Accademica}}{1.8.1 Rilevanza Accademica}}\label{rilevanza-accademica}
 
 La ricerca contribuisce significativamente all'avanzamento delle
@@ -813,7 +812,7 @@ permettono valutazioni oggettive dell'impatto di diverse scelte
 architetturali, fornendo una base scientifica per decisioni
 tradizionalmente basate su intuizione o esperienza.
 
-\subsubsection{\texorpdfstring{\textbf{1.8.2 Rilevanza
+\subsection{\texorpdfstring{\textbf{Rilevanza
 Pratica}}{1.8.2 Rilevanza Pratica}}\label{rilevanza-pratica}
 
 L'impatto pratico della ricerca si manifesta in tre dimensioni
@@ -838,7 +837,7 @@ dimostrazione che approcci integrati possono ridurre i costi del 30-40\%
 mantenendo o migliorando l'efficacia fornisce una forte motivazione
 economica per il cambiamento.
 
-\subsubsection{\texorpdfstring{\textbf{1.8.3 Impatto
+\subsection{\texorpdfstring{\textbf{Impatto
 Sociale}}{1.8.3 Impatto Sociale}}\label{impatto-sociale}
 
 Oltre agli aspetti tecnici ed economici, la ricerca ha implicazioni
@@ -864,9 +863,6 @@ raffreddamento e della gestione energetica dei data center distribuiti,
 contribuiscono alla riduzione dell'impronta carbonica del settore
 retail, allineandosi con obiettivi di sostenibilità ambientale sempre
 più stringenti.
-
-{[}FIGURA 1.5: Impatto Multidimensionale della Ricerca - Inserire qui{]}
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figura 1-5}
@@ -875,45 +871,45 @@ più stringenti.
 \end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
+\newpage
 \section{\texorpdfstring{\textbf{Note}}{Note}}\label{note}
 
-¹ ISTAT, Struttura e competitività del sistema delle imprese - Commercio
+$^1$ ISTAT, Struttura e competitività del sistema delle imprese - Commercio
 al dettaglio, Roma, Istituto Nazionale di Statistica, 2024.
 
-² Osservatorio Retail, Il digitale nel Retail italiano: infrastrutture e
+$^2$ Osservatorio Retail, Il digitale nel Retail italiano: infrastrutture e
 trasformazione, Milano, Politecnico di Milano, 2024.
 
-³ Gartner, Market Guide for Retail IT Infrastructure Modernization,
+$^3$ Gartner, Market Guide for Retail IT Infrastructure Modernization,
 Gartner Research Report G00789234, 2024.
 
-⁴ ENISA, Threat Landscape for Retail and Supply Chain 2024, Heraklion,
+$^4$ ENISA, Threat Landscape for Retail and Supply Chain 2024, Heraklion,
 European Union Agency for Cybersecurity, 2024.
 
-⁵ Ponemon Institute, Cost of Compliance Report 2024: Retail Sector
+$^5$ Ponemon Institute, Cost of Compliance Report 2024: Retail Sector
 Analysis, Traverse City, Ponemon Institute Research Report, 2024.
 
-⁶ Wang H., Li J., Zhang Y., ``Energy efficiency in distributed data
+$^6$ Wang H., Li J., Zhang Y., ``Energy efficiency in distributed data
 centers'', IEEE Transactions on Sustainable Computing, Vol. 8, No.~2,
 2023, pp.~234-247.
 
-⁷ Martinez C., Silva D., ``Security considerations in hybrid cloud
+$^7$ Martinez C., Silva D., ``Security considerations in hybrid cloud
 architectures'', IEEE Security \& Privacy, Vol. 22, No.~1, 2024,
 pp.~45-58.
 
-⁸ Kumar A., Patel S., Sharma R., ``Compliance automation in
+$^8$ Kumar A., Patel S., Sharma R., ``Compliance automation in
 multi-standard environments'', Journal of Information Security and
 Applications, Vol. 71, 2023, p.~103382.
 
-⁹ Chen L., Wang K., Liu J., ``Zero Trust implementation patterns in
+$^9$ Chen L., Wang K., Liu J., ``Zero Trust implementation patterns in
 distributed systems'', IEEE Transactions on Dependable and Secure
 Computing, Vol. 20, No.~4, 2023, pp.~1823-1837.
 
-¹⁰ Davis M., Thompson R., ``Cloud migration strategies for
+$^{10}$ Davis M., Thompson R., ``Cloud migration strategies for
 mission-critical systems'', ACM Computing Surveys, Vol. 56, No.~1, 2024,
 Article 23.
 
-¹¹ McKinsey \& Company. Why do most transformations fail? A conversation
+$^{11}$ McKinsey \& Company. Why do most transformations fail? A conversation
 with Harry Robinson, McKinsey Global Institute (2023).
 
 \chapter{Capitolo 2 - Threat Landscape e Sicurezza Distribuita nella
@@ -962,11 +958,9 @@ La natura distribuita delle operazioni GDO introduce complessità
 sistemiche che amplificano la superficie di attacco rispetto ad
 architetture centralizzate equivalenti. La ricerca di Chen e Zhang¹ ha
 sviluppato un modello matematico per quantificare questa amplificazione:
-
-\begin{verbatim}
+\begin{equation}
 SAD = N × (C + A + Au)
-\end{verbatim}
-
+\end{equation}
 dove SAD rappresenta la Superficie di Attacco Distribuita, N il numero
 di punti vendita, C il fattore di connettività, A il fattore di
 accessibilità, e Au il fattore di autonomia operativa. L'analisi
@@ -983,7 +977,7 @@ risultato ha implicazioni dirette per la progettazione di architetture
 di sicurezza, richiedendo approcci che considerino esplicitamente la
 natura distribuita del sistema.
 
-\subsubsection{2.2.2 Analisi dei Fattori di Vulnerabilità
+\subsection{2.2.2 Analisi dei Fattori di Vulnerabilità
 Specifici}\label{analisi-dei-fattori-di-vulnerabilituxe0-specifici}
 
 L'analisi fattoriale condotta su 847 incidenti con root cause
@@ -1024,7 +1018,7 @@ O(n²) dove n rappresenta il numero di tecnologie diverse.
     \label{fig:vulnerabilita_gdo}
 \end{figure}
 
-\subsubsection{2.2.3 Il Fattore Umano come Moltiplicatore di
+\subsection{2.2.3 Il Fattore Umano come Moltiplicatore di
 Rischio}\label{il-fattore-umano-come-moltiplicatore-di-rischio}
 
 L'analisi del contributo del fattore umano agli incidenti di sicurezza
@@ -1057,7 +1051,7 @@ la dipendenza da comportamenti umani corretti.
 \section{2.3 Anatomia degli Attacchi: Analisi Tecnica e Pattern
 Evolutivi}\label{anatomia-degli-attacchi-analisi-tecnica-e-pattern-evolutivi}
 
-\subsubsection{2.3.1 Vulnerabilità dei Sistemi POS: Analisi
+\subsection{2.3.1 Vulnerabilità dei Sistemi POS: Analisi
 Temporale}\label{vulnerabilituxe0-dei-sistemi-pos-analisi-temporale}
 
 I sistemi Point of Sale rappresentano il target primario degli attacchi
@@ -1089,7 +1083,7 @@ opportunità di attacco ogni 115 millisecondi. Questa frequenza rende
 l'automazione degli attacchi non solo possibile ma necessaria per gli
 attaccanti.
 
-\subsubsection{2.3.2 Evoluzione delle Tecniche di
+\subsection{2.3.2 Evoluzione delle Tecniche di
 Attacco}\label{evoluzione-delle-tecniche-di-attacco}
 
 L'analisi longitudinale delle tecniche di attacco ai sistemi POS rivela
@@ -1128,7 +1122,7 @@ chip. Durante la successiva elaborazione chip, che presenta maggiori
 vulnerabilità, il malware cattura i dati con un tasso di successo del
 94\%.
 
-\subsubsection{2.3.3 Modellazione della Propagazione negli Ambienti
+\subsection{2.3.3 Modellazione della Propagazione negli Ambienti
 Distribuiti}\label{modellazione-della-propagazione-negli-ambienti-distribuiti}
 
 La propagazione di malware attraverso reti GDO distribuite segue
@@ -1178,7 +1172,7 @@ alla sofisticazione degli strumenti di detection.
 
 
 
-\subsubsection{2.3.4 Supply Chain Attacks: Quantificazione del Rischio
+\subsection{2.3.4 Supply Chain Attacks: Quantificazione del Rischio
 Sistemico}\label{supply-chain-attacks-quantificazione-del-rischio-sistemico}
 
 Gli attacchi alla supply chain rappresentano una categoria di minacce in
@@ -1217,7 +1211,7 @@ come strategia di mitigazione del rischio sistemico.
 delle
 Minacce}\label{limpatto-dellintelligenza-artificiale-sul-panorama-delle-minacce}
 
-\subsubsection{2.4.1 Quantificazione dell'Amplificazione
+\subsection{2.4.1 Quantificazione dell'Amplificazione
 AI-Driven}\label{quantificazione-dellamplificazione-ai-driven}
 
 L'adozione di tecnologie di Intelligenza Artificiale (AI) generativa da
@@ -1249,7 +1243,7 @@ costi-benefici per gli attaccanti mostra un ROI (Return on Investment)
 del 847\% per campagne AI-enhanced contro il 234\% delle campagne
 tradizionali.
 
-\subsubsection{2.4.2 Pattern Stagionali e Prevedibilità degli
+\subsection{2.4.2 Pattern Stagionali e Prevedibilità degli
 Attacchi}\label{pattern-stagionali-e-prevedibilituxe0-degli-attacchi}
 
 L'analisi delle serie temporali di 5 anni di dati (2020-2024) rivela
@@ -1287,7 +1281,7 @@ Inserire qui{]}
 \section{2.5 Framework per la Validazione delle Ipotesi di
 Ricerca}\label{framework-per-la-validazione-delle-ipotesi-di-ricerca}
 
-\subsubsection{2.5.1 Evidenze dalla Letteratura per l'Ipotesi H1:
+\subsection{2.5.1 Evidenze dalla Letteratura per l'Ipotesi H1:
 Architetture
 Cloud-Ibride}\label{evidenze-dalla-letteratura-per-lipotesi-h1-architetture-cloud-ibride}
 
@@ -1340,7 +1334,7 @@ intende verificare se risultati simili possano essere replicati nel
 contesto specifico della GDO italiana attraverso l'analisi longitudinale
 di 15 organizzazioni.
 
-\subsubsection{2.5.2 Analisi Preliminare e Target per l'Ipotesi H2: Zero
+\subsection{2.5.2 Analisi Preliminare e Target per l'Ipotesi H2: Zero
 Trust}\label{analisi-preliminare-e-target-per-lipotesi-h2-zero-trust}
 
 L'ipotesi H2 sulla riduzione della superficie di attacco attraverso Zero
@@ -1372,7 +1366,7 @@ Appendice A. I valori preliminari sono utilizzati per calibrare gli
 strumenti di misurazione e validare la fattibilità del design
 sperimentale.}
 
-\subsubsection{2.5.3 Proiezioni e Benchmark per l'Ipotesi H3: Compliance
+\subsection{2.5.3 Proiezioni e Benchmark per l'Ipotesi H3: Compliance
 Integrata}\label{proiezioni-e-benchmark-per-lipotesi-h3-compliance-integrata}
 
 La validazione dell'ipotesi H3 sui benefici economici della compliance
@@ -1422,7 +1416,7 @@ Integrati - Inserire qui{]}
 \section{2.6 Framework di Prioritizzazione per
 l'Implementazione}\label{framework-di-prioritizzazione-per-limplementazione}
 
-\subsubsection{2.6.1 Modello di Ottimizzazione
+\subsection{2.6.1 Modello di Ottimizzazione
 Multi-Obiettivo}\label{modello-di-ottimizzazione-multi-obiettivo}
 
 Basandosi sui benchmark identificati nella letteratura e sui dati
@@ -1449,7 +1443,7 @@ attraverso l'analisi empirica delle 15 organizzazioni del campione di
 ricerca. I valori presentati di seguito rappresentano proiezioni basate
 sui benchmark di letteratura.}
 
-\subsubsection{2.6.2 Roadmap Implementativa
+\subsection{2.6.2 Roadmap Implementativa
 Proposta}\label{roadmap-implementativa-proposta}
 
 L'applicazione preliminare del modello a parametri derivati dalla
@@ -1597,7 +1591,7 @@ Intelligente}\label{capitolo-3---evoluzione-infrastrutturale-dalle-fondamenta-fi
 \section{3.1 Introduzione e Framework
 Teorico}\label{introduzione-e-framework-teorico}
 
-\subsubsection{3.1.1 Posizionamento nel Contesto della
+\subsection{3.1.1 Posizionamento nel Contesto della
 Ricerca}\label{posizionamento-nel-contesto-della-ricerca}
 
 L'analisi del threat landscape condotta nel Capitolo 2 ha evidenziato
@@ -1634,21 +1628,20 @@ analisi preliminare su 3 organizzazioni del campione di ricerca
 attraverso lo studio longitudinale di 15 organizzazioni descritto nel
 Capitolo 1.}
 
-\subsubsection{3.1.2 Modello Teorico dell'Evoluzione
+\subsection{3.1.2 Modello Teorico dell'Evoluzione
 Infrastrutturale}\label{modello-teorico-dellevoluzione-infrastrutturale}
 
 L'evoluzione infrastrutturale nella GDO può essere modellata attraverso
 una funzione di transizione che considera vincoli operativi, driver
 economici e requisiti normativi:
 
-\begin{verbatim}
-E(t) = α·I(t-1) + β·T(t) + γ·C(t) + δ·R(t) + ε
-\end{verbatim}
+\begin{equation}
+E(t) = \alpha·I(t-1) + \beta·T(t) + \gamma·C(t) + \delta·R(t) + \epsilon
+\end{equation}
 
 dove: - E(t) = Stato evolutivo al tempo t - I(t-1) = Infrastruttura
 legacy (path dependency) - T(t) = Pressione tecnologica (innovation
-driver) - C(t) = Vincoli di compliance - R(t) = Requisiti di resilienza
-- α, β, γ, δ = Coefficienti di peso calibrati empiricamente - ε =
+driver) - C(t) = Vincoli di compliance - R(t) = Requisiti di resilienza - $\alpha$, $\beta$, $\gamma$, $\delta$ = Coefficienti di peso calibrati empiricamente - $\epsilon$ =
 Termine di errore stocastico
 
 L'analisi di regressione su dati aggregati da 156 organizzazioni retail
@@ -1660,7 +1653,7 @@ modello.
 \section{3.2 Infrastruttura Fisica: Quantificazione della Criticità
 Foundational}\label{infrastruttura-fisica-quantificazione-della-criticituxe0-foundational}
 
-\subsubsection{3.2.1 Modellazione dell'Affidabilità dei Sistemi di
+\subsection{3.2.1 Modellazione dell'Affidabilità dei Sistemi di
 Alimentazione}\label{modellazione-dellaffidabilituxe0-dei-sistemi-di-alimentazione}
 
 L'affidabilità dell'infrastruttura di alimentazione rappresenta il
@@ -1697,7 +1690,7 @@ ottiene con configurazioni N+1 per siti \textless1000m² e N+2 per siti
 {[}TABELLA 3.1: Analisi Costo-Beneficio Ridondanza Alimentazione per
 Classe Dimensionale - Inserire qui{]}
 
-\subsubsection{3.2.2 Ottimizzazione Termica attraverso Computational
+\subsection{3.2.2 Ottimizzazione Termica attraverso Computational
 Fluid
 Dynamics}\label{ottimizzazione-termica-attraverso-computational-fluid-dynamics}
 
@@ -1725,7 +1718,7 @@ basata su 2.4 milioni di datapoint raccolti⁷, dimostra riduzioni del
 consumo energetico del 18.7\% mantenendo temperature entro ±1°C dai
 target ASHRAE.
 
-\subsubsection{3.2.3 Quantificazione dell'Impatto sulla Validazione
+\subsection{3.2.3 Quantificazione dell'Impatto sulla Validazione
 H1}\label{quantificazione-dellimpatto-sulla-validazione-h1}
 
 I miglioramenti nell'infrastruttura fisica contribuiscono direttamente
@@ -1747,7 +1740,7 @@ Miglioramento Availability - Inserire qui{]}
 dei
 Benefici}\label{architetture-di-rete-software-defined-quantificazione-dei-benefici}
 
-\subsubsection{3.3.1 SD-WAN: Modellazione delle Performance e
+\subsection{3.3.1 SD-WAN: Modellazione delle Performance e
 Resilienza}\label{sd-wan-modellazione-delle-performance-e-resilienza}
 
 L'implementazione SD-WAN nella GDO può essere modellata come un problema
@@ -1778,7 +1771,7 @@ Implementazioni SD-WAN mostrano η=0.78±0.06 contro η=0.51±0.09 per WAN
 tradizionali¹¹, indicando un miglioramento del 53\% nell'utilizzo
 efficace della banda disponibile.
 
-\subsubsection{3.3.2 Edge Computing: Analisi Quantitativa della
+\subsection{3.3.2 Edge Computing: Analisi Quantitativa della
 Distribuzione
 Computazionale}\label{edge-computing-analisi-quantitativa-della-distribuzione-computazionale}
 
@@ -1803,7 +1796,7 @@ Riduzione traffico WAN: 67.8\% per workload analitici
 includendo processing time, network latency e queueing delays. Le
 misurazioni utilizzano il 95° percentile per escludere outlier.}
 
-\subsubsection{3.3.3 Contributo alla Validazione H2: Riduzione della
+\subsection{3.3.3 Contributo alla Validazione H2: Riduzione della
 Superficie di
 Attacco}\label{contributo-alla-validazione-h2-riduzione-della-superficie-di-attacco}
 
@@ -1831,7 +1824,7 @@ Architetturale - Inserire qui{]}
 \section{3.4 Migrazione Cloud: Analisi Economica e
 Operativa}\label{migrazione-cloud-analisi-economica-e-operativa}
 
-\subsubsection{3.4.1 Modellazione TCO per Strategie di Migrazione
+\subsection{3.4.1 Modellazione TCO per Strategie di Migrazione
 Alternative}\label{modellazione-tco-per-strategie-di-migrazione-alternative}
 
 Il Total Cost of Ownership per diverse strategie di migrazione cloud
@@ -1864,7 +1857,7 @@ applicazione media - OPEX reduction: 58.9\% ± 6.7\% - Time to migration:
 {[}TABELLA 3.2: Analisi Comparativa TCO per Strategia di Migrazione - 5
 Year NPV - Inserire qui{]}
 
-\subsubsection{3.4.2 Ottimizzazione del Portfolio di
+\subsection{3.4.2 Ottimizzazione del Portfolio di
 Migrazione}\label{ottimizzazione-del-portfolio-di-migrazione}
 
 La selezione ottimale delle applicazioni e strategie di migrazione può
@@ -1884,7 +1877,7 @@ tipici GDO (150-200 applicazioni) identifica soluzioni che: -
 Massimizzano NPV del 34.7\% rispetto a approcci uniformi - Riducono il
 rischio complessivo del 41.2\% - Completano la migrazione 5.3 mesi prima
 
-\subsubsection{3.4.3 Validazione Empirica dell'Ipotesi
+\subsection{3.4.3 Validazione Empirica dell'Ipotesi
 H1}\label{validazione-empirica-dellipotesi-h1}
 
 I dati raccolti forniscono forte evidenza per la validazione
@@ -1912,7 +1905,7 @@ Inserire qui{]}
 \section{3.5 Architetture Multi-Cloud: Resilienza attraverso
 Diversificazione}\label{architetture-multi-cloud-resilienza-attraverso-diversificazione}
 
-\subsubsection{3.5.1 Teoria del Portfolio Applicata al Cloud
+\subsection{3.5.1 Teoria del Portfolio Applicata al Cloud
 Computing}\label{teoria-del-portfolio-applicata-al-cloud-computing}
 
 L'approccio multi-cloud può essere analizzato attraverso la Modern
@@ -1934,7 +1927,7 @@ Questi bassi coefficienti di correlazione indicano che strategie
 multi-cloud possono ridurre significativamente il rischio di
 unavailability totale.
 
-\subsubsection{3.5.2 Quantificazione dei Costi e Benefici del
+\subsection{3.5.2 Quantificazione dei Costi e Benefici del
 Multi-Cloud}\label{quantificazione-dei-costi-e-benefici-del-multi-cloud}
 
 L'implementazione multi-cloud introduce overhead operativo
@@ -1952,7 +1945,7 @@ Tuttavia, i benefici in termini di resilienza e ottimizzazione dei costi
 compensano l'overhead per N\_providers ≤ 3, con optimal configuration a
 2 provider per la maggior parte delle organizzazioni GDO.
 
-\subsubsection{3.5.3 Impatto sulla Compliance
+\subsection{3.5.3 Impatto sulla Compliance
 (H3)}\label{impatto-sulla-compliance-h3}
 
 Le architetture multi-cloud contribuiscono alla validazione dell'ipotesi
@@ -1978,7 +1971,7 @@ multi-cloud mature rispetto a single-cloud deployments.
 \section{3.6 Framework di Implementazione: Dalla Teoria alla
 Pratica}\label{framework-di-implementazione-dalla-teoria-alla-pratica}
 
-\subsubsection{3.6.1 Modello di Maturità
+\subsection{3.6.1 Modello di Maturità
 Quantitativo}\label{modello-di-maturituxe0-quantitativo}
 
 Il livello di maturità infrastrutturale può essere quantificato
@@ -2001,7 +1994,7 @@ distribuzione: - Livello 1 (M\textless20): 12.3\% delle organizzazioni -
 Livello 2 (20≤M\textless40): 34.5\% - Livello 3 (40≤M\textless60):
 31.2\% - Livello 4 (60≤M\textless80): 18.4\% - Livello 5 (M≥80): 3.6\%
 
-\subsubsection{3.6.2 Roadmap Ottimizzata: Sequenziamento degli
+\subsection{3.6.2 Roadmap Ottimizzata: Sequenziamento degli
 Interventi}\label{roadmap-ottimizzata-sequenziamento-degli-interventi}
 
 L'ottimizzazione della sequenza di implementazione utilizza algoritmi di
@@ -2029,7 +2022,7 @@ implementation (ROI: 16 mesi)
 (ROI: 24 mesi) - AI/ML integration (ROI: 20 mesi) - Compliance
 automation (ROI: 18 mesi)
 
-\subsubsection{3.6.3 Gestione del Rischio
+\subsection{3.6.3 Gestione del Rischio
 Quantitativa}\label{gestione-del-rischio-quantitativa}
 
 Il rischio complessivo della trasformazione può essere modellato
@@ -2112,7 +2105,7 @@ GIST\_post = 0.1050 + 0.2975 + 0.2250 + 0.1300 = 0.758
 \section{3.7 Conclusioni e Implicazioni per la
 Ricerca}\label{conclusioni-e-implicazioni-per-la-ricerca}
 
-\subsubsection{3.7.1 Sintesi delle Evidenze per la Validazione delle
+\subsection{3.7.1 Sintesi delle Evidenze per la Validazione delle
 Ipotesi}\label{sintesi-delle-evidenze-per-la-validazione-delle-ipotesi}
 
 L'analisi condotta in questo capitolo fornisce robuste evidenze
@@ -2132,7 +2125,7 @@ predittivo con R²=0.87
 27.3\% per architetture multi-cloud - Overhead operativo contenuto entro
 il 10\% come previsto - ROI positivo entro 18 mesi nel 78\% dei casi
 
-\subsubsection{3.7.2 Limitazioni e Direzioni
+\subsection{3.7.2 Limitazioni e Direzioni
 Future}\label{limitazioni-e-direzioni-future}
 
 Le limitazioni principali dell'analisi includono: 1. Focus geografico su
@@ -2145,7 +2138,7 @@ con infrastrutture meno mature - Impatti di tecnologie emergenti
 (quantum computing, 6G) - Modelli di sostenibilità ambientale per
 infrastrutture IT
 
-\subsubsection{3.7.3 Bridge verso il Capitolo
+\subsection{3.7.3 Bridge verso il Capitolo
 4}\label{bridge-verso-il-capitolo-4}
 
 L'evoluzione infrastrutturale analizzata crea le premesse per
@@ -2267,7 +2260,7 @@ Governance}\label{capitolo-4---compliance-integrata-e-governance}
 \section{4.1 Introduzione: La Compliance come Vantaggio
 Competitivo}\label{introduzione-la-compliance-come-vantaggio-competitivo}
 
-\subsubsection{4.1.1 Dalla Compliance Reattiva alla Compliance
+\subsection{4.1.1 Dalla Compliance Reattiva alla Compliance
 Strategica}\label{dalla-compliance-reattiva-alla-compliance-strategica}
 
 La gestione della compliance nella Grande Distribuzione Organizzata ha
@@ -2295,7 +2288,7 @@ campione di ricerca (protocollo etico \#2024-UNICU-087). La validazione
 completa dell'ipotesi H3 richiederà l'analisi longitudinale di 24 mesi
 descritta nel framework metodologico.}
 
-\subsubsection{4.1.2 Framework Teorico per la Compliance
+\subsection{4.1.2 Framework Teorico per la Compliance
 Integrata}\label{framework-teorico-per-la-compliance-integrata}
 
 La compliance multi-standard può essere modellata come problema di
@@ -2328,7 +2321,7 @@ scala significative nell'integrazione.
 \section{4.2 Analisi Quantitativa del Panorama Normativo
 GDO}\label{analisi-quantitativa-del-panorama-normativo-gdo}
 
-\subsubsection{4.2.1 PCI-DSS 4.0: Impatto Economico della
+\subsection{4.2.1 PCI-DSS 4.0: Impatto Economico della
 Transizione}\label{pci-dss-4.0-impatto-economico-della-transizione}
 
 L'implementazione di PCI-DSS 4.0, mandatoria dal marzo 2024, ha
@@ -2355,7 +2348,7 @@ con breakdown: - Assessment e gap analysis: 12\% - Modifiche
 infrastrutturali: 34\% - Implementazione controlli: 28\% - Testing e
 certificazione: 18\% - Formazione e change management: 8\%
 
-\subsubsection{4.2.2 GDPR: Quantificazione del Rischio di
+\subsection{4.2.2 GDPR: Quantificazione del Rischio di
 Non-Conformità}\label{gdpr-quantificazione-del-rischio-di-non-conformituxe0}
 
 Il rischio finanziario associato alla non-conformità GDPR nella GDO
@@ -2382,7 +2375,7 @@ maturi (riduzione 75\%, IC 95\%: 71\%-79\%).
 {[}TABELLA 4.1: Distribuzione Sanzioni GDPR per Categoria di Violazione
 - Inserire qui{]}
 
-\subsubsection{4.2.3 NIS2: Modellazione dell'Impatto sulla Resilienza
+\subsection{4.2.3 NIS2: Modellazione dell'Impatto sulla Resilienza
 Operativa}\label{nis2-modellazione-dellimpatto-sulla-resilienza-operativa}
 
 La Direttiva NIS2, applicabile dal 18 ottobre 2024, introduce requisiti
@@ -2416,7 +2409,7 @@ per ogni raddoppio dell'esperienza implementativa.
 \section{4.3 Matrice di Integrazione Normativa: Sinergie e
 Conflitti}\label{matrice-di-integrazione-normativa-sinergie-e-conflitti}
 
-\subsubsection{4.3.1 Identificazione Quantitativa delle
+\subsection{4.3.1 Identificazione Quantitativa delle
 Sovrapposizioni}\label{identificazione-quantitativa-delle-sovrapposizioni}
 
 L'analisi delle sovrapposizioni tra requisiti normativi utilizza
@@ -2440,7 +2433,7 @@ soddisfa parzialmente il 68\% dei requisiti totali.
 {[}FIGURA 4.1: Diagramma di Venn - Sovrapposizioni Requisiti Normativi -
 Inserire qui{]}
 
-\subsubsection{4.3.2 Modello di Ottimizzazione per l'Implementazione
+\subsection{4.3.2 Modello di Ottimizzazione per l'Implementazione
 Integrata}\label{modello-di-ottimizzazione-per-limplementazione-integrata}
 
 L'implementazione ottimale dei controlli può essere formulata come
@@ -2462,7 +2455,7 @@ Riduzione controlli da implementare: 43\% (da 1,247 a 711) - Riduzione
 costi totali: 38.7\% (IC 95\%: 35.2\%-42.2\%) - Riduzione effort di
 audit: 52.3\% (IC 95\%: 48.7\%-55.9\%)
 
-\subsubsection{4.3.3 Validazione Empirica dell'Ipotesi
+\subsection{4.3.3 Validazione Empirica dell'Ipotesi
 H3}\label{validazione-empirica-dellipotesi-h3}
 
 I dati raccolti forniscono robusta evidenza per la validazione
@@ -2486,7 +2479,7 @@ Integrati - Inserire qui{]}
 \section{4.4 Framework di Governance per la GDO
 Moderna}\label{framework-di-governance-per-la-gdo-moderna}
 
-\subsubsection{4.4.1 Modello di Maturità della
+\subsection{4.4.1 Modello di Maturità della
 Governance}\label{modello-di-maturituxe0-della-governance}
 
 La maturità della governance può essere quantificata attraverso un
@@ -2512,7 +2505,7 @@ La correlazione tra maturità governance e riduzione incidenti è r =
 -0.72 (p\textless0.001), con ogni livello di maturità associato a
 riduzione del 34.2\% negli incidenti di sicurezza.
 
-\subsubsection{4.4.2 Automazione della Compliance: ROI e
+\subsection{4.4.2 Automazione della Compliance: ROI e
 Implementazione}\label{automazione-della-compliance-roi-e-implementazione}
 
 L'automazione dei processi di compliance genera benefici quantificabili
@@ -2585,7 +2578,7 @@ Downtime\_cost = 72 × €750 × 34 = €1.84M
 
 Costi\_ripristino = €35,000 × Negozi\_impattati = €1.19M
 
-\subsubsection{4.5.2 Anatomia dell'Attacco: Timeline e Impatti
+\subsection{4.5.2 Anatomia dell'Attacco: Timeline e Impatti
 Quantificati}\label{anatomia-dellattacco-timeline-e-impatti-quantificati}
 
 L'attacco si è sviluppato in quattro fasi distinte con impatti
@@ -2619,7 +2612,7 @@ anomalie (NIS2 Art.21, PCI-DSS 10.8)
 {[}FIGURA 4.3: Attack Tree - Cyber-Physical Compromise Pathway -
 Inserire qui{]}
 
-\subsubsection{4.5.3 Impatto sulla Compliance e Lessons
+\subsection{4.5.3 Impatto sulla Compliance e Lessons
 Learned}\label{impatto-sulla-compliance-e-lessons-learned}
 
 L'incidente ha generato implicazioni di compliance quantificabili:
@@ -2642,7 +2635,7 @@ AI-driven (€0.9M) - Security awareness training (€0.7M)
 avrebbero prevenuto l'incidente con probabilità 0.87 (IC 95\%:
 0.82-0.92), generando ROI del 659\% considerando i costi evitati.
 
-\subsubsection{4.5.4 Framework di Mitigazione
+\subsection{4.5.4 Framework di Mitigazione
 Post-Incident}\label{framework-di-mitigazione-post-incident}
 
 La risposta all'incidente ha seguito un approccio strutturato con
@@ -2664,7 +2657,7 @@ controlli
 \section{4.6 Modello Economico della Compliance
 Integrata}\label{modello-economico-della-compliance-integrata}
 
-\subsubsection{4.6.1 Total Cost of Compliance (TCC)
+\subsection{4.6.1 Total Cost of Compliance (TCC)
 Framework}\label{total-cost-of-compliance-tcc-framework}
 
 Il Total Cost of Compliance estende il concetto di TCO includendo costi
@@ -2690,7 +2683,7 @@ L'analisi su 5 anni per organizzazione GDO media (€500M fatturato)²²:
 
 Riduzione TCC: 50.0\% (IC 95\%: 46.3\%-53.7\%)
 
-\subsubsection{4.6.2 Ottimizzazione degli Investimenti in
+\subsection{4.6.2 Ottimizzazione degli Investimenti in
 Compliance}\label{ottimizzazione-degli-investimenti-in-compliance}
 
 L'allocazione ottimale degli investimenti in compliance può essere
@@ -2711,7 +2704,7 @@ ottimale: - Tecnologia e automazione: 45\% - Processi e governance: 25\%
 {[}FIGURA 4.4: Frontiera Efficiente Investimenti Compliance - Inserire
 qui{]}
 
-\subsubsection{4.6.3 Breakeven Analysis e
+\subsection{4.6.3 Breakeven Analysis e
 ROI}\label{breakeven-analysis-e-roi}
 
 Il punto di breakeven per investimenti in compliance integrata varia con
@@ -2739,7 +2732,7 @@ Con L = 312\% (asintoto), k = 0.74 (growth rate), t₀ = 22 mesi
 \section{4.7 Conclusioni e Implicazioni
 Strategiche}\label{conclusioni-e-implicazioni-strategiche}
 
-\subsubsection{4.7.1 Validazione Definitiva dell'Ipotesi
+\subsection{4.7.1 Validazione Definitiva dell'Ipotesi
 H3}\label{validazione-definitiva-dellipotesi-h3}
 
 L'analisi quantitativa condotta fornisce robusta evidenza per la
@@ -2760,7 +2753,7 @@ La significatività statistica (p\textless0.001 per tutte le metriche
 chiave) e la dimensione del campione (n=47 per analisi principale)
 forniscono confidenza elevata nei risultati.
 
-\subsubsection{4.7.2 Framework GIST-C: Estensione per
+\subsection{4.7.2 Framework GIST-C: Estensione per
 Compliance}\label{framework-gist-c-estensione-per-compliance}
 
 L'integrazione dei findings sulla compliance nel framework GIST produce
@@ -2778,7 +2771,7 @@ integrata, con organizzazioni high-performing che raggiungono
 C\_integration \textgreater{} 0.4, corrispondente a miglioramento del
 40\% nelle metriche complessive.
 
-\subsubsection{4.7.3 Raccomandazioni
+\subsection{4.7.3 Raccomandazioni
 Pratiche}\label{raccomandazioni-pratiche}
 
 Basandosi sull'evidenza empirica, le raccomandazioni prioritarie
@@ -2825,7 +2818,7 @@ includono:
   \end{itemize}
 \end{enumerate}
 
-\subsubsection{4.7.4 Bridge verso il Capitolo
+\subsection{4.7.4 Bridge verso il Capitolo
 Conclusivo}\label{bridge-verso-il-capitolo-conclusivo}
 
 L'analisi della compliance integrata completa il quadro sistemico
@@ -2924,7 +2917,7 @@ Strategiche}\label{capitolo-5---sintesi-e-direzioni-strategiche}
 \section{5.1 Introduzione: Dall'Analisi
 all'Azione}\label{introduzione-dallanalisi-allazione}
 
-\subsubsection{5.1.1 Riepilogo del Percorso di
+\subsection{5.1.1 Riepilogo del Percorso di
 Ricerca}\label{riepilogo-del-percorso-di-ricerca}
 
 La presente ricerca ha affrontato la sfida della trasformazione digitale
@@ -2950,7 +2943,7 @@ peer-reviewed, e studio preliminare su campione ristretto. La
 validazione completa richiederà il completamento dello studio
 longitudinale di 24 mesi come definito nel protocollo di ricerca.}
 
-\subsubsection{5.1.2 Sintesi delle Evidenze per la Validazione delle
+\subsection{5.1.2 Sintesi delle Evidenze per la Validazione delle
 Ipotesi}\label{sintesi-delle-evidenze-per-la-validazione-delle-ipotesi-1}
 
 L'analisi quantitativa condotta fornisce evidenze definitive per la
@@ -2976,7 +2969,7 @@ target 30-40\% - Overhead operativo: 9.7\% risorse IT, sotto threshold
 \section{5.2 Il Framework GIST: Architettura Completa e
 Validata}\label{il-framework-gist-architettura-completa-e-validata}
 
-\subsubsection{5.2.1 Formalizzazione Matematica del
+\subsection{5.2.1 Formalizzazione Matematica del
 Framework}\label{formalizzazione-matematica-del-framework}
 
 Il framework GIST integra le componenti analizzate in un modello
@@ -3032,7 +3025,7 @@ un'infrastruttura fisica subottimale (P = 0.4) ma compensare con
 eccellenza architetturale (A = 0.9) e sicurezza robusta (S = 0.8),
 ottenendo comunque un GIST score accettabile.
 
-\subsubsection{5.2.2 Calibrazione Empirica dei
+\subsection{5.2.2 Calibrazione Empirica dei
 Parametri}\label{calibrazione-empirica-dei-parametri}
 
 L'analisi di regressione multipla su 156 organizzazioni² ha prodotto i
@@ -3069,7 +3062,7 @@ costi operativi (R²=0.817, p\textless0.001).
 {[}FIGURA 5.1: Framework GIST - Modello Integrato con Coefficienti
 Validati - Inserire qui{]}
 
-\subsubsection{5.2.3 Soglie di Performance e
+\subsection{5.2.3 Soglie di Performance e
 Benchmarking}\label{soglie-di-performance-e-benchmarking}
 
 L'applicazione del framework GIST produce score normalizzati
@@ -3116,7 +3109,7 @@ intervento immediato) - 28.4\% Base (conformità minima) - 34.6\% Maturo
 \section{5.3 Roadmap Implementativa: Dal Framework alla
 Pratica}\label{roadmap-implementativa-dal-framework-alla-pratica}
 
-\subsubsection{5.3.1 Metodologia di Prioritizzazione degli
+\subsection{5.3.1 Metodologia di Prioritizzazione degli
 Interventi}\label{metodologia-di-prioritizzazione-degli-interventi}
 
 La trasformazione guidata da GIST richiede prioritizzazione strategica
@@ -3222,7 +3215,7 @@ reduction: 67\%
 {[}TABELLA 5.1: Roadmap Dettagliata con Metriche e Dipendenze - Inserire
 qui{]}
 
-\subsubsection{5.3.2 Gestione del Cambiamento
+\subsection{5.3.2 Gestione del Cambiamento
 Organizzativo}\label{gestione-del-cambiamento-organizzativo}
 
 L'implementazione tecnica deve essere accompagnata da trasformazione
@@ -3238,7 +3231,7 @@ Metriche chiave per monitoraggio: - Security awareness score: baseline
 Time to competency: 4.3 mesi media per ruolo tecnico - Retention rate
 personale qualificato: target \textgreater85\%
 
-\subsubsection{5.3.3 Framework di Misurazione e
+\subsection{5.3.3 Framework di Misurazione e
 KPI}\label{framework-di-misurazione-e-kpi}
 
 Il successo della trasformazione richiede metriche oggettive alignate
@@ -3309,7 +3302,7 @@ dati aggregati del \textbf{``Retail Technology Leadership Survey 2024''
 \section{5.4 Analisi Prospettica: Trend Emergenti e Impatti
 Futuri}\label{analisi-prospettica-trend-emergenti-e-impatti-futuri}
 
-\subsubsection{5.4.1 Tecnologie Emergenti e Impatto sulla
+\subsection{5.4.1 Tecnologie Emergenti e Impatto sulla
 GDO}\label{tecnologie-emergenti-e-impatto-sulla-gdo}
 
 L'analisi dei trend tecnologici attraverso metodologie Delphi⁸ e
@@ -3336,7 +3329,7 @@ ridefinizione architetture
 2025-2026 - Use case primario: tracciabilità end-to-end - Riduzione
 frodi stimata: 67\% - Barriere: scalabilità e costi energetici
 
-\subsubsection{5.4.2 Evoluzione Normativa
+\subsection{5.4.2 Evoluzione Normativa
 Anticipata}\label{evoluzione-normativa-anticipata}
 
 L'analisi delle proposte legislative e trend regolatori¹⁰ suggerisce
@@ -3354,7 +3347,7 @@ Investimento stimato: €2.4M medio per catena
 AI transparency, biometric data - Sanzioni attese: incremento 40\%
 importi medi - Preparazione richiesta: 18-24 mesi lead time
 
-\subsubsection{5.4.3 Sostenibilità e Green IT nella
+\subsection{5.4.3 Sostenibilità e Green IT nella
 GDO}\label{sostenibilituxe0-e-green-it-nella-gdo}
 
 L'integrazione di obiettivi di sostenibilità con sicurezza IT emerge
@@ -3379,7 +3372,7 @@ qui{]}
 \section{5.5 Direzioni per la Ricerca
 Futura}\label{direzioni-per-la-ricerca-futura}
 
-\subsubsection{5.5.1 Gap Identificati e Opportunità di
+\subsection{5.5.1 Gap Identificati e Opportunità di
 Ricerca}\label{gap-identificati-e-opportunituxe0-di-ricerca}
 
 L'analisi condotta rivela aree che richiedono approfondimento
@@ -3405,7 +3398,7 @@ Gap: ROI models non considerano margini retail (2-4\%) - Opportunità:
 Modelli economici sector-specific - Output: Framework decisionale per
 vincoli estremi
 
-\subsubsection{5.5.2 Implicazioni per la Pratica
+\subsection{5.5.2 Implicazioni per la Pratica
 Professionale}\label{implicazioni-per-la-pratica-professionale}
 
 Le evidenze prodotte hanno implicazioni dirette per diversi stakeholder:
@@ -3426,7 +3419,7 @@ requisiti overlapping
 Investimenti in resilienza = protezione margini - Competitive advantage
 attraverso trust
 
-\subsubsection{5.5.3 Verso un Nuovo Paradigma: Security as a Business
+\subsection{5.5.3 Verso un Nuovo Paradigma: Security as a Business
 Enabler}\label{verso-un-nuovo-paradigma-security-as-a-business-enabler}
 
 La ricerca dimostra definitivamente che nella GDO moderna, sicurezza e
@@ -3447,7 +3440,7 @@ sicurezza da centro di costo a centro di profitto.
 
 \section{5.6 Conclusioni Finali}\label{conclusioni-finali}
 
-\subsubsection{5.6.1 Contributi Principali della
+\subsection{5.6.1 Contributi Principali della
 Ricerca}\label{contributi-principali-della-ricerca}
 
 Questa ricerca ha prodotto quattro contributi fondamentali alla
@@ -3479,7 +3472,7 @@ Organizzata:
   letteratura.
 \end{enumerate}
 
-\subsubsection{5.6.2 Messaggio Finale: Un Imperativo per
+\subsection{5.6.2 Messaggio Finale: Un Imperativo per
 l'Azione}\label{messaggio-finale-un-imperativo-per-lazione}
 
 La trasformazione digitale sicura della Grande Distribuzione Organizzata
@@ -3558,7 +3551,7 @@ Digital Trust Survey 2024, Accenture Retail Technology Vision 2024.
 
 \section{Abstract (Italiano)}\label{abstract-italiano}
 
-\subsubsection{Infrastrutture IT Sicure per la Grande Distribuzione
+\subsection{Infrastrutture IT Sicure per la Grande Distribuzione
 Organizzata: Un Framework Integrato per la Trasformazione Cloud-First
 con Validazione
 Empirica}\label{infrastrutture-it-sicure-per-la-grande-distribuzione-organizzata-un-framework-integrato-per-la-trasformazione-cloud-first-con-validazione-empirica}
@@ -3615,7 +3608,7 @@ Framework, Retail IT Security, Digital Transformation
 
 \section{Abstract (English)}\label{abstract-english}
 
-\subsubsection{Secure IT Infrastructures for Large-Scale Organized
+\subsection{Secure IT Infrastructures for Large-Scale Organized
 Distribution: An Integrated Framework for Cloud-First Transformation
 with Empirical
 Validation}\label{secure-it-infrastructures-for-large-scale-organized-distribution-an-integrated-framework-for-cloud-first-transformation-with-empirical-validation}
@@ -3671,7 +3664,7 @@ Framework, Retail IT Security, Digital Transformation
 \section{Riassunto Esteso (Extended Abstract - 1000
 parole)}\label{riassunto-esteso-extended-abstract---1000-parole}
 
-\subsubsection{Contesto e Motivazione}\label{contesto-e-motivazione}
+\subsection{Contesto e Motivazione}\label{contesto-e-motivazione}
 
 La Grande Distribuzione Organizzata rappresenta un settore strategico
 dell'economia italiana, con un impatto diretto sulla vita quotidiana di
@@ -3697,7 +3690,7 @@ direttiva NIS2 creano un panorama di compliance che richiede
 investimenti significativi e può assorbire fino al 2-3\% del fatturato
 se gestito con approcci tradizionali frammentati.
 
-\subsubsection{Obiettivi e Metodologia}\label{obiettivi-e-metodologia}
+\subsection{Obiettivi e Metodologia}\label{obiettivi-e-metodologia}
 
 Questa ricerca si propone di rispondere alla domanda fondamentale: come
 possono le organizzazioni GDO progettare e implementare infrastrutture
@@ -3721,7 +3714,7 @@ distribuzione geografica. La raccolta dati ha utilizzato strumenti
 automatizzati di monitoring, analisi di log di sicurezza, metriche
 finanziarie certificate, e valutazioni di compliance strutturate.
 
-\subsubsection{Risultati Principali}\label{risultati-principali}
+\subsection{Risultati Principali}\label{risultati-principali}
 
 I risultati dello studio forniscono evidenze robuste per tutte e tre le
 ipotesi di ricerca. Per quanto riguarda le architetture cloud-ibride
@@ -3747,7 +3740,7 @@ operativo ridotto dal 17.2\% al 9.7\% delle risorse IT. Il ROI
 dell'automazione della compliance è stato del 241\% a 24 mesi, con
 payback period medio di 15.3 mesi.
 
-\subsubsection{Framework GIST}\label{framework-gist}
+\subsection{Framework GIST}\label{framework-gist}
 
 Il framework GIST emergente dalla ricerca fornisce un modello
 quantitativo per valutare e guidare la trasformazione sicura dell'IT
@@ -3762,7 +3755,7 @@ threat detection, incident response), e C l'integrazione della
 compliance. Il coefficiente K\_GDO (1.23) cattura le specificità del
 settore, mentre I rappresenta il fattore di innovazione.
 
-\subsubsection{Implicazioni e
+\subsection{Implicazioni e
 Conclusioni}\label{implicazioni-e-conclusioni}
 
 Le implicazioni di questa ricerca sono molteplici e significative. Per i
