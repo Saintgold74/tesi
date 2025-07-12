@@ -1,11 +1,6 @@
-% ===================================
-% CODICE LaTeX PER GRAFICI E TABELLE
-% Tesi GDO - Capitoli 1 e 2
-% ===================================
-% filepath: c:\Users\saint\tesi\nuovi grafi 1 e 2.tex
+%\documentclass{article}
 \documentclass[border=10pt]{standalone}
 % Pacchetti necessari
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amssymb}    
@@ -17,31 +12,68 @@
 \usepackage{pgfplots}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{fontspec}
+\usepackage{pgfplotstable}
+\usepackage{tikz-3dplot}
+\captionsetup{font=small, labelfont=bf, labelsep=period}
 \pgfplotsset{compat=1.17}
-\usetikzlibrary{pgfplots.polar}
+\usetikzlibrary{patterns,arrows.meta,shapes,positioning,calc,backgrounds,fit,decorations.pathreplacing,pgfplots.polar}
+
+\setmainfont{Arial}
+
+\definecolor{gdoblu}{RGB}{52, 152, 219}
+\definecolor{gdoverde}{RGB}{46, 204, 113}
 % FIGURA 1.3: Decomposizione del Framework GIST
 \begin{document}
+%\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    width=14cm,
-    height=10cm,
     ybar stacked,
+    bar width=0.8cm,
+    width=12cm,
+    height=7cm,
+    enlarge x limits=0.15,
     ylabel={Peso Relativo (\%)},
     xlabel={Componenti GIST},
-    symbolic x coords={Physical,Architectural,Security,Compliance},
+    symbolic x coords={Physical, Architectural, Security, Compliance},
     xtick=data,
     ymin=0,
-    ymax=100,
-    bar width=30pt,
-    legend style={at={(0.5,-0.2)},anchor=north,legend columns=4},
-    cycle list name=color list
+    ymax=105,
+    ymajorgrids=true,
+    grid style={dashed,gray!30},
+    legend style={at={(1.05,1)},anchor=north west,font=\small},
+    %title={Decomposizione delle Metriche Tecniche nel Framework GIST 
+    %\\{\small Basata su Analisi di Sensibilità (n=156 configurazioni)}}
 ]
-\addplot+[ybar,fill=blue!30] coordinates {(Physical,25) (Architectural,20) (Security,15) (Compliance,20)};
-\addplot+[ybar,fill=red!30] coordinates {(Physical,20) (Architectural,25) (Security,25) (Compliance,15)};
-\addplot+[ybar,fill=green!30] coordinates {(Physical,15) (Architectural,20) (Security,25) (Compliance,25)};
-\addplot+[ybar,fill=yellow!30] coordinates {(Physical,10) (Architectural,15) (Security,15) (Compliance,20)};
-\legend{Infrastructure,Performance,Risk Mitigation,Integration}
+
+% Reliability (MTTF)
+\addplot+[ybar,fill=blue!70,draw=black] coordinates {
+    (Physical,25) (Architectural,20) (Security,15) (Compliance,20)
+};
+
+% Latency (P99)
+\addplot+[ybar,fill=green!70,draw=black] coordinates {
+    (Physical,20) (Architectural,45) (Security,25) (Compliance,15)
+};
+
+% Security (CVSS)
+\addplot+[ybar,fill=red!70,draw=black] coordinates {
+    (Physical,15) (Architectural,25) (Security,40) (Compliance,20)
+};
+
+% Controls (Coverage)
+\addplot+[ybar,fill=yellow!70,draw=black] coordinates {
+    (Physical,10) (Architectural,10) (Security,30) (Compliance,40)
+};
+
+\legend{Affidabilità (MTTF), Latenza (P99), Sicurezza (CVSS), Controlli (Coverage)}
+
+% Aggiungere percentuali (opzionale, può rendere il grafico affollato) %
+
 \end{axis}
 \end{tikzpicture}
+%\caption{Decomposizione delle metriche tecniche per componente GIST basata su analisi di sensibilità.}
+%\label{fig:decomposizione-metriche}
+%\end{figure}
 \end{document}

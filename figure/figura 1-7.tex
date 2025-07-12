@@ -1,0 +1,76 @@
+\documentclass{article}
+% Per un output più pulito della sola figura, decommenta la riga seguente
+%\documentclass[border=10pt]{standalone}
+
+% --- PACHETTI ---
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots} % Carica anche TikZ e xcolor
+\usepackage{fontspec}
+
+% --- CONFIGURAZIONE ---
+\pgfplotsset{compat=1.18}
+\captionsetup{font=small, labelfont=bf, labelsep=period}
+\setmainfont{Arial} % Richiede XeLaTeX o LuaLaTeX
+
+\begin{document}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Latenza (ms)},
+    ylabel={Sicurezza (ASSA Score)},
+    xmin=10, xmax=100,
+    ymin=0, ymax=100,
+    colormap/viridis,
+    colorbar,
+    colorbar style={
+        title={Throughput (TPS)},
+        ylabel={TPS}
+    },
+    title={Trade-off Multi-Obiettivo nel Framework GIST\\{\small Frontiera di Pareto per Configurazioni Ottimali}}
+]
+
+% --- PLOT DI CONTORNO (CON GNUPLOT) ---
+% RICORDA: Richiede Gnuplot installato e la compilazione con --shell-escape
+\addplot3[
+    contour gnuplot={
+        levels={2000,3000,4000,5000,6000,7000,8000,9000},
+        labels=false
+    },
+    thick
+]
+{10000*exp(-0.02*x)*(1+0.005*y)};
+
+% --- PUNTI DELLE CONFIGURAZIONI ---
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {
+    (80,90) % Alta Sicurezza
+    (20,40) % Basse Latenze
+    (50,70) % Bilanciata
+};
+
+% --- PUNTO OTTIMALE ---
+\addplot[only marks, mark=*, mark size=5pt, red] coordinates {
+    (32,75) % GIST Ottimale
+};
+
+% --- ETICHETTE ---
+\node[above right] at (axis cs:80,90) {\footnotesize Alta Sicurezza};
+\node[above right] at (axis cs:20,40) {\footnotesize Basse Latenze};
+\node[above right] at (axis cs:50,70) {\footnotesize Bilanciata};
+\node[above right, red] at (axis cs:32,75) {\footnotesize\bfseries GIST Ottimale};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Superficie di Pareto bidimensionale per l'ottimizzazione multi-obiettivo dei parametri di sistema.}
+\label{fig:tradeoff}
+\end{figure}
+
+\end{document}
