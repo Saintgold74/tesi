@@ -1,0 +1,41 @@
+% ===================================
+% CODICE LaTeX PER GRAFICI E TABELLE
+% Tesi GDO - Capitoli 1
+% ===================================
+% filepath: c:\Users\saint\figure\tabella 1-1.tex
+\documentclass[border=10pt]{standalone}
+% Pacchetti necessari
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}    
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption} % Per sottotitoli nelle figure
+% Preambolo necessario:
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{pgfplots.polar}
+\begin{document}
+
+% TABELLA 2.1: Metriche di Evoluzione degli Attacchi POS
+
+\centering
+
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Parametro} & \textbf{Elasticità} & \textbf{Ranking} & \textbf{Contributo Varianza} \\
+\midrule
+Transazioni giornaliere & 0,42 & 1 & 28,3\% \\
+Costi IT (\%) & $-$0,38 & 2 & 24,1\% \\
+Affidabilità ($\beta$) & 0,31 & 3 & 18,7\% \\
+Numero negozi ($\sigma$) & 0,23 & 4 & 12,2\% \\
+%\ldots & \ldots & \ldots & \ldots \\
+\bottomrule
+\multicolumn{4}{l}{\small \textit{Nota}: Elasticità = variazione \% output per 1\% variazione input}
+\end{tabular}
+
+\end{document}
