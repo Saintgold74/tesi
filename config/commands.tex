@@ -1,0 +1,26 @@
+% Comandi personalizzati per velocizzare la scrittura
+
+% Figura semplice
+\newcommand{\myfig}[4]{
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=#1\textwidth]{figures/#2}
+        \caption{#3}
+        \label{fig:#4}
+    \end{figure}
+}
+
+% Tabella semplice
+\newcommand{\mytab}[4]{
+    \begin{table}[htbp]
+        \centering
+        \caption{#1}
+        \label{tab:#2}
+        #3
+    \end{table}
+}
+
+% Acronimi comuni (definire alla prima occorrenza)
+\newcommand{\ZTA}{Zero Trust Architecture\xspace}
+\newcommand{\PCIDSS}{Payment Card Industry Data Security Standard\xspace}
+\newcommand{\GDPR}{General Data Protection Regulation\xspace}

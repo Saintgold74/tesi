@@ -1,0 +1,51 @@
+% Encoding e lingue
+\usepackage{fontspec}
+\usepackage[italian]{babel}
+
+% Layout e formattazione
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Grafici e figure
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+
+% Tabelle
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Matematica e algoritmi
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% Codice
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Collegamenti e riferimenti
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% Configurazione listings per codice
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numberstyle=\tiny\color{gray},
+    numbers=left,
+    stepnumber=1,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true
+}

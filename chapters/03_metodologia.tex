@@ -1,0 +1,42 @@
+\chapter{Metodologia}
+\label{ch:metodologia}
+
+\section{Introduzione}
+
+In questo capitolo viene presentata la metodologia adottata per lo sviluppo dell'architettura Zero Trust proposta...
+
+\section{Architettura del Sistema}
+
+\myfig{0.8}{architettura_sistema.png}{Schema dell'architettura del sistema proposto}{architettura}
+
+Come illustrato in Figura~\ref{fig:architettura}, il sistema si compone di tre livelli principali...
+
+\subsection{Livello di Autenticazione}
+
+Il primo livello implementa meccanismi di autenticazione multi-fattore basati su...
+
+% TODO: Completare sezione autenticazione
+
+\section{Implementazione del Modello Zero Trust}
+
+\begin{enumerate}
+    \item \textbf{Verify Explicitly}: ogni richiesta viene autenticata...
+    \item \textbf{Use Least Privilege}: accesso minimo necessario...
+    \item \textbf{Assume Breach}: monitoraggio continuo...
+\end{enumerate}
+
+\section{Metriche di Valutazione}
+
+Per valutare l'efficacia della soluzione proposta, sono state definite le seguenti metriche:
+
+\mytab{Metriche di valutazione del sistema}{metriche}{
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Metrica} & \textbf{Unità} & \textbf{Target} \\
+        \midrule
+        Latenza di autenticazione & ms & < 100 \\
+        Throughput & req/sec & > 1000 \\
+        False Positive Rate & \% & < 5 \\
+        \bottomrule
+    \end{tabular}
+}
