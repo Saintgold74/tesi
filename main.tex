@@ -1,3 +1,4 @@
+% !TEX program = xelatex
 % --- PREAMBOLO ---
 % Definisce il tipo di documento. 'report' è adatto per una tesi.
 \documentclass[12pt,a4paper,oneside]{book}
@@ -32,6 +33,8 @@
 \usepackage{listings}
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
+\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
+\addbibresource{bibliografia1.bib} % Dice a LaTeX dove trovare le fonti
 % filepath: main.tex
 % --- PREAMBOLO ---
 \usepackage{bookmark}  % Migliora la gestione dei segnalibri
@@ -46,8 +49,11 @@
 % Imposta la profondità di numerazione fino a subsection (livello 2)
 \setcounter{secnumdepth}{3}
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
-% !TEX program = xelatex
 
+
+% Bibliografia
+%\bibliographystyle{ieeetr}
+\bibliography{bibliografia1}
 
 % ==========================================
 % PACCHETTI ESSENZIALI PER XeLaTeX
@@ -258,9 +264,7 @@
 %\include{chapters/05_risultati}
 %\include{chapters/06_conclusioni}
 
-% Bibliografia
-\bibliographystyle{ieeetr}
-\bibliography{config/bibliography}
+
 
 % Appendici
 \appendix
