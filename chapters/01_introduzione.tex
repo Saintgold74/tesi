@@ -13,7 +13,7 @@ Moderna}}{1.1.1 La Complessità Sistemica della GDO Moderna}}\label{la-complessi
 
 Il settore della Grande Distribuzione Organizzata in Italia gestisce
 un'infrastruttura tecnologica di complessità paragonabile a quella di
-operatori di telecomunicazioni o servizi finanziari; con 27.432 nodi computazionali distribuiti che processano 521 transazioni al secondo (TPS)\supercite{istat2024struttura} con vincoli di latenza P99 < 50 ms (ovvero il 99\% delle transazioni risponde entro 50 ms) e requisiti di disponibilità definiti da \textbf{SLA (Service Level Agreement)} multi-livello (Tier 1: 99.99\%, Tier 2: 99.95\%, Tier 3: 99.9\%), la GDO rappresenta un caso di studio unico per l'ingegneria dei sistemi distribuiti mission-critical, dove possiamo anticipare, ma lo svilupperemo più avanti che :
+operatori di telecomunicazioni o servizi finanziari; con 27.432 nodi computazionali distribuiti\supercite{istat2024struttura} che processano 521 transazioni al secondo (TPS)\supercite{federdistribuzione2024mappa} con vincoli di latenza P99 < 50 ms (ovvero il 99\% delle transazioni risponde entro 50 ms) e requisiti di disponibilità definiti da \textbf{SLA (Service Level Agreement)} multi-livello (Tier 1: 99.99\%, Tier 2: 99.95\%, Tier 3: 99.9\%), la GDO rappresenta un caso di studio unico per l'ingegneria dei sistemi distribuiti mission-critical, dove possiamo anticipare, ma lo svilupperemo più avanti che :
 \begin{itemize}
     \item Tier 1 (99.99\%) = "Four nines" = Quasi sempre operativo, solo 52 minuti di stop all'anno
     \item Tier 2 (99.95\%) = "Three nines five" = Altamente disponibile, circa 4 ore di stop all'anno
@@ -24,7 +24,7 @@ e che ovviamente un Tier più alto corrisponde a strutture più complesse e cost
 L'infrastruttura IT della GDO moderna deve garantire simultaneamente
 continuità operativa H24 in ambienti fisicamente distribuiti, processare
 volumi transazionali con picchi del 300-500\% durante eventi
-promozionali (come il Natale, Black Friday, etc.) $^2$, proteggere dati sensibili di pagamento e personali sotto multiple normative, integrare sistemi legacy con tecnologie
+promozionali (come il Natale, Black Friday, etc.) \supercite{verizon2024dbir}, proteggere dati sensibili di pagamento e personali sotto multiple normative, integrare sistemi legacy con tecnologie
 cloud-native, e gestire la convergenza tra \textbf{Information Technology (IT)} e
 \textbf{Operational Technology (OT)}.
 
@@ -278,7 +278,7 @@ dove $C_i \in \{P, A, S, C\}$ rappresentano \textbf{Physical infrastructure}, \t
 \subsubsection{\texorpdfstring{\textbf{Contributi di supporto}}{1.3.3.2 Contributo di supporto}}\label{contributi-supporto}
 
 \textbf{1. Algoritmo GDO-Cloud per Migrazione Ottimizzata}
-Risolve il problema della migrazione cloud in ambienti retail attraverso scheduling stocastico multi-stadio, riducendo la complessità da O(n³) a O(n log n) e garantendo zero-downtime con probabilità >99.9\%. Il Capitolo 3 presenterà l'algoritmo completo con prove di correttezza.
+Risolve il problema della migrazione cloud in ambienti retail attraverso scheduling stocastico multi-stadio, riducendo la complessità da O(n³) a O(n \log n) e garantendo zero-downtime con probabilità >99.9\%. Il Capitolo 3 presenterà l'algoritmo completo con prove di correttezza.
 
 \textbf{2. Matrice di Integrazione Normativa Auto-Ottimizzante}
 Utilizza graph clustering per identificare overlap tra PCI-DSS, GDPR e NIS2, riducendo 1.247 controlli totali a 711 controlli effettivi (-43\%) attraverso un algoritmo greedy con garanzie teoriche. Il Capitolo 4 dettaglierà l'implementazione.
@@ -653,7 +653,7 @@ La ricerca riconosce quattro categorie principali di limitazioni. Le \textit{lim
 \
 \section{\texorpdfstring{\textbf{Struttura della
 Tesi}}{1.7 Struttura della Tesi}}\label{struttura-della-tesi}
-La tesi si articola in cinque capitoli principali oltre all'introduzione, ciascuno focalizzato su un aspetto specifico del problema di ricerca e costruito per fornire una progressione logica dal problema alla soluzione.
+La tesi si articola in cinque capitoli principali, oltre all'introduzione, ciascuno focalizzato su un aspetto specifico del problema di ricerca e costruito per fornire una progressione logica dal problema alla soluzione.
 
 Il \textbf{Capitolo 2}, dedicato al `\textbf{`Threat Landscape e Sicurezza Distribuita''}, si estende per 18-20 pagine e fornisce un'analisi quantitativa dell'evoluzione delle minacce specifiche per la GDO. Il capitolo va oltre la semplice catalogazione degli attacchi, sviluppando il modello ASSA (Aggregated System Surface Attack) che quantifica per la prima volta la vulnerabilità sistemica delle architetture retail distribuite. Attraverso l'analisi di 847 incidenti documentati, il capitolo esamina l'efficacia delle tecnologie difensive moderne valutandone il ROI e propone un framework integrato che considera la crescente convergenza tra Information Technology e Operational Technology, aspetto particolarmente critico per attacchi cyber-fisici ai sistemi di refrigerazione e HVAC.
 
