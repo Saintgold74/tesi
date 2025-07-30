@@ -33,7 +33,127 @@
 \usepackage{listings}
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
-\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
+%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
+%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none, defernumbers=true]{biblatex}
+%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
+
+% Configurazione biblatex per formato università
+\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% ==========================================
+% PERSONALIZZAZIONE FORMATO BIBLIOGRAFIA
+% ==========================================
+
+% Formato per libri (@book)
+\DeclareBibliographyDriver{book}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Luogo di pubblicazione (gestisce sia location che address)
+  \printlist{location}%
+  \newunit\newblock
+  % Casa editrice
+  \printlist{publisher}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Formato per articoli (@article)
+\DeclareBibliographyDriver{article}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo articolo
+  \printfield[quotes]{title}%
+  \newunit\newblock
+  % Rivista in corsivo
+  \printfield[italic]{journaltitle}%
+  \newunit\newblock
+  % Volume e numero
+  \printfield{volume}%
+  \iffieldundef{number}{}{\mkbibparens{\printfield{number}}}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \newunit\newblock
+  % Pagine
+  \printfield{pages}%
+  \finentry
+}
+
+% Formato per report tecnici (@techreport)
+\DeclareBibliographyDriver{techreport}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Istituzione
+  \printlist{institution}%
+  \newunit\newblock
+  % Luogo
+  \printlist{location}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Formato per documenti vari (@misc)
+\DeclareBibliographyDriver{misc}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Come pubblicato
+  \printfield{howpublished}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Personalizzazione formato nomi (cognome in maiuscoletto)
+\DeclareNameFormat{family-given}{%
+  \ifgiveninits
+    {\usebibmacro{name:family-given}
+      {\namepartfamily}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}  % Cognome in maiuscoletto
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}
+}
+
+% Formato per titoli in corsivo
+\DeclareFieldFormat[book,techreport,misc]{title}{\textit{#1}}
+
+% Formato per titoli di articoli tra virgolette
+\DeclareFieldFormat[article]{title}{``#1''}
+
+% Formato per riviste in corsivo
+\DeclareFieldFormat{journaltitle}{\textit{#1}}
+
+% Rimuove alcuni elementi non necessari
+\AtEveryBibitem{%
+  \clearfield{url}%
+  \clearfield{doi}%
+  \clearfield{isbn}%
+  \clearfield{issn}%
+}
 \addbibresource{bibliografia.bib} % Dice a LaTeX dove trovare le fonti
 % filepath: main.tex
 % --- PREAMBOLO ---
