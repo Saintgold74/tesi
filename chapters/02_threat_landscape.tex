@@ -33,7 +33,7 @@ ricorrenti e principi di progettazione sicura.
 
 La natura distribuita delle operazioni GDO introduce complessità
 sistemiche che amplificano la superficie di attacco rispetto ad
-architetture centralizzate equivalenti. La ricerca di Chen e Zhang $^1$ ha
+architetture centralizzate equivalenti. La ricerca di Chen e Zhang\supercite{chen2024graph} ha
 sviluppato un modello matematico per quantificare questa amplificazione:
 \begin{equation}
 SAD = N × (C + A + Au)
@@ -65,7 +65,7 @@ punto vendita processa quotidianamente tra 500 e 2.000 transazioni con
 carte di pagamento, generando un flusso aggregato di dati finanziari che
 rappresenta un target ad alto valore per i cybercriminali. L'analisi
 quantitativa mostra che il valore economico medio per transazione
-compromessa nel settore GDO è di €47.30², significativamente superiore
+compromessa nel settore GDO è di €47.30\supercite{nrf2024workforce}, significativamente superiore
 alla media di altri settori retail (€31.20).
 
 La seconda dimensione concerne i vincoli di operatività continua. I
@@ -73,14 +73,14 @@ requisiti di disponibilità H24 impongono finestre di manutenzione
 estremamente limitate, con conseguente accumulo di vulnerabilità non
 patchate. L'analisi statistica rivela che il tempo medio tra il rilascio
 di una patch critica e la sua applicazione nei sistemi GDO è di 127
-giorni³, contro una media industry di 72 giorni. Questo ritardo aumenta
+giorni\supercite{verizon2024breach}, contro una media industry di 72 giorni. Questo ritardo aumenta
 la finestra di esposizione del 76\%.
 
 La terza dimensione deriva dall'eterogeneità tecnologica intrinseca
 dell'infrastruttura GDO. L'inventario tecnologico medio per punto
 vendita include 3.7 generazioni diverse di sistemi Point of Sale (POS),
 2.4 versioni di sistemi operativi, e 5.2 applicazioni di fornitori
-diversi⁴. Questa eterogeneità moltiplica la complessità della gestione
+diversi\supercite{secureretail2024pos}. Questa eterogeneità moltiplica la complessità della gestione
 delle vulnerabilità secondo un fattore esponenziale quantificato in
 O(n²) dove n rappresenta il numero di tecnologie diverse.
 
@@ -98,7 +98,7 @@ O(n²) dove n rappresenta il numero di tecnologie diverse.
 
 L'analisi del contributo del fattore umano agli incidenti di sicurezza
 nella GDO rivela caratteristiche strutturali che amplificano
-significativamente il rischio. Il National Retail Federation² documenta
+significativamente il rischio. Il National Retail Federation\supercite{nrf2024workforce} documenta
 parametri specifici del personale GDO che impattano direttamente sulla
 postura di sicurezza.
 
@@ -117,7 +117,7 @@ stagionale, il 30-40\% della forza lavoro è costituito da personale
 temporaneo che riceve formazione ancora più limitata (media 0.8 ore).
 
 L'impatto complessivo del fattore umano è quantificato nel 68\% degli
-incidenti analizzati³, con una distribuzione che vede il 34\%
+incidenti analizzati\supercite{verizon2024breach}, con una distribuzione che vede il 34\%
 attribuibile a phishing e social engineering, il 22\% a
 misconfigurazioni, e il 12\% a compromissione di credenziali. Questi
 dati sottolineano la necessità di approcci di sicurezza che minimizzino
@@ -137,7 +137,7 @@ una base per comprendere l'evoluzione delle tecniche di attacco.
 Durante il processo di pagamento, esiste una finestra temporale in cui i
 dati della carta devono necessariamente esistere in forma non cifrata
 nella memoria del terminale prima della cifratura per la trasmissione. I
-ricercatori di SecureRetail Labs⁴ hanno quantificato questa finestra di
+ricercatori di SecureRetail Labs\supercite{secureretail2024pos} hanno quantificato questa finestra di
 vulnerabilità attraverso misurazioni dirette su sistemi in produzione:
 
 \begin{verbatim}
@@ -183,9 +183,9 @@ sono state implementate difese migliorate. Tuttavia, nel periodo
 una drastica riduzione del tasso di rilevamento (34\%), indicando
 l'adozione di tecniche più sofisticate di evasione.
 
-Il malware Prilex⁵ rappresenta un esempio paradigmatico di questa
+Il malware Prilex\supercite{kaspersky2024prilex} rappresenta un esempio paradigmatico di questa
 evoluzione. Invece di tentare di violare direttamente le tecnologie di
-sicurezza moderne, implementa una strategia di ``regressione forzata''
+sicurezza moderne, implementa una strategia di "regressione forzata"
 che disabilita selettivamente le funzionalità di sicurezza più avanzate.
 Quando un cliente tenta un pagamento contactless, il malware simula un
 errore di lettura NFC (Near Field Communication) con un tasso di
@@ -199,7 +199,7 @@ vulnerabilità, il malware cattura i dati con un tasso di successo del
 La propagazione di malware attraverso reti GDO distribuite segue
 dinamiche che possono essere modellate efficacemente attraverso
 l'adattamento del modello epidemiologico SIR
-(Susceptible-Infected-Recovered). Anderson e Miller⁶ hanno sviluppato
+(Susceptible-Infected-Recovered). Anderson e Miller\supercite{anderson2024epidemiological} hanno sviluppato
 una variante specifica per ambienti retail:
 
 \begin{verbatim}
@@ -215,9 +215,9 @@ empirica su 15 incidenti reali mostra valori di β/γ compresi tra 2.3 e
 3.1, indicando che ogni sistema compromesso può infettare mediamente 2-3
 altri sistemi prima della rilevazione.
 
-L'analisi di un case study documentato nella letteratura di settore²¹,
+L'analisi di un case study documentato nella letteratura di settore\supercite{sans2024retail},
 relativo a un incidente maggiore verificatosi in una catena GDO europea
-nel 2023 (anonimizzato come ``Caso Alpha'' per motivi di riservatezza),
+nel 2023 (anonimizzato come "Caso Alpha" per motivi di riservatezza),
 illustra la dinamica di propagazione tipica. La compromissione iniziale
 attraverso email di phishing ha colpito un singolo store. Entro 48 ore,
 sistemi di reconnaissance automatizzata avevano mappato 150 store della
@@ -248,21 +248,21 @@ alla sofisticazione degli strumenti di detection.
 Gli attacchi alla supply chain rappresentano una categoria di minacce in
 rapida crescita che sfrutta le interdipendenze tra organizzazioni.
 L'analisi del primo trimestre 2025 documenta 70 gruppi ransomware attivi
-simultaneamente, con un incremento del 55.5\% rispetto al 2024⁷. Questa
+simultaneamente, con un incremento del 55.5\% rispetto al 2024\supercite{checkpoint2025ransomware}. Questa
 proliferazione ha creato un ecosistema criminale stratificato con
 specializzazioni settoriali.
 
 L'analisi tassonomica di 312 incidenti supply chain nel periodo
 2023-2025 rivela tre categorie principali di attaccanti. Il 40\% sono
-gruppi ``enterprise-focused'' che targetizzano specificamente la GDO con
+gruppi "enterprise-focused" che targetizzano specificamente la GDO con
 ransomware personalizzati e richieste di riscatto medie di €2.3M. Il
-35\% sono ``supply-chain specialists'' che si concentrano su fornitori
+35\% sono "supply-chain specialists" che si concentrano su fornitori
 di servizi critici con richieste medie di €890K ma tassi di successo
 superiori (78\% vs 67\%). Il restante 25\% sono attori opportunistici
 con approcci ad alto volume ma basso valore (richieste medie €45K, tasso
 di successo 23\%).
 
-L'incidente Cleo-Carrefour del 2024⁸ esemplifica l'impatto potenziale di
+L'incidente Cleo-Carrefour del 2024\supercite{europol2024cybercrime} esemplifica l'impatto potenziale di
 questi attacchi. L'exploit di una vulnerabilità zero-day nella
 piattaforma Cleo Harmony, utilizzata per file transfer B2B, ha permesso
 la compromissione di 312 organizzazioni in 3 settimane. L'impatto sulla
@@ -292,7 +292,7 @@ Mentre un attaccante tradizionale può gestire simultaneamente 5-10
 target con approcci manuali, l'utilizzo di AI generativa permette la
 gestione parallela di oltre 100 target. Questo incremento non è
 accompagnato da un proporzionale aumento dei costi, anzi si osserva una
-riduzione dell'85\% del costo per target⁹.
+riduzione dell'85\% del costo per target\supercite{proofpoint2024social}.
 
 L'efficacia degli attacchi di phishing personalizzato mostra un
 incremento del 35\% quando vengono utilizzate tecniche AI per la
@@ -305,7 +305,7 @@ una maggiore persuasività dei contenuti AI-generated.
 
 Per organizzazioni GDO con 50.000-100.000 dipendenti, questa
 amplificazione permette campagne di social engineering
-``personalizzate'' su scala precedentemente impossibile. L'analisi
+"personalizzate" su scala precedentemente impossibile. L'analisi
 costi-benefici per gli attaccanti mostra un ROI (Return on Investment)
 del 847\% per campagne AI-enhanced contro il 234\% delle campagne
 tradizionali.
@@ -365,8 +365,8 @@ confidenza nelle conclusioni anche in assenza di validazione empirica diretta.
 Per costruire scenari realistici di implementazione cloud-ibrida, sono
 stati utilizzati i seguenti parametri da fonti pubbliche:
 
-\textbf{Baseline Performance} (Fonte: Gartner ``Magic Quadrant for
-Hyperconverged Infrastructure'' 2024¹⁰):
+\textbf{Baseline Performance} (Fonte: Gartner "Magic Quadrant for
+Hyperconverged Infrastructure" 2024\supercite{gartner2024cloud}):
 
 \begin{itemize}
 \tightlist
@@ -375,12 +375,12 @@ Hyperconverged Infrastructure'' 2024¹⁰):
 \item
   MTTR medio: 4.2 ore\\
 \item
-  Costo downtime retail: €52,000/ora (Fonte: Ponemon Institute ``Cost of
-  Data Center Outages 2024''³²)
+  Costo downtime retail: €52,000/ora (Fonte: Ponemon Institute "Cost of
+  Data Center Outages 2024"\supercite{ponemon2024cost})
 \end{itemize}
 
-\textbf{Miglioramenti Cloud-Ibridi} (Fonte: IDC ``CloudPulse Survey Q4
-2024''¹²):
+\textbf{Miglioramenti Cloud-Ibridi} (Fonte: IDC "CloudPulse Survey Q4
+2024"\supercite{idc2024european}):
 
 \begin{itemize}
 \tightlist
@@ -400,7 +400,7 @@ improvement = np.random.uniform(0.0035, 0.0072)\\
 availability\_post = min(availability\_base + improvement, 0.9999)
 
 Risultati simulati: mediana availability post-implementazione = 99.96\%,
-coerente con benchmark di settore.''
+coerente con benchmark di settore."
 
 Questi dati di letteratura supportano la plausibilità dell'ipotesi H1 e
 forniscono benchmark per la validazione empirica proposta. La ricerca
@@ -414,13 +414,13 @@ L'ipotesi H2 sulla riduzione della superficie di attacco attraverso Zero
 Trust si basa su evidenze preliminari e proiezioni derivate da studi
 pilota e letteratura di settore.
 
-Microsoft Security¹³ nel ``Zero Trust Deployment Report 2024'' documenta
+Microsoft Security\supercite{microsoft2024zerotrust} nel "Zero Trust Deployment Report 2024" documenta
 riduzioni della superficie di attacco tra il 38\% e il 52\% in
 implementazioni enterprise multi-settoriali. Per il settore retail
 specificamente, i dati disaggregati (n=18) mostrano riduzioni medie del
 44\% con deviazione standard del 7.3\%.
 
-Palo Alto Networks¹⁴ riporta dati su latenza operativa da 67
+Palo Alto Networks\supercite{paloalto2024zerotrust} riporta dati su latenza operativa da 67
 implementazioni Zero Trust, documentando incrementi medi di 15-35ms per
 transazioni critiche. Il 92\% delle implementazioni mantiene latenze
 aggiuntive sotto la soglia dei 50ms considerata critica per i sistemi di
@@ -445,18 +445,18 @@ La validazione dell'ipotesi H3 sui benefici economici della compliance
 integrata si basa su un'analisi comparativa di implementazioni
 documentate e modellazione economica.
 
-ISACA¹⁵ nel ``State of Compliance 2024'' riporta che organizzazioni con
+ISACA\supercite{isaca2024compliance} nel "State of Compliance 2024" riporta che organizzazioni con
 approcci integrati alla compliance mostrano riduzioni di costo medie del
 32-48\% rispetto ad approcci frammentati. L'analisi copre 234
 organizzazioni di cui 31 nel settore retail con risultati consistenti
 (retail: 35-45\% riduzione).
 
-Ponemon Institute¹⁶ quantifica l'overhead operativo della compliance nel
+Ponemon Institute\supercite{ponemon2024cost} quantifica l'overhead operativo della compliance nel
 retail al 12-18\% delle risorse IT per approcci tradizionali, ridotto al
 7-11\% per approcci integrati. La metodologia utilizzata include
 Activity-Based Costing con validazione attraverso audit indipendenti.
 
-PwC¹⁷ nel report ``Integrated GRC in Retail'' documenta ROI positivo
+PwC\supercite{pwc2024integrated} nel report "Integrated GRC in Retail" documenta ROI positivo
 entro 18-24 mesi per il 78\% delle implementazioni integrate, con
 break-even medio a 14.3 mesi. I driver principali di risparmio
 identificati sono: - Eliminazione duplicazioni di controllo: 28\% del
@@ -516,24 +516,24 @@ sui benchmark di letteratura.}
 \subsection{\texorpdfstring{2.6.2 Roadmap Implementativa Proposta}{2.6.2 Roadmap Implementativa Proposta}}\label{roadmap-implementativa-proposta}
 
 L'applicazione preliminare del modello a parametri derivati dalla
-letteratura¹⁸ produce una roadmap teorica in tre fasi che ottimizza il
+letteratura\supercite{mckinsey2024retail} produce una roadmap teorica in tre fasi che ottimizza il
 rapporto benefici/costi:
 
 La Fase 1 (0-6 mesi) si concentra su Visibility e Detection attraverso
 il deployment di sistemi Endpoint Detection and Response (EDR).
-Basandosi sui dati di Gartner¹⁹, l'investimento stimato di €150K-300K
+Basandosi sui dati di Gartner\supercite{gartner2024edr}, l'investimento stimato di €150K-300K
 per 1.000 endpoint dovrebbe generare un incremento del detection rate al
 90-95\% con ROI positivo in 12-18 mesi.
 
 La Fase 2 (6-12 mesi) implementa Network Segmentation avanzata combinata
-con principi Zero Trust. Secondo le proiezioni derivate da Forrester²⁰,
+con principi Zero Trust. Secondo le proiezioni derivate da Forrester\supercite{forrester2024zerotrust},
 un investimento di €350K-450K dovrebbe permettere il raggiungimento di
 availability superiore al 99.9\% con una riduzione della superficie di
 attacco del 40-50\%.
 
 La Fase 3 (12-18 mesi) realizza l'integrazione della Compliance
 attraverso un framework multi-standard unificato. Le stime basate su
-ISACA¹⁵ e PwC¹⁷ indicano investimenti di €5M-8M per catene con oltre
+ISACA\supercite{isaca2024compliance} e PwC\supercite{pwc2024integrated} indicano investimenti di €5M-8M per catene con oltre
 1.000 store, con potenziali riduzioni dei costi di compliance del
 35-45\% rispetto ad approcci separati.
 
@@ -552,7 +552,7 @@ settore possono simultaneamente migliorare sicurezza, performance e
 efficienza economica.
 
 I principi emergenti dall'analisi forniscono linee guida concrete per la
-progettazione architettuale. La velocità di detection emerge come
+progettazione architetturale. La velocità di detection emerge come
 fattore critico superiore alla sofisticazione degli strumenti, con
 riduzioni del 75\% nel MTTR che generano impatti sulla sicurezza
 superiori a incrementi del 20\% nell'accuracy di detection.
@@ -577,77 +577,3 @@ Landscape all'Architettura - Inserire qui{]}
 \caption{Framework integrato di sicurezza GDO: dal threat landscape all'architettura}
 \label{fig:framework_sicurezza}
 \end{figure}
-
-
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\section{\texorpdfstring{Note}{Note}}\label{note-1}
-
-¹ CHEN L., ZHANG W., ``Graph-theoretic Analysis of Distributed Retail
-Network Vulnerabilities'', IEEE Transactions on Network and Service
-Management, Vol. 21, No.~3, 2024, pp.~234-247.
-
-² NATIONAL RETAIL FEDERATION, 2024 Retail Workforce Turnover and
-Security Impact Report, Washington DC, NRF Research Center, 2024.
-
-³ VERIZON COMMUNICATIONS, 2024 Data Breach Investigations Report, New
-York, Verizon Business Security, 2024.
-
-⁴ SECURERETAIL LABS, POS Memory Security Analysis: Timing Attack Windows
-in Production Environments, Boston, SecureRetail Labs Research Division,
-2024.
-
-⁵ KASPERSKY LAB, Prilex Evolution: Technical Analysis of NFC
-Interference Capabilities, Moscow, Kaspersky Security Research, 2024.
-
-⁶ ANDERSON J.P., MILLER R.K., ``Epidemiological Modeling of Malware
-Propagation in Distributed Retail Networks'', ACM Transactions on
-Information and System Security, Vol. 27, No.~2, 2024, pp.~45-72.
-
-⁷ CHECK POINT RESEARCH, The State of Ransomware in the First Quarter of
-2025: Record-Breaking 149\% Spike, Tel Aviv, Check Point Software
-Technologies, 2025.
-
-⁸ EUROPOL, European Cybercrime Report 2024: Supply Chain Attacks
-Analysis, The Hague, European Cybercrime Center, 2024.
-
-⁹ PROOFPOINT INC., State of AI-Enhanced Social Engineering 2024,
-Sunnyvale, Proofpoint Threat Research, 2024.
-
-¹⁰ GARTNER, Cloud Migration Impact in Retail 2024, Stamford, Gartner
-Research Report G00798234, 2024.
-
-¹¹ FORRESTER RESEARCH, The Total Economic Impact of Hybrid Cloud in
-Retail, Cambridge, Forrester Consulting TEI Study, 2024.
-
-¹² IDC, European Retail IT Transformation Benchmark 2024, Framingham,
-International Data Corporation Report \#EUR148923, 2024.
-
-¹³ MICROSOFT SECURITY, Zero Trust Deployment Report 2024, Redmond,
-Microsoft Corporation Security Division, 2024.
-
-¹⁴ PALO ALTO NETWORKS, Zero Trust Network Architecture Performance
-Analysis 2024, Santa Clara, Palo Alto Networks Unit 42, 2024.
-
-¹⁵ ISACA, State of Compliance 2024: Multi-Standard Integration Benefits,
-Schaumburg, Information Systems Audit and Control Association, 2024.
-
-¹⁶ PONEMON INSTITUTE, Cost of Compliance Report 2024: Retail Sector Deep
-Dive, Traverse City, Ponemon Institute LLC, 2024.
-
-¹⁷ PWC, Integrated GRC in Retail: ROI Analysis and Implementation
-Strategies, London, PricewaterhouseCoopers LLP, 2024.
-
-¹⁸ MCKINSEY \& COMPANY, Retail Technology Investment Optimization
-Framework, New York, McKinsey Global Institute, 2024.
-
-¹⁹ GARTNER, EDR Market Guide and ROI Analysis 2024, Stamford, Gartner
-Research Report G00812345, 2024.
-
-²⁰ FORRESTER RESEARCH, Zero Trust Network Segmentation: Cost-Benefit
-Analysis for Retail, Cambridge, Forrester Consulting, 2024.
-
-²¹ SANS INSTITUTE, Retail Cyber Incident Case Studies: Lessons from
-Major Breaches 2020-2023, Bethesda, SANS Digital Forensics and Incident
-Response, 2024.
