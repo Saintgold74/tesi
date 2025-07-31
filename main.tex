@@ -12,12 +12,6 @@
 % Per la gestione della lingua italiana (sillabazione, nomi dei capitoli, ecc.)
 \usepackage[italian]{babel} 
 
-% Per usare i font installati nel sistema con XeLaTeX (gestisce l'UTF-8 di default)
-\usepackage{fontspec} 
-
-% Per creare link interni ed esterni e per il comando \texorpdfstring
-\usepackage{hyperref} 
-
 \usepackage[utf8]{inputenc} % Codifica UTF-8
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -34,8 +28,7 @@
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
 %\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
-%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none, defernumbers=true]{biblatex}
-%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
+
 
 % Configurazione biblatex per formato università
 \usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
@@ -171,8 +164,6 @@
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
 
 
-% Bibliografia
-%\bibliographystyle{ieeetr}
 \bibliography{bibliografia}
 
 % ==========================================
@@ -263,6 +254,13 @@
 \hypersetup{
     colorlinks=false,
     pdfborder={0 0 0},
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
+    pdfauthor={Marco Santoro},
+    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
+    pdfkeywords={ingegneria informatica, tesi, università},
 }
 % ==========================================
 % COMANDI PERSONALIZZATI PER CITAZIONI
@@ -299,12 +297,6 @@
 % ==========================================
 % METADATI DOCUMENTO
 % ==========================================
-\hypersetup{
-    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
-    pdfauthor={Marco Santoro},
-    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
-    pdfkeywords={ingegneria informatica, tesi, università},
-}
 \setcounter{tocdepth}{2}
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.17}

@@ -1,62 +1,102 @@
-% ===================================
-% CODICE LaTeX PER GRAFICI E TABELLE
-% Tesi GDO - Capitoli 1 e 2
-% ===================================
-% filepath: c:\Users\saint\tesi\nuovi grafi 1 e 2.tex
 \documentclass[border=10pt]{standalone}
-% Pacchetti necessari
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{amssymb}    
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{subcaption} % Per sottotitoli nelle figure
-% Preambolo necessario:
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usepackage{booktabs}
-\usepackage{multirow}
 \pgfplotsset{compat=1.17}
-\usetikzlibrary{pgfplots.polar}
+\usetikzlibrary{shadows,positioning,arrows.meta,shapes}
 
-% ===================================
-% CAPITOLO 2
-% ===================================
+% Definizione colori tema GDO
+\definecolor{gdoblu}{RGB}{25,118,188}
+\definecolor{gdorosso}{RGB}{220,38,58}
+\definecolor{gdoverde}{RGB}{0,150,108}
+\definecolor{gdoarancio}{RGB}{255,165,0}
+\definecolor{gdogrigio}{RGB}{128,128,128}
+
 \begin{document}
-% FIGURA 2.5: Framework Integrato di Sicurezza GDO
-
-\centering
 \begin{tikzpicture}[
-    level/.style={rectangle, draw, text centered, minimum width=8cm, minimum height=1.5cm},
-    component/.style={rectangle, draw, text centered, minimum width=2.5cm, minimum height=1cm, font=\footnotesize},
-    arrow/.style={->, thick, >=latex}
+    % Box principale per le fasi
+    phase/.style={
+        rectangle,
+        rounded corners=8pt,
+        draw=black,
+        line width=1.5pt,
+        minimum width=10cm,
+        minimum height=1.5cm,
+        text centered,
+        font=\bfseries,
+        fill=#1!30
+    },
+    % Box per sottoelementi
+    subitem/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=gray,
+        minimum width=2cm,
+        minimum height=0.8cm,
+        text centered,
+        font=\scriptsize,
+        fill=white
+    },
+    % Frecce
+    arrow/.style={->, thick, >=stealth}
 ]
 
-% Livelli principali
-\node[level, fill=red!20] (threat) at (0,0) {\textbf{Threat Landscape Analysis}};
-\node[level, fill=orange!20] (arch) at (0,-2) {\textbf{Security Architecture Design}};
-\node[level, fill=yellow!20] (impl) at (0,-4) {\textbf{Implementation Strategy}};
-\node[level, fill=green!20] (valid) at (0,-6) {\textbf{Validation \& Monitoring}};
+% FASE 1
+\node[phase=red] (f1) at (0,0) {FASE 1: THREAT LANDSCAPE ANALYSIS};
 
-% Componenti
-\node[component, align=center] (t1) at (-5,0) {Threat\\Modeling};
+% Sottoelementi fase 1
+\node[subitem] at (-3.8,-1.5) {Threat Modeling};
+\node[subitem] at (-1.4,-1.5) {Risk Assessment};
+\node[subitem] at (1.5,-1.5) {Attack Patterns};
+\node[subitem] at (3.8,-1.5) {Trend Analysis};
 
-\node[component, align=center] (t2) at (-2.5,0) {Risk\\Assessment};
-\node[component, align=center] (t3) at (2.5,0) {Attack\\Patterns};
-\node[component, align=center] (t4) at (5,0) {Trend\\Analysis};
+% FASE 2
+\node[phase=orange] (f2) at (0,-4) {FASE 2: SECURITY ARCHITECTURE DESIGN};
+
+% Sottoelementi fase 2
+\node[subitem] at (-3.8,-5.5) {Zero Trust};
+\node[subitem] at (-1.4,-5.5) {Cloud Hybrid};
+\node[subitem] at (1.4,-5.5) {Micro \\ Segmentation};
+\node[subitem] at (4,-5.5) {Defense in Depth};
+
+% FASE 3
+\node[phase=yellow!70!orange] (f3) at (0,-8) {FASE 3: IMPLEMENTATION STRATEGY};
+
+% Timeline fase 3
+\draw[thick, orange!50] (-4,-9.5) -- (4,-9.5);
+\foreach \x/\txt in {-3/Phase 1, -1/Phase 2, 1/Phase 3, 3/Phase 4} {
+    \node[circle, fill=orange, minimum size=4mm] at (\x,-9.5) {};
+    \node[font=\tiny, below] at (\x,-9.8) {\txt};
+}
+
+% FASE 4
+\node[phase=green!70!black] (f4) at (0,-12) {FASE 4: VALIDATION \& MONITORING};
+
+% Sottoelementi fase 4
+\node[subitem] at (-3.8,-13.5) {KPI Metrics};
+\node[subitem] at (-1.5,-13.5) {SOC 24/7};
+\node[subitem] at (1.0,-13.5) {Incident Response};
+\node[subitem] at (3.7,-13.5) {Compliance Audit};
 
 % Frecce di flusso
-\draw[arrow] (threat) -- (arch);
-\draw[arrow] (arch) -- (impl);
-\draw[arrow] (impl) -- (valid);
+\draw[arrow] (f1) -- (f2);
+\draw[arrow] (f2) -- (f3);
+\draw[arrow] (f3) -- (f4);
 
 % Feedback loop
-\draw[arrow, dashed] (valid.east) -- ++(2,0) -- ++(0,6) -- (threat.east);
-\node[font=\scriptsize] at (3,-3) {Continuous Improvement};
+\draw[arrow, dashed, blue] (f4.east) -- ++(1.5,0) -- ++(0,12) -- (f1.east);
+\node[rotate=90, font=\footnotesize, blue] at (6.3,-6) {Continuous Feedback};
+
+% Timeline laterale
+\node[font=\footnotesize, align=right] at (-6.5,0) {Mesi 1-3};
+\node[font=\footnotesize, align=right] at (-6.5,-4) {Mesi 4-6};
+\node[font=\footnotesize, align=right] at (-6.5,-8) {Mesi 7-18};
+\node[font=\footnotesize, align=right] at (-6.5,-12) {Ongoing};
+
+% Box finale
+\node[rectangle, draw=black, fill=gray!20, minimum width=8cm, minimum height=1cm] 
+    at (0,-15) {\textbf{Output: Framework GIST Operativo}};
 
 \end{tikzpicture}
-
-
 \end{document}
-% --- IGNORE ---
