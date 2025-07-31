@@ -140,13 +140,13 @@ nella memoria del terminale prima della cifratura per la trasmissione. I
 ricercatori di SecureRetail Labs\supercite{secureretail2024pos} hanno quantificato questa finestra di
 vulnerabilità attraverso misurazioni dirette su sistemi in produzione:
 
-\begin{verbatim}
+\begin{equation}
 FV = TE - TC
-\end{verbatim}
+\end{equation}
 
 dove FV rappresenta la Finestra di Vulnerabilità, TE il Tempo di
 Elaborazione e TC il Tempo di Cifratura. Le misurazioni mostrano valori
-medi di FV = 127ms (deviazione standard σ = 43ms), durante i quali i
+medi di FV = 127ms (deviazione standard $\sigma= 43ms$), durante i quali i
 dati sono teoricamente accessibili a malware con privilegi sufficienti.
 
 Per una catena GDO tipica con 1.000 terminali che processano 500
@@ -194,24 +194,29 @@ chip. Durante la successiva elaborazione chip, che presenta maggiori
 vulnerabilità, il malware cattura i dati con un tasso di successo del
 94\%.
 
-\subsection{\texorpdfstring{2.3.3 Modellazione della Propagazione negli Ambienti Distribuiti}{2.3.3 Modellazione della Propagazione negli Ambienti Distribuiti}}\label{modellazione-della-propagazione-negli-ambienti-distribuiti}
+\subsection{\texorpdfstring{Modellazione della Propagazione negli Ambienti Distribuiti}{2.3.3 Modellazione della Propagazione negli Ambienti Distribuiti}}\label{modellazione-della-propagazione-negli-ambienti-distribuiti}
 
 La propagazione di malware attraverso reti GDO distribuite segue
 dinamiche che possono essere modellate efficacemente attraverso
-l'adattamento del modello epidemiologico SIR
-(Susceptible-Infected-Recovered). Anderson e Miller\supercite{anderson2024epidemiological} hanno sviluppato
+l'adattamento del modello epidemiologico \textbf{SIR
+(Susceptible-Infected-Recovered)}. Anderson e Miller\supercite{anderson2024epidemiological} hanno sviluppato
 una variante specifica per ambienti retail:
 
-\begin{verbatim}
-dS/dt = -β x S x I / N
-dI/dt = β x S x I / N - γ × I
-dR/dt = γ × I
-\end{verbatim}
+\begin{gather}
+\frac{\mathrm{d}S}{\mathrm{d} x}
+=-\beta*S*\frac{I}{N}\\
+\frac{\mathrm{d}I}{\mathrm{d} t}
+=-\beta*S*\frac{I}{N} - \gamma * I \\
+\frac{\mathrm{d}R}{\mathrm{d} t}
+=\gamma * I
+%dI/dt = β x S x I / N - γ × I
+%dR/dt = γ × I
+\end{gather}
 
-dove β rappresenta il tasso di trasmissione, γ il tasso di recovery, S
+dove $\beta$ rappresenta il tasso di trasmissione, $\gamma$ il tasso di recovery, S
 il numero di sistemi suscettibili, I il numero di sistemi infetti, R il
 numero di sistemi recuperati, e N il totale dei sistemi. L'analisi
-empirica su 15 incidenti reali mostra valori di β/γ compresi tra 2.3 e
+empirica su 15 incidenti reali mostra valori di $\frac{\beta}{\gamma}$ compresi tra 2.3 e
 3.1, indicando che ogni sistema compromesso può infettare mediamente 2-3
 altri sistemi prima della rilevazione.
 
