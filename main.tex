@@ -27,6 +27,8 @@
 \usepackage{listings}
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
+\usepackage[toc,nopostdot,nonumberlist]{glossaries}
+\makeglossaries
 %\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
 
 
@@ -340,6 +342,8 @@
 % Importa configurazioni
 %\input{config/packages}
 \input{config/commands}
+\input{glossario}
+
 
 % ==========================================
 % INIZIO DOCUMENTO
@@ -381,5 +385,8 @@
 \appendix
 %\include{appendices/codice}
 \printbibliography
+% Dopo la bibliografia
+\clearpage
+\printglossary[title=Glossario dei Termini,toctitle=Glossario]
 
 \end{document}
