@@ -12,12 +12,6 @@
 % Per la gestione della lingua italiana (sillabazione, nomi dei capitoli, ecc.)
 \usepackage[italian]{babel} 
 
-% Per usare i font installati nel sistema con XeLaTeX (gestisce l'UTF-8 di default)
-\usepackage{fontspec} 
-
-% Per creare link interni ed esterni e per il comando \texorpdfstring
-\usepackage{hyperref} 
-
 \usepackage[utf8]{inputenc} % Codifica UTF-8
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -33,8 +27,143 @@
 \usepackage{listings}
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
-\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
-\addbibresource{bibliografia1.bib} % Dice a LaTeX dove trovare le fonti
+\usepackage[toc,nopostdot,nonumberlist]{glossaries}
+\makeglossaries
+%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
+
+
+% Configurazione biblatex per formato università
+\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none, refsection=chapter]{biblatex}
+%\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% ==========================================
+% PERSONALIZZAZIONE FORMATO BIBLIOGRAFIA
+% ==========================================
+
+% Formato per libri (@book)
+\DeclareBibliographyDriver{book}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Luogo di pubblicazione (gestisce sia location che address)
+  \printlist{location}%
+  \newunit\newblock
+  % Casa editrice
+  \printlist{publisher}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Formato per articoli (@article)
+\DeclareBibliographyDriver{article}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo articolo
+  \printfield[quotes]{title}%
+  \newunit\newblock
+  % Rivista in corsivo
+  \printfield[italic]{journaltitle}%
+  \newunit\newblock
+  % Volume e numero
+  \printfield{volume}%
+  \iffieldundef{number}{}{\mkbibparens{\printfield{number}}}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \newunit\newblock
+  % Pagine
+  \printfield{pages}%
+  \finentry
+}
+
+% Formato per report tecnici (@techreport)
+\DeclareBibliographyDriver{techreport}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Istituzione
+  \printlist{institution}%
+  \newunit\newblock
+  % Luogo
+  \printlist{location}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Formato per documenti vari (@misc)
+\DeclareBibliographyDriver{misc}{%
+  % Autore in maiuscoletto
+  \printnames[family-given]{author}%
+  \newunit\newblock
+  % Titolo in corsivo
+  \printfield[italic]{title}%
+  \newunit\newblock
+  % Come pubblicato
+  \printfield{howpublished}%
+  \newunit\newblock
+  % Anno
+  \printfield{year}%
+  \finentry
+}
+
+% Personalizzazione formato nomi (cognome in maiuscoletto)
+\DeclareNameFormat{family-given}{%
+  \ifgiveninits
+    {\usebibmacro{name:family-given}
+      {\namepartfamily}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}  % Cognome in maiuscoletto
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}
+}
+
+% Formato per titoli in corsivo
+\DeclareFieldFormat[book,techreport,misc]{title}{\textit{#1}}
+
+% Formato per titoli di articoli tra virgolette
+\DeclareFieldFormat[article]{title}{``#1''}
+
+% Formato per riviste in corsivo
+\DeclareFieldFormat{journaltitle}{\textit{#1}}
+
+% Rimuove alcuni elementi non necessari
+\AtEveryBibitem{%
+  \clearfield{url}%
+  \clearfield{doi}%
+  \clearfield{isbn}%
+  \clearfield{issn}%
+}
+\addbibresource{bibliografia.bib} % Dice a LaTeX dove trovare le fonti
+
+
+% ==========================================
+% BIBLIOGRAFIA PER CAPITOLO
+% ==========================================
+
+% Personalizza l'aspetto della bibliografia per capitolo
+\defbibheading{subbibliography}[\bibname]{%
+    \section*{Bibliografia del Capitolo \thechapter}%
+    \addcontentsline{toc}{section}{Bibliografia del Capitolo \thechapter}%
+}
+
+
 % filepath: main.tex
 % --- PREAMBOLO ---
 \usepackage{bookmark}  % Migliora la gestione dei segnalibri
@@ -51,9 +180,7 @@
 % Imposta la profondità del TOC (Table of Contents) per includere le subsubsection
 
 
-% Bibliografia
-%\bibliographystyle{ieeetr}
-\bibliography{bibliografia1}
+\bibliography{bibliografia}
 
 % ==========================================
 % PACCHETTI ESSENZIALI PER XeLaTeX
@@ -64,7 +191,6 @@
 % Font Arial nativo dal sistema (REGOLA UNIVERSITÀ)
 \setmainfont{Arial}[
     Ligatures=TeX,
-    Numbers=Lining,
     BoldFont=Arial Bold,
     ItalicFont=Arial Italic,
     BoldItalicFont=Arial Bold Italic,
@@ -86,22 +212,44 @@
 \usepackage{indentfirst}
 \setlength{\parindent}{1.25cm}
 
-% NOTE A PIÈ PAGINA - NUMERATE PER CAPITOLO (REGOLA UNIVERSITÀ)
-\usepackage{footmisc}
-\usepackage{chngcntr}
-\counterwithout{footnote}{chapter}
-\counterwithin{footnote}{chapter}
+% ==========================================
+% SISTEMA DOPPIO SEPARATO: CITAZIONI [1] + NOTE (1) - CORREZIONE FINALE
+% ==========================================
 
-% PERSONALIZZAZIONE FORMATO NOTE (PARENTESI TONDE)
-\renewcommand{\thefootnote}{(\arabic{footnote})}
+% 1) PERSONALIZZAZIONE FOOTCITE PER FORMATO [n] - RESTA UGUALE
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {[\printfield{labelnumber}]\space
+   \printnames{labelname}%
+   \setunit{\labelnamepunct}%
+   \printfield[citetitle]{labeltitle}%
+   \newunit%
+   \printlist{publisher}%
+   \newunit%
+   \printfield{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
-% FORMATO NOTE: Arial 10pt, rientro 0,6cm, interlinea singola
+% 2) SISTEMA SEPARATO PER NOTE ESPLICATIVE - NUMERAZIONE CORRETTA
+\usepackage{bigfoot}
+\DeclareNewFootnote{exp}[arabic]
+
+% CORREZIONE: Formato senza numero capitolo - SOLO (1), (2), (3)...
+\renewcommand{\thefootnoteexp}{(\arabic{footnoteexp})}
+
+% CORREZIONE: Reset esplicito per capitolo SENZA includere il numero capitolo
+\makeatletter
+\@addtoreset{footnoteexp}{chapter}
+\makeatother
+
+% Comando per note esplicative
+\newcommand{\nota}[1]{\footnoteexp{#1}}
+
+% 3) CONFIGURAZIONE LAYOUT - SPAZIATURA RIDOTTA
 \renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
 \renewcommand{\footnoterule}{\kern-3pt\hrule width 0.4\columnwidth \kern 2.6pt}
-
-% Configurazione layout note
-\setlength{\footnotemargin}{0.6cm}
-\setlength{\footnotesep}{0pt}
+\setlength{\footnotesep}{0.2cm}     % RIDOTTO: spaziatura tra note
+\setlength{\skip\footins}{0.5cm}    % RIDOTTO: spazio sopra le note
 
 % GESTIONE INDICE - TITOLI A SINISTRA, NUMERI A DESTRA
 \usepackage{tocloft}
@@ -144,6 +292,13 @@
 \hypersetup{
     colorlinks=false,
     pdfborder={0 0 0},
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
+    pdfauthor={Marco Santoro},
+    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
+    pdfkeywords={ingegneria informatica, tesi, università},
 }
 % ==========================================
 % COMANDI PERSONALIZZATI PER CITAZIONI
@@ -180,12 +335,6 @@
 % ==========================================
 % METADATI DOCUMENTO
 % ==========================================
-\hypersetup{
-    pdftitle={"Dall'Alimentazione alla Cybersecurity: Fondamenti di un'Infrastruttura IT Sicura nella Grande Distribuzione"},
-    pdfauthor={Marco Santoro},
-    pdfsubject={Tesi di Laurea in Ingegneria Informatica},
-    pdfkeywords={ingegneria informatica, tesi, università},
-}
 \setcounter{tocdepth}{2}
 % Configurazioni PGFPlots
 \pgfplotsset{compat=1.17}
@@ -229,6 +378,8 @@
 % Importa configurazioni
 %\input{config/packages}
 \input{config/commands}
+\input{glossario}
+
 
 % ==========================================
 % INIZIO DOCUMENTO
@@ -258,7 +409,8 @@
 
 \include{chapters/abstract}
 \include{chapters/01_introduzione}
-%\include{chapters/02_stato_arte}
+\include{chapters/02_threat_landscape}
+
 %\include{chapters/03_metodologia}
 %\include{chapters/04_implementazione}
 %\include{chapters/05_risultati}
@@ -268,6 +420,11 @@
 
 % Appendici
 \appendix
-%\include{appendices/codice}
+
+% Bibliografia generale di tutta la tesi
+\printbibliography[title=Bibliografia Generale]
+% Dopo la bibliografia
+\clearpage
+\printglossary[title=Glossario dei Termini,toctitle=Glossario]
 
 \end{document}
