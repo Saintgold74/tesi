@@ -1,4 +1,4 @@
-\chapter{\texorpdfstring{Threat Landscape e Sicurezza Distribuita nella GDO}{Threat Landscape e Sicurezza Distribuita nella GDO}}\label{capitolo-2---threat-landscape-e-sicurezza-distribuita-nella-gdo}
+\chapter{\texorpdfstring{Threat Landscape e Sicurezza Distribuita}{Capitolo 2 - Threat Landscape e Sicurezza Distribuita}}\label{capitolo-2---threat-landscape-e-sicurezza-distribuita-nella-gdo}
 
 \section{\texorpdfstring{Introduzione e Obiettivi del Capitolo}{Introduzione e Obiettivi del Capitolo}}\label{introduzione-e-obiettivi-del-capitolo}
 
@@ -27,18 +27,18 @@ Questa base documentale, integrata da modellazione matematica e analisi
 statistica dei trend, fornisce il fondamento per identificare pattern
 ricorrenti e principi di progettazione sicura.
 
-\section{\texorpdfstring{2.2 Caratterizzazione della Superficie di Attacco nella GDO}{2.2 Caratterizzazione della Superficie di Attacco nella GDO}}\label{caratterizzazione-della-superficie-di-attacco-nella-gdo}
+\section{\texorpdfstring{Caratterizzazione della Superficie di Attacco nella GDO}{Caratterizzazione della Superficie di Attacco nella GDO}}\label{caratterizzazione-della-superficie-di-attacco-nella-gdo}
 
-\subsection{\texorpdfstring{2.2.1 Modellazione Matematica della Vulnerabilità Distribuita}{2.2.1 Modellazione Matematica della Vulnerabilità Distribuita}}\label{modellazione-matematica-della-vulnerabilituxe0-distribuita}
+\subsection{\texorpdfstring{Modellazione Matematica della Vulnerabilità Distribuita}{Modellazione Matematica della Vulnerabilità Distribuita}}\label{modellazione-matematica-della-vulnerabilituxe0-distribuita}
 
 La natura distribuita delle operazioni GDO introduce complessità
 sistemiche che amplificano la superficie di attacco rispetto ad
 architetture centralizzate equivalenti. La ricerca di Chen e Zhang\supercite{chen2024graph} ha
 sviluppato un modello matematico per quantificare questa amplificazione:
 \begin{equation}
-SAD = N × (C + A + Au)
+SAD = N \times (C + A + Au)
 \end{equation}
-dove SAD rappresenta la Superficie di Attacco Distribuita, N il numero
+dove \(SAD\) rappresenta la Superficie di Attacco Distribuita, N il numero
 di punti vendita, C il fattore di connettività, A il fattore di
 accessibilità, e Au il fattore di autonomia operativa. L'analisi
 empirica su 15 catene GDO italiane dimostra che questa configurazione
@@ -54,7 +54,7 @@ risultato ha implicazioni dirette per la progettazione di architetture
 di sicurezza, richiedendo approcci che considerino esplicitamente la
 natura distribuita del sistema.
 
-\subsection{\texorpdfstring{2.2.2 Analisi dei Fattori di Vulnerabilità Specifici}{2.2.2 Analisi dei Fattori di Vulnerabilità Specifici}}\label{analisi-dei-fattori-di-vulnerabilituxe0-specifici}
+\subsection{\texorpdfstring{Analisi dei Fattori di Vulnerabilità Specifici}{Analisi dei Fattori di Vulnerabilità Specifici}}\label{analisi-dei-fattori-di-vulnerabilituxe0-specifici}
 
 L'analisi fattoriale condotta su 847 incidenti con root cause
 identificata rivela tre dimensioni principali di vulnerabilità
@@ -91,7 +91,7 @@ O(n²) dove n rappresenta il numero di tecnologie diverse.
     \label{fig:vulnerabilita_gdo}
 \end{figure}
 
-\subsection{\texorpdfstring{2.2.3 Il Fattore Umano come Moltiplicatore di Rischio}{2.2.3 Il Fattore Umano come Moltiplicatore di Rischio}}\label{il-fattore-umano-come-moltiplicatore-di-rischio}
+\subsection{\texorpdfstring{Il Fattore Umano come Moltiplicatore di Rischio}{Il Fattore Umano come Moltiplicatore di Rischio}}\label{il-fattore-umano-come-moltiplicatore-di-rischio}
 
 L'analisi del contributo del fattore umano agli incidenti di sicurezza
 nella GDO rivela caratteristiche strutturali che amplificano
@@ -120,7 +120,7 @@ misconfigurazioni, e il 12\% a compromissione di credenziali. Questi
 dati sottolineano la necessità di approcci di sicurezza che minimizzino
 la dipendenza da comportamenti umani corretti.
 
-\section{\texorpdfstring{2.3 Anatomia degli Attacchi: Analisi Tecnica e Pattern Evolutivi}{2.3 Anatomia degli Attacchi: Analisi Tecnica e Pattern Evolutivi}}\label{anatomia-degli-attacchi-analisi-tecnica-e-pattern-evolutivi}
+\section{\texorpdfstring{Anatomia degli Attacchi: Analisi Tecnica e Pattern Evolutivi}{Anatomia degli Attacchi: Analisi Tecnica e Pattern Evolutivi}}\label{anatomia-degli-attacchi-analisi-tecnica-e-pattern-evolutivi}
 
 \subsection{\texorpdfstring{2.3.1 Vulnerabilità dei Sistemi POS: Analisi Temporale}{2.3.1 Vulnerabilità dei Sistemi POS: Analisi Temporale}}\label{vulnerabilituxe0-dei-sistemi-pos-analisi-temporale}
 
@@ -186,7 +186,7 @@ sono state implementate difese migliorate. Tuttavia, nel periodo
 una drastica riduzione del tasso di rilevamento (34\%), indicando
 l'adozione di tecniche più sofisticate di evasione.
 
-Il malware Prilex\supercite{kaspersky2024prilex} rappresenta un esempio paradigmatico di questa
+Il malware conosciuto col nome di \textbf{Prilex}\supercite{kaspersky2024prilex} rappresenta un esempio paradigmatico di questa
 evoluzione. Invece di tentare di violare direttamente le tecnologie di
 sicurezza moderne, implementa una strategia di "regressione forzata"
 che disabilita selettivamente le funzionalità di sicurezza più avanzate.
@@ -442,11 +442,8 @@ Per rendere operativa la metrica ASSA (Aggregated System Surface Attack), l'infr
 
     \begin{itemize}
         \item Numero di nodi esposti a reti non fidate.
-        \item 
         \item Numero di porte e servizi aperti su ciascun nodo.
-        \item 
         \item Presenza di vulnerabilità note (CVE) non corrette.
-        \item 
         \item Numero di connessioni non crittografate o non autenticate.
     \end{itemize}
 
