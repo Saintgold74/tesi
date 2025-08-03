@@ -1,0 +1,8 @@
+Tipologia,Incidenti_Totali,Crescita_YoY,Dwell_Time_ore,Impatto_Medio_MEur,Target_Primario,Trend_2025
+Malware POS,512,23.0,127.0,2.3,Pagamenti,↑↑
+Ransomware Operativo,334,45.0,103.2,4.8,Continuità,↑↑↑
+Supply Chain,156,87.0,189.0,8.2,Multi-retailer,↑↑↑
+AI-Powered Phishing,243,156.0,72.0,1.2,Credenziali,↑↑↑
+Cyber-Physical,89,67.0,96.0,3.4,OT/HVAC,↑↑
+Insider Threats,67,12.0,234.0,2.8,Dati clienti,→
+TOTALE,1401,65.0,136.86666666666667,3.783333333333333,-,-

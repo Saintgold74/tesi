@@ -1,0 +1,14 @@
+
+    SUMMARY REPORT - Tabelle Capitolo 2
+    =====================================
+    
+    Tabella 2.1: 6 tipologie di minacce analizzate
+    Tabella 2.2: 3 componenti ASSA + 4 fattori amplificazione
+    Tabella 2.3: 5 pattern stagionali identificati
+    Tabella 2.4: 6 tecnologie difensive comparate
+    Tabella 2.5: 3 fasi implementative su 36 mesi
+    Tabella 2.6: 5 componenti Zero Trust analizzati
+    
+    Investimento totale roadmap: €12.5M
+    ROI medio atteso: 244%
+    

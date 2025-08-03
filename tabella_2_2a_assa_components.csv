@@ -1,0 +1,4 @@
+Componente,Simbolo,Peso,Store_Media,Store_Std,Hub_Media,Hub_Std
+Porte Aperte,P_i,0.3,8,2.1,25,4.3
+Servizi Esposti,S_i,0.4,5,1.4,15,3.2
+Vulnerabilità Note,V_i,0.3,3,1.0,8,2.5
