@@ -57,24 +57,30 @@ Validare il framework proposto attraverso casi di studio reali, dimostrando la s
 
 \subsection{Il Framework GIST: Una Visione Integrata}
 
-Per affrontare la complessità del problema identificato, questa ricerca propone il framework GIST (GDO Integrated Security Transformation), un modello olistico che integra quattro dimensioni fondamentali:
+Per affrontare la complessità del problema identificato, questa ricerca propone il framework GIST (GDO Integrated Security Transformation), un modello olistico che integra quattro dimensioni fondamentali: Governance, Infrastructure, Security e Transformation. Come illustrato nella Figura \ref{fig:gist_framework}, il framework rappresenta un approccio sistemico dove ciascuna dimensione interagisce con le altre attraverso flussi bidirezionali di informazioni e controlli.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{figure/thesis_figures/fig_1_1_gist_framework.pdf}
-\caption{Il Framework GIST: Integrazione delle quattro dimensioni fondamentali per la trasformazione sicura della GDO}
+\includegraphics[width=0.9\textwidth]{thesis_figures/fig_1_1_gist_framework.pdf}
+\caption{Il Framework GIST: Integrazione delle quattro dimensioni fondamentali per la trasformazione sicura della GDO. Il framework evidenzia le interconnessioni sistemiche tra governance strategica (controllo e direzione), infrastruttura tecnologica (fondamenta operative), sicurezza (protezione e resilienza) e processi di trasformazione (evoluzione continua). Le frecce bidirezionali rappresentano i flussi di informazione e controllo, mentre le connessioni tratteggiate indicano le interdipendenze operative tra le componenti.}
 \label{fig:gist_framework}
 \end{figure}
 
 Il framework GIST si basa sul principio che la trasformazione digitale sicura non può essere affrontata attraverso interventi puntuali o approcci settoriali, ma richiede una visione sistemica che consideri le interdipendenze tra infrastruttura fisica, architettura IT, sicurezza e compliance. Ciascuna dimensione del framework è caratterizzata da metriche specifiche e interconnessioni con le altre componenti.
 
-La \textbf{Governance} rappresenta il livello strategico del framework, definendo politiche, processi e strutture organizzative necessarie per orchestrare la trasformazione. Include la definizione di ruoli e responsabilità, meccanismi di decision-making e framework di gestione del rischio.
+La \textbf{Governance} rappresenta il livello strategico del framework, definendo politiche, processi e strutture organizzative necessarie per orchestrare la trasformazione. Include la definizione di ruoli e responsabilità, meccanismi di decision-making e framework di gestione del rischio. Come evidenziato nella Figura \ref{fig:gist_framework}, la Governance fornisce direttive al core del framework e riceve feedback continuo per l'ottimizzazione delle politiche.
 
-L'\textbf{Infrastructure} copre l'intero stack tecnologico, dalle fondamenta fisiche dei data center alle architetture applicative cloud-native. Questa dimensione considera non solo gli aspetti tecnici, ma anche i modelli economici e operativi associati a diverse scelte architetturali.
+L'\textbf{Infrastructure} copre l'intero stack tecnologico, dalle fondamenta fisiche dei data center alle architetture applicative cloud-native. Questa dimensione considera non solo gli aspetti tecnici, ma anche i modelli economici e operativi associati a diverse scelte architetturali. L'interazione con il framework centrale avviene attraverso la definizione dei requisiti operativi e la ricezione di specifiche tecniche.
 
-La \textbf{Security} adotta un approccio Zero Trust che assume la compromissione come inevitabile e progetta controlli di sicurezza stratificati per minimizzare l'impatto. Include la protezione dei dati, la sicurezza delle applicazioni, la difesa della rete e la resilienza operativa.
+La \textbf{Security} adotta un approccio Zero Trust che assume la compromissione come inevitabile e progetta controlli di sicurezza stratificati per minimizzare l'impatto. Include la protezione dei dati, la sicurezza delle applicazioni, la difesa della rete e la resilienza operativa. La dimensione Security implementa i controlli definiti dal framework e fornisce feedback continuo sullo stato di sicurezza.
 
-La \textbf{Transformation} rappresenta la dimensione dinamica del framework, definendo percorsi di migrazione, strategie di change management e metriche di successo per guidare l'evoluzione da stati correnti a stati target desiderati.
+La \textbf{Transformation} rappresenta la dimensione dinamica del framework, definendo percorsi di migrazione, strategie di change management e metriche di successo per guidare l'evoluzione da stati correnti a stati target desiderati. Questa componente riceve input evolutivi dal core e fornisce feedback sui progressi della trasformazione.
+
+Le metriche chiave del framework, mostrate nella parte inferiore della Figura \ref{fig:gist_framework}, includono:
+- Availability ≥99.95%: target di disponibilità per sistemi mission-critical
+- TCO -38%: riduzione del Total Cost of Ownership attraverso ottimizzazione
+- ASSA -42%: diminuzione della Attack Surface Score Aggregated
+- ROI 287%: ritorno sull'investimento a 24 mesi
 
 \subsection{Metodologia di Ricerca}
 
@@ -150,7 +156,14 @@ Questa ipotesi propone che la compliance, tradizionalmente vista come centro di 
 
 \section{Struttura della Tesi}
 
-La tesi si articola in cinque capitoli principali che seguono una progressione logica dal particolare al generale, costruendo progressivamente il framework GIST attraverso analisi approfondite di ciascuna dimensione.
+La tesi si articola in cinque capitoli principali che seguono una progressione logica dal particolare al generale, costruendo progressivamente il framework GIST attraverso analisi approfondite di ciascuna dimensione. La Figura \ref{fig:thesis_structure} illustra la struttura complessiva e le interdipendenze tra i capitoli.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{thesis_figures/fig_1_4_thesis_structure.pdf}
+\caption{Struttura della tesi e interdipendenze tra capitoli. Il diagramma mostra il flusso logico dalla definizione del problema (Capitolo 1) attraverso l'analisi delle componenti specifiche (Capitoli 2-4) fino alla sintesi e validazione del framework completo (Capitolo 5). Le frecce indicano le dipendenze principali, mentre le linee tratteggiate rappresentano le interconnessioni tematiche. Le ipotesi di ricerca (H1, H2, H3) sono mappate ai capitoli dove vengono primariamente validate.}
+\label{fig:thesis_structure}
+\end{figure}
 
 \subsection{Capitolo 2: Threat Landscape e Sicurezza Distribuita}
 
@@ -205,6 +218,8 @@ Le appendici forniscono dettagli tecnici e materiale supplementare:
 \item \textbf{Appendice C}: Algoritmi e modelli computazionali
 \item \textbf{Appendice D}: Tabelle di parametrizzazione e risultati dettagliati
 \end{itemize}
+
+Come mostrato nella Figura \ref{fig:thesis_structure}, i capitoli sono interconnessi ma mantengono una struttura modulare che permette diversi percorsi di lettura a seconda degli interessi specifici del lettore.
 
 \section{Delimitazioni e Limitazioni}
 
