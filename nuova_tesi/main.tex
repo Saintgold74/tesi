@@ -27,6 +27,10 @@
 \usepackage{listings}
 \usepackage{xcolor} % Per i colori
 \usepackage{standalone}
+\usepackage[most]{tcolorbox} % Add this line to the preamble of your main.tex file
+\usepackage{stackengine}
+
+\usepackage{fancyhdr}
 \usepackage[toc,nopostdot,nonumberlist]{glossaries}
 \makeglossaries
 %\usepackage[backend=biber, style=numeric, citestyle=numeric-comp]{biblatex}
@@ -36,6 +40,14 @@
 \usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none, refsection=chapter]{biblatex}
 %\usepackage[backend=biber, style=numeric, citestyle=numeric-comp, sorting=none]{biblatex}
 \addbibresource{bibliografia.bib}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{shapes,arrows,positioning,calc,patterns,decorations.pathreplacing,shadows}
+\usetikzlibrary{shapes.geometric,shapes.symbols,shapes.misc}
+\usetikzlibrary{matrix,chains,scopes,fit,backgrounds}
+\usetikzlibrary{arrows.meta, positioning, shapes, calc}
 
 % ==========================================
 % PERSONALIZZAZIONE FORMATO BIBLIOGRAFIA
@@ -409,7 +421,8 @@
 
 \include{new1}
 \include{new2}
-
+\include{new3}
+%\include{new4}
 
 % \include{chapters/abstract}
 % \include{chapters/01_introduzione}
