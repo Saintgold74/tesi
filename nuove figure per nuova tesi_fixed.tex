@@ -1,0 +1,511 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[italian]{babel}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xstring}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=1.18}
+
+% Librerie TikZ necessarie
+\usetikzlibrary{shapes,arrows,calc,patterns,decorations.pathreplacing}
+\usetikzlibrary{shadows,backgrounds,fit,trees,mindmap}
+\usetikzlibrary{charts,graphs,er,folding,calendar,matrix}
+\usetikzlibrary{intersections,through,datavisualization}
+\usetikzlibrary{decorations.text,calligraphy}
+\usetikzlibrary{positioning}
+
+% Definizione colori GIST
+\definecolor{gistblue}{RGB}{52,152,219}      % Physical
+\definecolor{gistgreen}{RGB}{46,204,113}     % Architectural  
+\definecolor{gistred}{RGB}{231,76,60}        % Security
+\definecolor{gistyellow}{RGB}{241,196,15}    % Compliance
+\definecolor{gistgray}{RGB}{149,165,166}     % Neutral
+
+% Stili comuni
+\tikzset{
+    component/.style={rectangle,rounded corners,minimum width=3cm,minimum height=1.5cm,font=\sffamily},
+    physical/.style={component,fill=gistblue!80,text=white},
+    architectural/.style={component,fill=gistgreen!80,text=white},
+    security/.style={component,fill=gistred!80,text=white},
+    compliance/.style={component,fill=gistyellow!80,text=black},
+    arrow/.style={->,>=stealth,thick},
+    dashedarrow/.style={->,>=stealth,thick,dashed}
+}
+
+% Map 'status' token to a color
+\newcommand{\statuscolor}[1]{%
+  \IfStrEq{##1}{done}{gistgreen}{%
+  \IfStrEq{##1}{current}{gistyellow}{gray}}}
+\begin{document}
+
+\title{Nuove Figure per Nuova Tesi}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{polaraxis}[
+        title={\textbf{Gap tra Ricerca e Implementazione nella GDO}},
+        title style={font=\Large},
+        width=12cm,
+        height=12cm,
+        ylabel near ticks,
+        ylabel style={font=\small},
+        xtick={0,60,120,180,240,300},
+        xticklabels={
+            Approccio\\Olistico,
+            Modelli\\Economici,
+            Vincoli\\Operativi,
+            Specificità\\Settoriale,
+            Integrazione\\Normativa,
+            Applicabilità\\Pratica
+        },
+        xticklabel style={align=center,font=\small},
+        ytick={0,20,40,60,80,100},
+        ymin=0, ymax=100,
+        ylabel={Copertura (\%)},
+        grid=both,
+        major grid style={gray!30},
+        minor grid style={gray!10},
+        legend pos=south east,
+        legend style={font=\footnotesize}
+    ]
+    
+    % Area Ricerca Accademica
+    \addplot[thick,gistblue,fill=gistblue!30,opacity=0.7] 
+        coordinates {
+            (0,45) (60,35) (120,38) (180,42) (240,40) (300,48) (360,45)
+        };
+    \addlegendentry{Ricerca Accademica}
+    
+    % Area Requisiti Reali
+    \addplot[thick,gistgreen,fill=gistgreen!30,opacity=0.7] 
+        coordinates {
+            (0,87) (60,92) (120,89) (180,95) (240,88) (300,90) (360,87)
+        };
+    \addlegendentry{Requisiti GDO}
+    
+    % Area Gap (pattern)
+    \addplot[pattern=north east lines,pattern color=gistred,opacity=0.5] 
+        coordinates {
+            (0,87) (60,92) (120,89) (180,95) (240,88) (300,90) (360,87)
+        } --
+        coordinates {
+            (360,45) (300,48) (240,40) (180,42) (120,38) (60,35) (0,45)
+        };
+    \addlegendentry{Gap Identificato}
+    
+    % Annotazioni
+    \node[font=\footnotesize,fill=white,inner sep=2pt] at (axis cs:60,65) {Gap: 62\%};
+    \node[font=\footnotesize,fill=white,inner sep=2pt] at (axis cs:300,69) {Gap: 38\%};
+    
+    \end{polaraxis}
+    
+    % Box con media gap
+    \node[draw,fill=gistgray!20,anchor=north west,font=\small] at (7,-0.5) {
+        \begin{tabular}{l}
+        \textbf{Gap Medio:} 51.7\%\\
+        \textbf{Max Gap:} Modelli Economici\\
+        \textbf{Min Gap:} Approccio Olistico
+        \end{tabular}
+    };
+\end{tikzpicture}
+\caption{Gap identificato tra ricerca accademica e requisiti reali del settore GDO}
+\label{fig:gap-ricerca}
+\end{figure}
+\begin{figure}[htbp]
+\begin{tikzpicture}[node distance=2cm]
+    % Livello 1: Componenti Base
+    \node[physical] (phys) at (0,0) {\parbox[c][1.5cm][c]{3cm}{\centering\textbf{Physical}\\18\%}};
+    \node[architectural,right=of phys] (arch) {\parbox[c][1.5cm][c]{3cm}{\centering\textbf{Architectural}\\32\%}};
+    \node[security,right=of arch] (sec) {\parbox[c][1.5cm][c]{3cm}{\centering\textbf{Security}\\28\%}};
+    \node[compliance,right=of sec] (comp) {\parbox[c][1.5cm][c]{3cm}{\centering\textbf{Compliance}\\22\%}};
+    
+    % Livello 2: Elaborazione
+    \node[draw,diamond,aspect=2,above=3cm of arch,fill=gray!20] (decision) {Modalità};
+    
+    % Percorso Balanced (sinistra)
+    \node[draw,rectangle,left=2cm of decision,fill=blue!20,align=center] (balanced) 
+        {\(\sum_{i}(w_i \times C_i)\)\\[0.3cm]\textit{Balanced}};
+    
+    % Percorso Critical (destra)
+    \node[draw,rectangle,right=2cm of decision,fill=red!20,align=center] (critical) 
+        {\(\prod_{i}(C_i^{w_i})\)\\[0.3cm]\textit{Critical}};
+    
+    % Livello 3: Output
+    \node[draw,rectangle,above=5cm of decision,minimum width=4cm,minimum height=2cm,fill=green!20,align=center] (output) 
+        {\textbf{GIST Score}\\0--100};
+    
+    % Moltiplicatori laterali
+    \node[draw,circle,left=of output,fill=yellow!20,align=center] (kgdo) {\(K_{GDO}\)\\1.0--1.5};
+    \node[draw,circle,right=of output,fill=orange!20,align=center] (innov) {\((1+I)\)\\1.0--1.35};
+    
+    % Frecce dal livello 1 al decision point
+    \draw[arrow] (phys.north) -- ++(0,1.5) -| (decision);
+    \draw[arrow] (arch.north) -- (decision);
+    \draw[arrow] (sec.north) -- ++(0,1.5) -| (decision);
+    \draw[arrow] (comp.north) -- ++(0,1.5) -| (decision);
+    
+    % Frecce da decision a modalità
+    \draw[arrow] (decision) -- (balanced);
+    \draw[arrow] (decision) -- (critical);
+    
+    % Frecce da modalità a output
+    \draw[arrow] (balanced.north) -- ++(0,1) -| (output);
+    \draw[arrow] (critical.north) -- ++(0,1) -| (output);
+    
+    % Frecce moltiplicatori
+    \draw[arrow] (kgdo) -- (output);
+    \draw[arrow] (innov) -- (output);
+    
+    % Etichette
+    \node[font=\footnotesize,below=0.1cm of phys,align=center] {Infrastruttura\\Fisica};
+    \node[font=\footnotesize,below=0.1cm of arch,align=center] {Maturità\\Architetturale};
+    \node[font=\footnotesize,below=0.1cm of sec,align=center] {Postura\\Sicurezza};
+    \node[font=\footnotesize,below=0.1cm of comp,align=center] {Integrazione\\Compliance};
+    
+    % Switch indicatore
+    \draw[thick,dotted] ($(decision.west)-(0.5,0)$) -- ($(decision.east)+(0.5,0)$);
+    \node[font=\tiny,above=0.1cm of decision] {Switch};
+\end{tikzpicture}
+\end{tikzpicture}
+\caption{Architettura del Framework GIST con doppia formulazione}
+\label{fig:gist-architecture}
+\end{figure}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    % Definizione del cerchio principale
+    \def\radius{4cm}
+    \coordinate (center) at (0,0);
+    
+    % Componenti principali (in cerchio)
+    \node[draw,circle,fill=gistblue!80,text=white,minimum size=2cm] (threat) at (90:\radius) {
+        \textbf{Threat}\\
+        \textbf{Intelligence}
+    };
+    
+    \node[draw,circle,fill=gistgreen!80,text=white,minimum size=2cm] (risk) at (0:\radius) {
+        \textbf{Risk}\\
+        \textbf{Assessment}
+    };
+    
+    \node[draw,circle,fill=gistred!80,text=white,minimum size=2cm] (control) at (270:\radius) {
+        \textbf{Control}\\
+        \textbf{Selection}
+    };
+    
+    \node[draw,circle,fill=gistyellow!80,text=black,minimum size=2cm] (impl) at (180:\radius) {
+        \textbf{Implementation}\\
+    };
+    
+    % Inner loop (tattico)
+    \draw[arrow,thick,gistblue] (threat) to[bend left=20] node[midway,right,font=\small] {Prioritize} (risk);
+    \draw[arrow,thick,gistgreen] (risk) to[bend left=20] node[midway,below,font=\small] {Optimize} (control);
+    \draw[arrow,thick,gistred] (control) to[bend left=20] node[midway,left,font=\small] {Deploy} (impl);
+    \draw[arrow,thick,gistyellow] (impl) to[bend left=20] node[midway,above,font=\small] {Monitor} (threat);
+    
+    % Outer loop (strategico)
+    \draw[dashedarrow,thick,gray] (threat) to[bend right=45] node[midway,left,font=\small] {Strategic\\Review} (control);
+    \draw[dashedarrow,thick,gray] (risk) to[bend right=45] node[midway,right,font=\small] {Policy\\Update} (impl);
+    
+    % Centro con metriche
+    \node[draw,circle,fill=white,minimum size=3cm] at (center) {
+        \begin{tabular}{c}
+        \textbf{Real-Time Metrics}\\[0.2cm]
+        ASSA: 1,631\\
+        Incidents: 4.2/month\\
+        MTTD: 24h\\
+        Compliance: 94\%
+        \end{tabular}
+    };
+    
+    % Timeline indicators
+    \node[font=\footnotesize,gray] at ($(threat)+(0,1.2)$) {Continuous};
+    \node[font=\footnotesize,gray] at ($(risk)+(1.2,0)$) {Weekly};
+    \node[font=\footnotesize,gray] at ($(control)+(0,-1.2)$) {Monthly};
+    \node[font=\footnotesize,gray] at ($(impl)+(-1.2,0)$) {Quarterly};
+    
+    % Legenda
+    \node[anchor=north west,font=\footnotesize] at (-5,-5) {
+        \textbf{Cicli di Feedback:}\\
+        \textcolor{gray}{---} Loop Strategico (mensile)\\
+        \textcolor{black}{$\rightarrow$} Loop Tattico (24h)
+    };
+\end{tikzpicture}
+\caption{Framework integrato di sicurezza GDO con cicli di feedback}
+\label{fig:security-framework}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{semilogxaxis}[
+    title={\textbf{Correlazione tra Investimenti e Availability}},
+    xlabel={Investimento Infrastrutturale (€/negozio)},
+    ylabel={Availability (\%)},
+    xmin=1000, xmax=50000,
+    ymin=99.0, ymax=100.0,
+    width=14cm,
+    height=10cm,
+    grid=both,
+    minor grid style={gray!10},
+    major grid style={gray!30},
+    legend pos=south east,
+    legend style={font=\footnotesize}
+]
+
+% Nuvola di punti Monte Carlo
+\addplot[
+    only marks,
+    mark=*,
+    mark size=0.5pt,
+    gray!50,
+    opacity=0.3
+] table[x=investment,y=availability] {
+    % Qui andrebbero i dati reali
+    % Per esempio dimostrativo:
+    investment availability
+    1500 99.12
+    2000 99.23
+    2500 99.31
+    3000 99.38
+    4000 99.48
+    5000 99.56
+    7000 99.68
+    10000 99.78
+    15000 99.86
+    20000 99.91
+    30000 99.94
+    40000 99.96
+};
+
+% Punti reali
+\addplot[
+    only marks,
+    mark=*,
+    mark size=2pt,
+    gistblue
+] coordinates {
+    (8700,99.82) (12300,99.96) (11200,99.94)
+};
+
+% Curve di fitting
+\addplot[
+    domain=1000:50000,
+    samples=100,
+    thick,
+    black
+] {99.0 + 0.7*ln(x/1000)};
+\addlegendentry{Regressione ($R^2=0.84$)}
+
+% Bande di confidenza
+\addplot[
+    domain=1000:50000,
+    samples=100,
+    thick,
+    gistgreen,
+    dashed,
+    name path=upper
+] {99.0 + 0.7*ln(x/1000) + 0.1};
+
+\addplot[
+    domain=1000:50000,
+    samples=100,
+    thick,
+    gistgreen,
+    dashed,
+    name path=lower
+] {99.0 + 0.7*ln(x/1000) - 0.1};
+
+\addplot[gistgreen!20,opacity=0.3] fill between[of=upper and lower];
+\addlegendentry{IC 95\%}
+
+% Target line
+\addplot[
+    domain=1000:50000,
+    samples=2,
+    thick,
+    gistred,
+    dashed
+] {99.95};
+\addlegendentry{Target 99.95\%}
+
+% Zone annotate
+\node[draw,fill=red!20,opacity=0.7,anchor=south west] at (axis cs:1000,99.8) {
+    \begin{tabular}{c}
+    \textbf{Underinvestment}\\
+    High Risk
+    \end{tabular}
+};
+
+\node[draw,fill=green!20,opacity=0.7] at (axis cs:10000,99.5) {
+    \begin{tabular}{c}
+    \textbf{Optimal Zone}\\
+    Best ROI
+    \end{tabular}
+};
+
+\node[draw,fill=yellow!20,opacity=0.7,anchor=south east] at (axis cs:40000,99.3) {
+    \begin{tabular}{c}
+    \textbf{Diminishing}\\
+    \textbf{Returns}
+    \end{tabular}
+};
+
+% Annotazioni punti chiave
+\node[pin={[pin edge={gistblue,thick}]90:Break-even}] at (axis cs:8700,99.82) {};
+\node[pin={[pin edge={gistblue,thick}]45:Sweet spot}] at (axis cs:12300,99.96) {};
+
+\end{semilogxaxis}
+\end{tikzpicture}
+\caption{Relazione tra investimenti infrastrutturali e disponibilità del servizio}
+\label{fig:investment-availability}
+\end{figure}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Centro - GIST Score
+    \node[draw,circle,minimum size=3cm,fill=white] (center) at (0,0) {
+        \begin{tabular}{c}
+        \textbf{GIST Score}\\[0.3cm]
+        \huge\textbf{76.8}\\[0.2cm]
+        \textit{Maturo}
+        \end{tabular}
+    };
+    
+    % Gauge meter background
+    \draw[thick,gray!30] (0,0) circle (1.8cm);
+    \draw[thick,gistgreen,line width=4pt] ([shift=(140:1.8cm)]0,0) arc (140:40:1.8cm);
+    
+    % Quadranti
+    \def\quadradius{5}
+    \def\compradius{2}
+    
+    % Physical (Nord)
+    \node[draw,circle,fill=gistblue!80,text=white,minimum size=\compradius cm] (physical) at (90:\quadradius) {
+        \begin{tabular}{c}
+        \textbf{Physical}\\
+        68/100
+        \end{tabular}
+    };
+    
+    % Architectural (Est)
+    \node[draw,circle,fill=gistgreen!80,text=white,minimum size=\compradius cm] (arch) at (0:\quadradius) {
+        \begin{tabular}{c}
+        \textbf{Architectural}\\
+        82/100
+        \end{tabular}
+    };
+    
+    % Security (Sud)
+    \node[draw,circle,fill=gistred!80,text=white,minimum size=\compradius cm] (security) at (270:\quadradius) {
+        \begin{tabular}{c}
+        \textbf{Security}\\
+        74/100
+        \end{tabular}
+    };
+    
+    % Compliance (Ovest)
+    \node[draw,circle,fill=gistyellow!80,text=black,minimum size=\compradius cm] (compliance) at (180:\quadradius) {
+        \begin{tabular}{c}
+        \textbf{Compliance}\\
+        79/100
+        \end{tabular}
+    };
+    
+    % Mini-indicatori per componente
+    \foreach \comp/\angle/\score in {physical/90/68,arch/0/82,security/270/74,compliance/180/79} {
+        \draw[thick,gray!30] ([shift=(\angle:\quadradius)]0,0) ++(0.2,0.8) -- ++(1,0);
+        \draw[thick,gistgreen,line width=2pt] ([shift=(\angle:\quadradius)]0,0) ++(0.2,0.8) -- ++({\score/100}cm,0);
+    }
+    
+    % Connessioni sinergiche
+    \draw[thick,gistgreen!50,<->,>=stealth] (physical) to[bend left=30] node[midway,font=\footnotesize] {+27\%} (arch);
+    \draw[thick,gistgreen!50,<->,>=stealth] (arch) to[bend left=30] node[midway,font=\footnotesize] {+34\%} (security);
+    \draw[thick,gistgreen!50,<->,>=stealth] (security) to[bend left=30] node[midway,font=\footnotesize] {+41\%} (compliance);
+    \draw[thick,gistgreen!50,<->,>=stealth] (compliance) to[bend left=30] node[midway,font=\footnotesize] {+23\%} (physical);
+    
+    % Anello esterno - Timeline
+    \draw[thick,gray!20] (0,0) circle (7cm);
+    
+    % Milestone
+    \foreach \angle/\label/\status in {
+        45/{M1: Kick-off}/done,
+        0/{M3: Cloud Wave 1}/done,
+        315/{M6: SD-WAN}/done,
+        270/{M9: Zero Trust}/current,
+        225/{M12: Multi-cloud}/planned,
+        180/{M18: Automation}/planned,
+        135/{M24: Steady State}/planned
+    }%
+\pgfplotsforeachungrouped \angle/\label/\status in {
+        \node[circle,fill=\statuscolor{\status},minimum size=0.3cm] at (\angle:7) {};
+        \node[font=\tiny,rotate=\angle,anchor=south,inner sep=1pt] at (\angle:7.5) {\label};
+    }
+    
+    % Indicatore progresso
+    \draw[thick,gistgreen,line width=3pt,->,>=stealth] (45:7) arc (45:270:7);
+    
+    % Legenda sinergie
+    \node[anchor=north,font=\footnotesize] at (0,-8) {
+        \textbf{Effetto Sistema:} +52\% oltre somma lineare componenti
+    };
+\end{tikzpicture}
+\caption{Framework GIST integrato - Vista sintetica con sinergie}
+\label{fig:gist-integrated}
+\end{figure}
+% Waterfall Chart per Figura 2.2
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        width=14cm,
+        height=10cm,
+        ymin=0,
+        ymax=3000,
+        ylabel={ASSA Score},
+        symbolic x coords={Baseline,Microseg,Edge Isol,Traffic Insp,Monitoring,Altri,Finale},
+        xtick=data,
+        x tick label style={rotate=45,anchor=east,font=\small},
+        nodes near coords,
+        every node near coord/.append style={font=\footnotesize},
+        grid=major,
+        grid style={gray!30}
+    ]
+    
+    % Valori cumulativi per waterfall
+    \addplot[fill=gistred!80] coordinates {
+        (Baseline,2847)
+        (Microseg,0)
+        (Edge Isol,0)
+        (Traffic Insp,0)
+        (Monitoring,0)
+        (Altri,0)
+        (Finale,1631)
+    };
+    
+    % Riduzioni (negative bars)
+    \addplot[fill=gistblue!80] coordinates {
+        (Baseline,0)
+        (Microseg,-888)
+        (Edge Isol,-687)
+        (Traffic Insp,-524)
+        (Monitoring,-371)
+        (Altri,-109)
+        (Finale,0)
+    };
+    
+    % Linee di connessione
+    \draw[dashed,thick] (axis cs:Baseline,2847) -- (axis cs:Microseg,1959);
+    \draw[dashed,thick] (axis cs:Microseg,1959) -- (axis cs:{Edge Isol},1272);
+    % ... continua per altre connessioni
+    
+    \end{axis}
+\end{tikzpicture}
+\caption{Decomposizione della riduzione ASSA per componente}
+\label{fig:assa-waterfall}
+\end{figure}
+\end{document}
+% End of document

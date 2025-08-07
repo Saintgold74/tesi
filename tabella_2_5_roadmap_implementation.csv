@@ -1,0 +1,4 @@
+Fase,Periodo,Interventi_Principali,Investimento_MEur,ROI_Atteso_%,KPI_Target
+Fase 1: Quick Wins,0-6 mesi,MFA universale; EDR deployment; Basic segmentation,0.8,312,Detection rate >90%; MTTD <48h; ASSA -24%
+Fase 2: Core Transformation,6-18 mesi,SD-WAN completo; Cloud migration (30%); Zero Trust phase 1; SIEM deployment,3.5,187,Availability >99.9%; TCO -23%; ASSA -52% totale; Compliance score >85%
+Fase 3: Advanced Optimization,18-36 mesi,SOC con AI/ML; Cloud-native (70%); Compliance automation; Threat hunting proattivo,8.2,234,MTTD <24h; TCO -38% totale; Automation >60%; Incident rate -75%
