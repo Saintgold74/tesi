@@ -154,7 +154,65 @@ L'ipotesi affronta la sfida di bilanciare sicurezza rafforzata con i requisiti d
 
 Questa ipotesi propone che la compliance, tradizionalmente vista come centro di costo, possa diventare driver di efficienza quando gestita attraverso un framework integrato che sfrutta le sovrapposizioni tra requisiti diversi.
 
+\section{1.5 Contributi Algoritmici Originali}
+
+Questa ricerca presenta cinque contributi algoritmici originali:
+
+\begin{enumerate}
+\item \textbf{ASSA-GDO Algorithm}: Quantificazione della superficie di attacco 
+per infrastrutture distribuite retail con complessità $O(n^2\log n)$ 
+[Appendice C.1.1]
+
+\item \textbf{ZT-Optimizer}: Algoritmo di ottimizzazione multi-obiettivo per 
+implementazione Zero Trust che bilancia sicurezza ($-42.7\%$ ASSA) e 
+performance ($<50ms$ latency) [Appendice C.2.1]
+
+\item \textbf{Compliance Set-Covering}: Soluzione greedy modificata al problema 
+NP-completo di copertura requisiti normativi multipli con garanzia di 
+approssimazione $\ln(n)$ [Appendice C.4.1]
+
+\item \textbf{Multi-Cloud Portfolio Optimizer}: Applicazione della Modern 
+Portfolio Theory all'allocazione workload multi-cloud [Appendice C.3.4]
+
+\item \textbf{GIST Scoring Engine}: Framework computazionale completo per 
+valutazione maturità con analisi sinergie non-lineari [Appendice C.5]
+\end{enumerate}
 \section{Struttura della Tesi}
+\begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title={\textbf{Innovation Box 1.1:} Framework GIST - Contributo Metodologico Principale},
+    fonttitle=\bfseries,
+    boxrule=1.5pt,
+    arc=2mm,
+    breakable
+]
+\textbf{Innovazione}: Primo framework quantitativo integrato specifico per la Grande Distribuzione Organizzata che unifica quattro dimensioni critiche.
+
+\vspace{0.3cm}
+\textbf{Formulazione Matematica}:
+\begin{equation*}
+GIST_{score} = \begin{cases}
+\sum_{i \in \{P,A,S,C\}} (w_i \times C_i) \times K_{GDO} \times (1+I) & \text{(Balanced)} \\
+\left(\prod_{i \in \{P,A,S,C\}} C_i^{w_i}\right) \times K_{GDO} \times (1+I) & \text{(Critical)}
+\end{cases}
+\end{equation*}
+
+\vspace{0.3cm}
+\textbf{Parametri Calibrati} (n=156 organizzazioni):
+\begin{itemize}[topsep=0pt,itemsep=2pt]
+    \item $w_P = 0.18$ (Physical), $w_A = 0.32$ (Architectural)
+    \item $w_S = 0.28$ (Security), $w_C = 0.22$ (Compliance)
+    \item $K_{GDO} \in [1.25, 1.87]$ (fattore contesto GDO)
+    \item $R^2 = 0.87$ (capacità predittiva)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Risultato Chiave}: Identificazione di effetti sinergici che amplificano i benefici del 52\% oltre la somma lineare delle componenti.
+
+\vspace{0.2cm}
+\textit{$\rightarrow$ Implementazione completa con 2000+ LOC: Appendice C.5}
+\end{tcolorbox}
 
 La tesi si articola in cinque capitoli principali che seguono una progressione logica dal particolare al generale, costruendo progressivamente il framework GIST attraverso analisi approfondite di ciascuna dimensione. La Figura \ref{fig:thesis_structure} illustra la struttura complessiva e le interdipendenze tra i capitoli.
 
