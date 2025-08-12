@@ -10,7 +10,7 @@ fig, ax = plt.subplots(figsize=(10, 6))
 bars = ax.bar(categorie, gap_scores, color=colori, alpha=0.8, edgecolor='black', linewidth=1.5)
 
 # Aggiungere valori sopra le barre
-for i, (bar, score) in enumerate(zip(bars, gap_scores)):
+for bar, score in zip(bars, gap_scores):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, 
             f'{score}%', ha='center', va='bottom', fontsize=12, fontweight='bold')
 
